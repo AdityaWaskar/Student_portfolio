@@ -1,0 +1,88 @@
+create database SP;
+use SP;
+
+create table login(
+	username varchar(20),
+	password varchar(20)
+);
+
+create table sem1_students(
+	roll_no int,
+	name varchar(50),
+	DOB varchar(15),
+	email varchar(50),
+	phone_no varchar(10),
+	Xth varchar(10),
+	XIIth varchar(10),
+	address varchar(100),
+	branch varchar(50),
+	PRIMARY KEY(roll_no)
+);
+
+create table students(
+	gr_no int AUTO_INCREMENT,
+	name varchar(50),
+	DOB varchar(15),
+	email varchar(50),
+	phone_no varchar(10),
+	Xth varchar(10),
+	XIIth varchar(10),
+	address varchar(100),
+	sem varchar(5),
+	branch varchar(50),
+	PRIMARY KEY(gr_no)
+);
+
+create table teachers(
+	sr_no int AUTO_INCREMENT,
+	name varchar(50),
+	DOB varchar(15),
+	email varchar(50),
+	phone_no varchar(10),
+	aadhar_no varchar(12),
+	gender varchar(5),
+	address varchar(100),
+	branch varchar(50),
+	PRIMARY KEY(sr_no)
+);
+
+
+----Reset Autoincrement
+alter table students AUTO_INCREMENT = 1;
+
+
+
+
+-----Deleting cmds
+delete from login;
+delete from students;
+delete from sem1_students;
+delete from sem2_students;
+delete from sem3_students;
+delete from sem4_students;
+delete from sem5_students;
+delete from sem6_students;
+delete from sem7_students;
+delete from sem8_students;
+
+-------selecting cmds
+select * from login;
+select * from students;
+select * from sem1_students;
+select * from sem2_students;
+select * from sem3_students;
+select * from sem4_students;
+select * from sem5_students;
+select * from sem6_students;
+select * from sem7_students;
+select * from sem8_students;	
+
+----Droping cmds
+drop table sem1_students;
+drop table sem2_students;
+drop table sem3_students;
+drop table sem4_students;
+drop table sem5_students;
+drop table sem6_students;
+drop table sem7_students;
+drop table sem8_students;
