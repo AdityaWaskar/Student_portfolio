@@ -116,24 +116,7 @@ class add_student:
                 sql1 = "INSERT INTO students(name, DOB, email, phone_no, Xth, XIIth, address, branch, sem) values(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
                 mycursor.execute(sql1, [self.get_name, self.get_DOB, self.get_email, self.get_phone_no, self.get_Xth, self.get_XIIth, self.get_address, self.get_branch, self.get_sem])
 
-
-                if(self.get_sem == 'sem 1'):
-                        sql = "INSERT INTO sem1_students(roll_no, name, DOB, email, phone_no, Xth, XIIth, address, branch) values(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                elif(self.get_sem == 'sem 2'):
-                        sql = "INSERT INTO sem2_students(roll_no, name, DOB, email, phone_no, Xth, XIIth, address, branch) values(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                elif(self.get_sem == 'sem 3'):
-                        sql = "INSERT INTO sem3_students(roll_no, name, DOB, email, phone_no, Xth, XIIth, address, branch) values(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                elif(self.get_sem == 'sem 4'):
-                        sql = "INSERT INTO sem4_students(roll_no, name, DOB, email, phone_no, Xth, XIIth, address, branch) values(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                elif(self.get_sem == 'sem 5'):
-                        sql = "INSERT INTO sem5_students(roll_no, name, DOB, email, phone_no, Xth, XIIth, address, branch) values(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                elif(self.get_sem == 'sem 6'):
-                        sql = "INSERT INTO sem6_students(roll_no, name, DOB, email, phone_no, Xth, XIIth, address, branch) values(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                elif(self.get_sem == 'sem 7'):
-                        sql = "INSERT INTO sem7_students(roll_no, name, DOB, email, phone_no, Xth, XIIth, address, branch) values(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                elif(self.get_sem == 'sem 8'):
-                        sql = "INSERT INTO sem8_students(roll_no, name, DOB, email, phone_no, Xth, XIIth, address, branch) values(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-
+                sql = f"INSERT INTO sem{self.get_sem[-1]}_students(roll_no, name, DOB, email, phone_no, Xth, XIIth, address, branch) values(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
                 mycursor.execute(sql, [int(self.get_roll_no), self.get_name, self.get_DOB, self.get_email, self.get_phone_no, self.get_Xth, self.get_XIIth, self.get_address, self.get_branch])
                 messagebox.showinfo("showinfo", "Data Inserted sucessfully.")
                 mydb.commit()

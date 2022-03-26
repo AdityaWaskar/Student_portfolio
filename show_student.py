@@ -1,7 +1,5 @@
-import email
 import os
 from tkinter import messagebox
-from turtle import width
 import mysql.connector as sql
 from tkinter import *
 from tkinter import ttk
@@ -47,7 +45,7 @@ class add_student:
         self.roll_no = Entry(self.root, font=("times new roman", 13), bg ="white")
         self.roll_no.place(x=160, y=250, width=150, height=30)
 
-        self.dob = DateEntry(self.root, selectmode="day",state="readonly",date_pattern = 'dd/mm/yyyy',background="blue",Cursor="hand1",year=2003, month=1, foreground='black', font=("Times new roman", 13))
+        self.dob = DateEntry(self.root, selectmode="day",date_pattern = 'dd/mm/yyyy',background="blue",Cursor="hand1",year=2003, month=1, foreground='black', font=("Times new roman", 13))
         self.dob.place(x=420, y=250, width=150, height=30)  
 
         self.phone_no = Entry(self.root, font=("times new roman", 13), bg ="white")
@@ -65,24 +63,153 @@ class add_student:
         self.address = Entry(self.root, font=("times new roman", 13), bg ="white")
         self.address.place(x=160, y=400, width=300, height=30)
 
-        self.branch = ttk.Combobox(self.root, text="branch", font=("times new roman",13), state="readonly", justify=CENTER)
+        self.branch = ttk.Combobox(self.root, text="branch", font=("times new roman",13), justify=CENTER)
         self.branch['values'] = ("Select","Information Technology")
         self.branch.place(x=160, y=450, width=150, height=30)
         self.branch.current(0)
 
-        self.sem = ttk.Combobox(self.root, text="semester", font=("times new roman",13), state="readonly", justify=CENTER)
+        self.sem = ttk.Combobox(self.root, text="semester", font=("times new roman",13), justify=CENTER)
         self.sem['values'] = ("Select","sem 1", "sem 2", "sem 3", "sem 4", "sem 5", "sem 6", "sem 7", "sem 8")
         self.sem.place(x=430, y=450, width=150, height=30)
         self.sem.current(0)
 
 
+# -----------Frame for displaying student table
+        self.Frame = Frame(self.root, bd = 2, relief=RIDGE)
+        self.Frame.place(x=620, y=150, width=550, height=500)
+
+# --------------table
+        scrollx = Scrollbar(self.Frame, orient=HORIZONTAL)
+        scrolly = Scrollbar(self.Frame, orient=VERTICAL)
+        self.student_table = ttk.Treeview(self.Frame,xscrollcommand=scrollx.set, yscrollcommand=scrolly.set, columns=("Gr No.", "Name", "DOB", "Email", "Phone No.", "Xth", "XIIth", "Address", "Semester","Branch"))
+        scrollx.pack(side=BOTTOM, fill=X)
+        scrolly.pack(side=RIGHT, fill=Y)
+        scrollx.config(command=self.student_table.xview)
+        scrolly.config(command=self.student_table.yview)
+        self.student_table.heading("Gr No.", text="Gr No.")
+        self.student_table.heading("Name", text="Name")
+        self.student_table.heading("DOB", text="DOB")
+        self.student_table.heading("Email", text="Email")
+        self.student_table.heading("Phone No.", text="Phone No.")
+        self.student_table.heading("Xth", text="Xth")
+        self.student_table.heading("XIIth", text="XIIth")
+        self.student_table.heading("Address", text="Address")
+        self.student_table.heading("Semester", text="Semester")
+        self.student_table.heading("Branch", text="Branch")
+        self.student_table["show"] = 'headings'
+        self.student_table.column("Gr No.", width=40)
+        self.student_table.column("Name", width=150)
+        self.student_table.column("DOB", width=70)
+        self.student_table.column("Email", width=150)
+        self.student_table.column("Phone No.", width=80)
+        self.student_table.column("Xth", width=50)
+        self.student_table.column("XIIth", width=50)
+        self.student_table.column("Address", width=150)
+        self.student_table.column("Semester", width=80)
+        self.student_table.column("Branch", width=150)
+        self.student_table.pack(fill=BOTH, expand=1)
+
 # --------------buttons
-        Button(self.root, text="search",cursor="hand2",bg="#1ab402",fg="black" ,bd=0, font=("times new roman",13)).place(x=450, y=120)
-        Button(self.root, text="Update",cursor="hand2",bg="#1ab402",fg="black" ,bd=0, font=("times new roman",15)).place(x=300, y=600, width=80)
-        Button(self.root, text="Delete",cursor="hand2",bg="aqua",fg="black" ,bd=0, font=("times new roman",15)).place(x=400, y=600, width=80)
-        Button(self.root, text="clear",cursor="hand2",bg="yellow",fg="black" ,bd=0, font=("times new roman",15)).place(x=500, y=600, width=80)
+        Button(self.root,command=self.search,text="search",cursor="hand2",bg="#2196f3",fg="white" ,bd=0, font=("goudy old style",13, "bold"),borderwidth=2).place(x=450, y=120)
+        Button(self.root,command=self.update,text="Update",cursor="hand2",bg="#4caf50",fg="white" ,bd=0, font=("goudy old style",15, "bold"),borderwidth=2).place(x=300, y=600, width=80)
+        Button(self.root,command=self.clear,text="Clear",cursor="hand2",bg="#f44336",fg="white" ,bd=0, font=("goudy old style",15, "bold"),borderwidth=2).place(x=400, y=600, width=80)
+        Button(self.root,command=self.back,text="Back",cursor="hand2",bg="#607d8b",fg="white" ,bd=0, font=("goudy old style",15, "bold"),borderwidth=2).place(x=500, y=600, width=80)
+        self.show()
+# --------------fucntions of buttons
+
+    def search(self):
+            self.get_gr_no = self.gr_no.get()
+            try:
+                if self.gr_no.get() == "":
+                        messagebox.showerror("Error", "Enter Gr No.")
+                else:
+                        sql_query1 = "SELECT * FROM students where gr_no = %s"
+                        mycursor.execute(sql_query1, [int(self.get_gr_no)])
+                        result = mycursor.fetchone()
+                        if(result == None):
+                                messagebox.showerror("Error", "Invalid Gr No.")
+                        else:
+                                self.name.insert(0, result[1])
+                                self.dob.delete(0, 'end')
+                                self.dob.insert(0, result[2])
+                                self.email.insert(0, result[3])
+                                self.phone_no.insert(0, result[4])
+                                self.xth.insert(0, result[5])
+                                self.xiith.insert(0, result[6])
+                                self.address.insert(0, result[7])
+                                self.sem.delete(0, 'end')
+                                self.sem.insert(0, result[8])
+                                self.branch.delete(0, 'end')
+                                self.branch.insert(0, result[9])
+                                self.pre_sem = result[8]
+                                sql_query2 = f"SELECT roll_no FROM sem{self.pre_sem[-1]}_students where name = %s"
+                                mycursor.execute(sql_query2, [result[1]])
+                                result1 = mycursor.fetchone()
+                                self.roll_no.insert(0, result1[0])
+                self.show()
+            except Exception as e:
+                messagebox.showerror("Error", f"Error due to {str(e)}")
+    
+    def show(self):
+            try:
+                sql_query1 = "SELECT * FROM students"
+                mycursor.execute(sql_query1)
+                result = mycursor.fetchall()
+                self.student_table.delete(*self.student_table.get_children())
+                for row in result:
+                        self.student_table.insert('',END, values=row)
+                        
+            except Exception as e:
+                messagebox.showerror("Error", f"Error due to {str(e)}")
 
 
+    def update(self):
+            self.updated_name = self.name.get()
+            self.updated_roll_no = self.roll_no.get()
+            self.updated_dob = self.dob.get()
+            self.updated_phone_no = self.phone_no.get()
+            self.updated_email = self.email.get()
+            self.updated_xth = self.xth.get()
+            self.updated_xiith = self.xiith.get()
+            self.updated_address = self.address.get()
+            self.updated_branch = self.branch.get()
+            self.updated_sem = self.sem.get()
+            
+            query1 = "UPDATE students SET name = %s, DOB = %s, email = %s, phone_no = %s, Xth = %s, XIIth = %s, address = %s, sem = %s, branch = %s WHERE gr_no = %s"
+            mycursor.execute(query1, [self.updated_name, self.updated_dob, self.updated_email, self.updated_phone_no, self.updated_xth, self.updated_xiith, self.updated_address, self.updated_sem, self.updated_branch, self.get_gr_no])
+           
+            if(self.pre_sem != self.updated_sem):
+                query2 = f"DELETE FROM sem{self.pre_sem[-1]}_students WHERE name = %s OR DOB = %s OR email = %s OR phone_no = %s"
+                query3 = f"INSERT INTO sem{self.updated_sem[-1]}_students(roll_no, name, DOB, email, phone_no, Xth, XIIth, address, branch) values(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+                mycursor.execute(query2, [self.updated_name, self.updated_dob, self.updated_email, self.updated_phone_no])
+                mycursor.execute(query3, [int(self.updated_roll_no), self.updated_name, self.updated_dob, self.updated_email, self.updated_phone_no, self.updated_xth, self.updated_xiith, self.updated_address, self.updated_branch])
+            else:
+                query4 = f"UPDATE sem{self.updated_sem[-1]}_students SET  roll_no=%s, name = %s, DOB = %s, email = %s, phone_no = %s, Xth = %s, XIIth = %s, address = %s, branch = %s WHERE name = %s OR DOB = %s OR email = %s OR phone_no = %s "
+                mycursor.execute(query4, [int(self.updated_roll_no), self.updated_name, self.updated_dob, self.updated_email, self.updated_phone_no, self.updated_xth, self.updated_xiith, self.updated_address, self.updated_branch, self.updated_name, self.updated_dob, self.updated_email, self.updated_phone_no])
+            self.show()
+            mydb.commit()
+            messagebox.showinfo("showinfo", f"Dara Updated")
+
+    def back(self):
+            self.root.destroy()
+            os.system("python main_page.py")
+    def clear(self):
+            self.name.delete(0,'end')
+        #     self.name.insert(0, '')
+            self.dob.delete(0, 'end')
+            self.dob.delete(0, 'end')
+            self.email.delete(0, 'end')
+            self.phone_no.delete(0, 'end')
+            self.xth.delete(0, 'end')
+            self.xiith.delete(0, 'end')
+            self.address.delete(0, 'end')
+            self.sem.delete(0, 'end')
+            self.sem.current(0)
+            self.branch.delete(0, 'end')
+            self.branch.current(0)
+            self.roll_no.delete(0, 'end')
+        
+            
     
 if __name__ == "__main__":
     root=Tk()

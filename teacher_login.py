@@ -4,8 +4,6 @@ from tkinter import messagebox
 from PIL import ImageTk
 import mysql.connector as sql
 
-from slkdhf import forgot_pass
-
 mydb = sql.connect(host="localhost", user="root", passwd="", database="SP")
 mycursor = mydb.cursor()
 
@@ -35,8 +33,9 @@ class teacher_Login:
         
         lbl_pass = Label(Frame_login, text="Password", font=("Goudy old style",15,"bold"), fg="grey", bg="white").place(x=90, y=210)
         self.txt_pass = Entry(Frame_login, font=("times new roman", 15), bg="lightgrey")
-        # self.txt_pass.insert(END, 'dd/mm/yyyy')
         self.txt_pass.place(x=90, y=240, width=350, height=35)  
+
+
         forget_btn = Button(Frame_login, command=forgot_pass,text="Forget Password?",cursor="hand2",bg="white",fg="#d77337",bd=0, font=("times new roman",12)).place(x=90, y=280)
         login_btn = Button(self.root, command=self.login_function,cursor="hand2",text="Login",fg="white",bg="#d77337", font=("times new roman",20)).place(x=300, y=470, width=180, height=40)
 
