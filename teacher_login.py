@@ -36,7 +36,7 @@ class teacher_Login:
         self.txt_pass.place(x=90, y=240, width=350, height=35)  
 
 
-        forget_btn = Button(Frame_login, command=forgot_pass,text="Forget Password?",cursor="hand2",bg="white",fg="#d77337",bd=0, font=("times new roman",12)).place(x=90, y=280)
+        forget_btn = Button(Frame_login, command=self.forgot_pass,text="Forget Password?",cursor="hand2",bg="white",fg="#d77337",bd=0, font=("times new roman",12)).place(x=90, y=280)
         login_btn = Button(self.root, command=self.login_function,cursor="hand2",text="Login",fg="white",bg="#d77337", font=("times new roman",20)).place(x=300, y=470, width=180, height=40)
 
     def login_function(self):

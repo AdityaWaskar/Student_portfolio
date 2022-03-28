@@ -40,7 +40,7 @@ create table teachers(
 	email varchar(50),
 	phone_no varchar(10),
 	aadhar_no varchar(12),
-	gender varchar(5),
+	gender varchar(15),
 	address varchar(100),
 	branch varchar(50),
 	PRIMARY KEY(sr_no)
