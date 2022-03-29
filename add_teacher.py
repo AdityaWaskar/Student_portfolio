@@ -11,7 +11,7 @@ mydb = sql.connect(host="localhost", user="root", passwd="", database="SP")
 mycursor = mydb.cursor()
 
 
-class add_student:
+class add_teacher:
     def __init__(self, root):
         self.root = root
         self.root.title("Add teacher")
@@ -126,5 +126,5 @@ class add_student:
     
 if __name__ == "__main__":
     root=Tk()
-    obj = add_student(root)
+    obj = add_teacher(root)
     root.mainloop()

@@ -56,7 +56,7 @@ class add_student:
         self.DOB = DateEntry(Frame_student, selectmode="day",date_pattern = 'dd/mm/yyyy',background="blue",Cursor="hand1",year=2003, month=1, foreground='black', font=("Arial", 12))
         self.DOB.place(x=450, y=150, width=300, height=30)
 
-        
+
 # --------------------row 3
         phone_no = Label(Frame_student, text="Phone No.", font=("times new roman",15), fg="black", bg="#d1e2f4").place(x=30, y=220)
         self.phone_no = Entry(Frame_student, font=("times new roman", 15), bg="white")
