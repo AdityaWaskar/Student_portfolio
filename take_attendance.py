@@ -45,7 +45,9 @@ class take_attendance:
         #-------------------------------define our column
         self.my_table['columns'] = ('Gr No.', 'name', 'attendance')
         
-        button = Button(self.root,text="Select Record", command=self.select_record).place(x=900, y=self.table_from_y, height=self.table_height, width=100)        
+        button = Button(self.root,text="Select Record", command=self.put_present).place(x=900, y=self.table_from_y, height=self.table_height, width=100)        
+        button = Button(self.root,text="Select Record", command=self.put_absent).place(x=900, y=self.table_from_y, height=self.table_height, width=100)        
+
 #-----------------------------------------------Create Headings 
         self.my_table.heading("#0",text="sdjhsd",anchor=CENTER)
         self.my_table.heading("Gr No.",text="ID",anchor=CENTER)
@@ -66,13 +68,15 @@ class take_attendance:
         selected=self.my_table.focus()
         self.my_table.item(selected,text="",values=(self.values[0],self.values[1],"Present"))
 
-    def select_record(self):
+    def put_present(self):
         #-------------------------------grab the particular row
         selected=self.my_table.focus()
         self.values = self.my_table.item(selected,'values')
         print(self.values)
         self.update_record()
 
+    def put_absent(self):
+        pass
        
 if __name__ == "__main__":
     root=Tk()
