@@ -47,11 +47,9 @@ create table teachers(
 );
 
 
+
 ----Reset Autoincrement
 alter table students AUTO_INCREMENT = 1;
-
-
-
 
 -----Deleting cmds
 delete from login;
@@ -64,6 +62,12 @@ delete from sem5_students;
 delete from sem6_students;
 delete from sem7_students;
 delete from sem8_students;
+delete from sem1_EM_1_attendance;
+delete from sem2_EM_2_attendance;
+delete from sem3_EM_3_attendance;
+delete from sem4_EM_4_attendance;
+delete from sem5_EM_5_attendance;
+delete from sem6_EM_6_attendance;
 
 -------selecting cmds
 select * from login;
@@ -75,9 +79,15 @@ select * from sem4_students;
 select * from sem5_students;
 select * from sem6_students;
 select * from sem7_students;
-select * from sem8_students;	
+select * from sem8_students;
+select * from sem1_EM_1_attendance;
+select * from sem2_EM_2_attendance;
+select * from sem3_EM_3_attendance;
+select * from sem4_EM_4_attendance;
+select * from sem5_EM_5_attendance;
+select * from sem6_EM_6_attendance;	
 
-----Droping cmds
+------Droping cmds
 drop table sem1_students;
 drop table sem2_students;
 drop table sem3_students;
@@ -86,3 +96,39 @@ drop table sem5_students;
 drop table sem6_students;
 drop table sem7_students;
 drop table sem8_students;
+drop table sem1_EM_1_attendance;
+drop table sem2_EM_2_attendance;
+drop table sem3_EM_3_attendance;
+drop table sem4_EM_4_attendance;
+drop table sem5_EM_5_attendance;
+drop table sem6_EM_6_attendance;
+
+-------subject attendance
+create table sem1_EM_1_attendance(
+	date varchar(20) PRIMARY KEY
+);
+create table sem2_EM_2_attendance(
+	date varchar(20) PRIMARY KEY
+);
+create table sem3_EM_3_attendance(
+	date varchar(20) PRIMARY KEY
+);
+create table sem4_EM_4_attendance(
+	date varchar(20) PRIMARY KEY
+);
+create table sem5_EM_5_attendance(
+	date varchar(20) PRIMARY KEY
+);
+create table sem6_EM_6_attendance(
+	date varchar(20) PRIMARY KEY
+);
+
+
+
+create table sem1_EM_1_performance(
+	gr_no int not null,
+	avg_attendacne float,
+	tt1 int,
+	tt2 int,
+	ut int
+);

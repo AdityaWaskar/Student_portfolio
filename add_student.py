@@ -19,7 +19,7 @@ class add_student:
         self.root.config(bg="#d1e2f4")
 
 # --------------------queries
-        sql = "select count(*) from sem1_students"
+        sql = "select count(*) from students"
         mycursor.execute(sql)
         result = mycursor.fetchall()
         form_no = result[0][0] + 1 
@@ -82,7 +82,7 @@ class add_student:
         
         branch = Label(Frame_student, text="branch", font=("times new roman",15), fg="black", bg="#d1e2f4").place(x=450, y=420)
         self.branch = ttk.Combobox(Frame_student, font=("times new roman", 15),state="readonly", justify=CENTER)
-        self.branch['values'] = ("Select","Informatin Technology")
+        self.branch['values'] = ("Select","Information Technology")
         self.branch.place(x=450, y=450, width=300, height=30)
         self.branch.current(0)
 
@@ -119,6 +119,60 @@ class add_student:
                 sql = f"INSERT INTO sem{self.get_sem[-1]}_students(roll_no, name, DOB, email, phone_no, Xth, XIIth, address, branch) values(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
                 mycursor.execute(sql, [int(self.get_roll_no), self.get_name, self.get_DOB, self.get_email, self.get_phone_no, self.get_Xth, self.get_XIIth, self.get_address, self.get_branch])
                 messagebox.showinfo("showinfo", "Data Inserted sucessfully.")
+
+# ---------------add new coloumn to attendance table
+                if(self.get_sem == "sem 1"):
+                        print("hel")
+                        query1 = f"ALTER TABLE sem1_em_1_attendance ADD a{self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query2 = f"ALTER TABLE sem1_sub2_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query3 = f"ALTER TABLE sem1_sub3_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query4 = f"ALTER TABLE sem1_sub4_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+
+                        query5= f"INSERT INTO sem1_EM_1_performance(gr_no) values ({self.stu_gr.get()})"
+                        print(query5)
+                        # query5= f"INSERT INTO sem1_EM_1_performance(gr_no) values ({self.stu_gr.get()})"
+                        # query5= f"INSERT INTO sem1_EM_1_performance(gr_no) values ({self.stu_gr.get()})"
+                        # query5= f"INSERT INTO sem1_EM_1_performance(gr_no) values ({self.stu_gr.get()})"
+                        # query5= f"INSERT INTO sem1_EM_1_performance(gr_no) values ({self.stu_gr.get()})"
+
+                if(self.get_sem == "sem 2"):
+                        query1 = f"ALTER TABLE sem2_em_2_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query2 = f"ALTER TABLE sem2_sub2_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query3 = f"ALTER TABLE sem2_sub3_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query4 = f"ALTER TABLE sem2_sub4_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        
+                if(self.get_sem == "sem 3"):
+                        query1 = f"ALTER TABLE sem3_em_3_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query2 = f"ALTER TABLE sem3_sub2_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query3 = f"ALTER TABLE sem3_sub3_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query4 = f"ALTER TABLE sem3_sub4_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                if(self.get_sem == "sem 4"):
+                        query1 = f"ALTER TABLE sem4_em_4_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query2 = f"ALTER TABLE sem4_sub2_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query3 = f"ALTER TABLE sem4_sub3_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query4 = f"ALTER TABLE sem4_sub4_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                if(self.get_sem == "sem 5"):
+                        query1 = f"ALTER TABLE sem5_em_5_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query2 = f"ALTER TABLE sem5_sub2_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query3 = f"ALTER TABLE sem5_sub3_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query4 = f"ALTER TABLE sem5_sub4_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                if(self.get_sem == "sem 6"):
+                        query1 = f"ALTER TABLE sem6_em_6_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query2 = f"ALTER TABLE sem6_sub2_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query3 = f"ALTER TABLE sem6_sub3_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query4 = f"ALTER TABLE sem6_sub4_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                if(self.get_sem == "sem 7"):
+                        query1 = f"ALTER TABLE sem7_em_6_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query2 = f"ALTER TABLE sem7_sub2_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query3 = f"ALTER TABLE sem7_sub3_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query4 = f"ALTER TABLE sem7_sub4_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                if(self.get_sem == "sem 8"):
+                        query1 = f"ALTER TABLE sem8_em_6_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query2 = f"ALTER TABLE sem8_sub2_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query3 = f"ALTER TABLE sem8_sub3_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                        # query4 = f"ALTER TABLE sem8_sub4_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
+                mycursor.execute(query1)
+                mycursor.execute(query5)
                 mydb.commit()
 # --------------destorying the frame
                 self.root.destroy()
