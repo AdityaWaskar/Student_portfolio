@@ -1,7 +1,5 @@
-import abc
 import os
 from tkinter import messagebox
-from webbrowser import get
 import mysql.connector as sql
 from tkinter import *
 from tkinter import ttk
@@ -20,10 +18,6 @@ class take_attendance:
         self.root.resizable(False, False)
         self.root.config(bg="#d1e2f4")
         title = Label(self.root, text="Attendance", font=("goudy old style",20,"bold"), fg="white", bg="#033054").place(x=30, y=10,width= 1090, height=50)
-
-
-        # ---------------------------queires
-        
 
         # ---------------------------getting current date, month and year 
         date = dt.datetime.now()
@@ -50,7 +44,7 @@ class take_attendance:
         self.sem.current(0)
         
         self.subject = ttk.Combobox(self.root, text="Subject", font=("times new roman",self.font), state="readonly", justify=CENTER)
-        self.subject['values'] = ("Select","EM_1", "EM_2", "EM_3", "EM_4", "EM_5", "EM_6", "EM_7", "EM_8")
+        self.subject['values'] = ("Select","-------", "EM_1", "EC_1", "EP_1", "BEE", "Mechanics_1", "------", "EM_2", "EC_2", "EP_2", "C_Programming", "ED", "-----", "EM_1", "Java", "DSA", "DBMS", "PCE_1", "-----", "EM_4", "Python", "CNND", "OS", "COA","-----","Internet_Programming","-----","Data_Mining","-----","Enterprise_Network_Design","-----", "Big_data_analytics")
         self.subject.place(x=450, y=self.y, width=100, height=21)
         self.subject.current(0)
 
@@ -109,71 +103,72 @@ class take_attendance:
         flag = False
 
         if(self.get_sem=='sem 1'):
-            if(self.get_subject !='EM_1'):
-                messagebox.showerror('error', 'Select EM-1')
-                print("ojdf")
+            print(self.get_sem, self.get_subject)
+            if(self.get_subject !='EM_1' and self.get_subject !='EC_1' and self.get_subject !='EP_1' and self.get_subject !='BEE' and self.get_subject !='Mechanics'):
+                messagebox.showerror('error', 'Select either EM_1 or EC_1 or EP_1 or BEE or Mechanics')
             else:
-                print("sjdf")
                 flag=True
         elif(self.get_sem == 'sem 2'):
-            if(self.get_subject !='EM_2'):
-                messagebox.showerror('error', 'Select EM-2')
+            if(self.get_subject !='EM_2' and self.get_subject !='EC_2' and self.get_subject !='EP_2' and self.get_subject !='C_Programming' and self.get_subject !='ED'):
+                messagebox.showerror('error', 'Select either EM_2 or EC_2 or EP_2 or C_Programming or ED')
             else:
                 flag=True
         elif(self.get_sem == 'sem 3'):
-            if(self.get_subject !='EM_3'):
-                messagebox.showerror('error', 'Select EM-3')
+            if(self.get_subject !='EM_3' and self.get_subject !='Java' and self.get_subject !='DSA' and self.get_subject !='DBMS' and self.get_subject !='PCE_1'):
+                messagebox.showerror('error', 'Select either EM_3 or Java or DSA or DBMS or PCE_1')
             else:
                 flag=True
         elif(self.get_sem == 'sem 4'):
-            if(self.get_subject !='EM_4'):
-                messagebox.showerror('error', 'Select EM-4')
+            if(self.get_subject !='EM_4' and self.get_subject !='Pyhton' and self.get_subject !='CNND' and self.get_subject !='OS' and self.get_subject !='COA'):
+                messagebox.showerror('error', 'Select either EM_4 or Pyhton or CNND or OS or COA')
             else:
                 flag=True
         elif(self.get_sem == 'sem 5' ):
-            if(self.get_subject !='EM_5'):
-                messagebox.showerror('error', 'Select EM-5')
+            if(self.get_subject !='Internet_Programming'):
+                messagebox.showerror('error', 'Select Internet_Programming ')
             else:
                 flag=True
         elif(self.get_sem == 'sem 6' ):
-            if(self.get_subject !='EM_6'):
-                messagebox.showerror('error', 'Select EM-6')
+            if(self.get_subject !='Data_Mining' ):
+                messagebox.showerror('error', 'Select Data_Mining')
             else:
                 flag=True
         elif(self.get_sem == 'sem 7' ):
-            if(self.get_subject !='EM_6'):
-                messagebox.showerror('error', 'Select EM-6')
+            if(self.get_subject !='Enterprise_Network'):
+                messagebox.showerror('error', 'Select Enterprise_Network')
             else:
                 flag=True
         elif(self.get_sem == 'sem 8' ):
-            if(self.get_subject !='EM_6'):
-                messagebox.showerror('error', 'Select EM-6')
+            if(self.get_subject !='Big_data_analytics'):
+                messagebox.showerror('error', 'Select Big_data_analytics')
             else:
                 flag=True
         else:
             print("main else")
 
-        a=0
-        if(flag):
 # -------------------insert date into toble
-            abc = f"insert into sem{self.get_sem[-1]}_{self.get_subject}_attendance (date) values ('{self.date.get()}');"
-            print(abc)
-            mycursor.execute(abc)
-            mydb.commit()
-             
+        a=0
+        try:
+            if(flag):
+                abc = f"insert into sem{self.get_sem[-1]}_{self.get_subject}_attendance (date) values ('{self.date.get()}');"
+                print(abc)
+                mycursor.execute(abc)
+                mydb.commit()     
 # ---------------display the data to the table
-            query1 = f"select gr_no, name, email from students where sem = '{self.get_sem}' and branch='{self.get_branch}' ;"
-            mycursor.execute(query1)
-            result1 = mycursor.fetchall()
-            print(query1)
-            a=0
-            for i in result1:
-                print(i)
-                query2 = f"select roll_no from sem{self.get_sem[-1]}_students where name = '{i[1]}' and email = '{i[2]}' ;"
-                mycursor.execute(query2)
-                result2 = mycursor.fetchone() 
-                self.my_table.insert(parent='',index='end',iid=a,text='',values=(i[0],result2[0], i[1], "none"))
-                a+=1
+                query1 = f"select gr_no, name, email from students where sem = '{self.get_sem}' and branch='{self.get_branch}' ;"
+                mycursor.execute(query1)
+                result1 = mycursor.fetchall()
+                print(query1)
+                a=0
+                for i in result1:
+                    print(i)
+                    query2 = f"select roll_no from sem{self.get_sem[-1]}_students where name = '{i[1]}' and email = '{i[2]}' ;"
+                    mycursor.execute(query2)
+                    result2 = mycursor.fetchone() 
+                    self.my_table.insert(parent='',index='end',iid=a,text='',values=(i[0],result2[0], i[1], "none"))
+                    a+=1
+        except Exception as e:
+            messagebox.showerror("error", f"Attendance of {self.get_date} is already taken.{e}")       
 
     def put_present(self):
         selected=self.my_table.focus()
@@ -191,9 +186,20 @@ class take_attendance:
         self.table_values1.append([values[0], values[3]])
 
     def submit(self):
-        for i in self.table_values1:
-            query = f"UPDATE sem{self.get_sem[-1]}_{self.get_subject}_attendance SET a{i[0]} = '{i[1]}' where date = '{self.get_date}';"
-            mycursor.execute(query)
+        try:
+            for i in self.table_values1:
+                query = f"UPDATE sem{self.get_sem[-1]}_{self.get_subject}_attendance SET a{i[0]} = '{i[1]}' where date = '{self.get_date}';"
+                print(query)
+                # print(query)
+                mycursor.execute(query)
+                mycursor.fetchall()
+
+        except Exception as e:
+            print(e)
+        self.root.destroy()
+        os.system("python take_attendance.py")
+
+    mydb.commit()
 
 
 if __name__ == "__main__":
