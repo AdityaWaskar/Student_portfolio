@@ -19,20 +19,20 @@ class take_attendance:
         self.root.config(bg="#d1e2f4")
         title = Label(self.root, text="Attendance", font=("goudy old style",20,"bold"), fg="white", bg="#033054").place(x=30, y=10,width= 1090, height=50)
 
-        # ---------------------------getting current date, month and year 
+# ---------------------------getting current date, month and year 
         date = dt.datetime.now()
         self.current_date = int(f"{date:%d}")
         self.current_month = int(f"{date:%m}")
         self.current_year = int(f"{date:%Y}")
 
-        # ---------------------------defining variables
+# ---------------------------defining variables
         self.table_width = 800
         self.table_height = 350
         self.table_from_y = 200
         self.y= 100
         self.font = 13
 
-        # ---------------------------combobox
+# ---------------------------combobox
         self.branch = ttk.Combobox(self.root, text="Branch", font=("times new roman",self.font), state="readonly", justify=CENTER)
         self.branch['values'] = ("Select","Information Technology")
         self.branch.place(x=50, y=self.y, width=200, height=21)
@@ -55,11 +55,11 @@ class take_attendance:
         Button(self.root, text="Search",command=self.get_sorting_data,cursor="hand2",bg="#1ab402",fg="black" ,bd=0, font=("times new roman",self.font)).place(x=1000, y=self.y)
         Button(self.root, text="Submit",command=self.submit,cursor="hand2",bg="#1ab402",fg="black" ,bd=0, font=("times new roman",self.font)).place(x=1050, y=550)
 
-        # ---------------------------creating table frame
+# ---------------------------creating table frame
         self.table_frame = Frame(root)
         self.table_frame.place(x=50, y=self.table_from_y, width=self.table_width, height=self.table_height)
 
-        #-----------------------------scrollbar
+#-----------------------------scrollbar
         table_scrolly = Scrollbar(self.table_frame, orient=VERTICAL)
         table_scrolly.pack(side=RIGHT, fill=Y)
 
@@ -72,9 +72,9 @@ class take_attendance:
         table_scrolly.config(command=self.my_table.yview)
         table_scrollx.config(command=self.my_table.xview)
 
-        #-------------------------------define our column
+#-------------------------------define our column
         self.my_table['columns'] = ('Gr No.','Roll No.', 'name', 'attendance')
-# -----------------------------------------------set the column size
+# -------------------------------set the column size
         self.my_table.column("#0", width=0, stretch=NO)
         self.my_table.column("Gr No.", width=80,anchor=CENTER)
         self.my_table.column("Roll No.", width=80,anchor=CENTER)
@@ -95,13 +95,15 @@ class take_attendance:
         frame.pack(pady=20)
 # ----------------empty list
         self.table_values1 = []
+
+# ----------------methods
     def get_sorting_data(self):
         self.get_branch = self.branch.get()
         self.get_sem = self.sem.get()
         self.get_subject = self.subject.get()
         self.get_date = self.date.get()
         flag = False
-
+# -------------------if-else ladder for selecting right option
         if(self.get_sem=='sem 1'):
             print(self.get_sem, self.get_subject)
             if(self.get_subject !='EM_1' and self.get_subject !='EC_1' and self.get_subject !='EP_1' and self.get_subject !='BEE' and self.get_subject !='Mechanics'):
@@ -146,19 +148,19 @@ class take_attendance:
         else:
             print("main else")
 
-# -------------------insert date into toble
-        a=0
         try:
             if(flag):
+# ----------------inserting the date into the database
                 abc = f"insert into sem{self.get_sem[-1]}_{self.get_subject}_attendance (date) values ('{self.date.get()}');"
-                print(abc)
                 mycursor.execute(abc)
                 mydb.commit()     
-# ---------------display the data to the table
+
+# ----------------getting the student data into the database
                 query1 = f"select gr_no, name, email from students where sem = '{self.get_sem}' and branch='{self.get_branch}' ;"
                 mycursor.execute(query1)
                 result1 = mycursor.fetchall()
-                print(query1)
+
+# ---------------display the data to the table
                 a=0
                 for i in result1:
                     print(i)
@@ -186,21 +188,18 @@ class take_attendance:
         self.table_values1.append([values[0], values[3]])
 
     def submit(self):
+# -------------inserting the attendance to the database
         try:
             for i in self.table_values1:
-                query = f"UPDATE sem{self.get_sem[-1]}_{self.get_subject}_attendance SET a{i[0]} = '{i[1]}' where date = '{self.get_date}';"
-                print(query)
-                # print(query)
-                mycursor.execute(query)
-                mycursor.fetchall()
+                query1 = f"UPDATE sem{self.get_sem[-1]}_{self.get_subject}_attendance SET a{i[0]} = '{i[1]}' where date = '{self.get_date}';"
+                mycursor.execute(query1)
+                mydb.commit()
 
         except Exception as e:
             print(e)
+# -----------destroying the current frame
         self.root.destroy()
         os.system("python take_attendance.py")
-
-    mydb.commit()
-
 
 if __name__ == "__main__":
     root=Tk()

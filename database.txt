@@ -234,37 +234,37 @@ create table sem7_Enterprise_Network_Design_attendance(date varchar(20) PRIMARY 
 create table sem8_Big_data_analytics_attendance(date varchar(20) PRIMARY KEY);
 
 ---------------------------performance
-create table sem1_EM_1_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
-create table sem1_EC_1_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
-create table sem1_EP_1_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
-create table sem1_BEE_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
-create table sem1_Mechanics_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
+create table sem1_EM_1_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem1_EC_1_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem1_EP_1_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem1_BEE_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem1_Mechanics_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
 
-create table sem2_EM_2_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
-create table sem2_EC_2_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
-create table sem2_EP_2_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
-create table sem2_C_Programming_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
-create table sem2_ED_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
+create table sem2_EM_2_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem2_EC_2_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem2_EP_2_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem2_C_Programming_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem2_ED_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
 
-create table sem3_EM_3_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
-create table sem3_Java_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
-create table sem3_DSA_3_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
-create table sem3_DBMS_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
-create table sem3_PCE_1_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
+create table sem3_EM_3_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem3_Java_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem3_DSA_3_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem3_DBMS_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem3_PCE_1_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
 
-create table sem4_EM_4_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
-create table sem4_Python_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
-create table sem4_CNND_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
-create table sem4_OS_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
-create table sem4_COA_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
+create table sem4_EM_4_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem4_Python_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem4_CNND_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem4_OS_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem4_COA_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
 
-create table sem5_Internet_Programming_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
+create table sem5_Internet_Programming_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
 
-create table sem6_Data_Mining_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
+create table sem6_Data_Mining_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
 
-create table sem7_Enterprise_Network_Design_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
+create table sem7_Enterprise_Network_Design_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
 
-create table sem8_Big_data_analytics_performance( gr_no int not null, avg_attendacne float, tt1 int, tt2 int, ut int);
+create table sem8_Big_data_analytics_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
 
 
 desc sem1_EM_1_attendance;
@@ -316,3 +316,9 @@ alter table sem4_COA_attendance drop column ;
 
 
 
+
+
+select (count(a1000)*100/(select count(*) from sem1_EM_1_attendance)) as score from sem1_EM_1_attendance where a1000 = 'true';
+select (count(a1000)*100/(select count(*) from sem1_EP_1_attendance)) as score from sem1_EP_1_attendance where a1000 = 'Present';
+
+select avg_attendance from sem1_EM_1_performance where avg_attendance < 75.00

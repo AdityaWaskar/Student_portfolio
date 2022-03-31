@@ -133,6 +133,7 @@ class add_student:
                         query8= f"INSERT INTO sem1_EP_1_performance(gr_no) values ({self.stu_gr.get()})"
                         query9= f"INSERT INTO sem1_BEE_performance(gr_no) values ({self.stu_gr.get()})"
                         query10= f"INSERT INTO sem1_Mechanics_performance(gr_no) values ({self.stu_gr.get()})"
+                     
 
                 if(self.get_sem == "sem 2"):
                         query1 = f"ALTER TABLE sem2_EM_2_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
