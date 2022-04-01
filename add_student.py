@@ -116,8 +116,8 @@ class add_student:
                 sql1 = "INSERT INTO students(gr_no, name, DOB, email, phone_no, Xth, XIIth, address, branch, sem) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
                 mycursor.execute(sql1, [self.stu_gr.get(),self.get_name, self.get_DOB, self.get_email, self.get_phone_no, self.get_Xth, self.get_XIIth, self.get_address, self.get_branch, self.get_sem])
 
-                sql = f"INSERT INTO sem{self.get_sem[-1]}_students(roll_no, name, DOB, email, phone_no, Xth, XIIth, address, branch) values(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                mycursor.execute(sql, [int(self.get_roll_no), self.get_name, self.get_DOB, self.get_email, self.get_phone_no, self.get_Xth, self.get_XIIth, self.get_address, self.get_branch])
+                sql = f"INSERT INTO sem{self.get_sem[-1]}_students(gr_no, roll_no, name, DOB, email, phone_no, Xth, XIIth, address, branch) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+                mycursor.execute(sql, [self.stu_gr.get() ,int(self.get_roll_no), self.get_name, self.get_DOB, self.get_email, self.get_phone_no, self.get_Xth, self.get_XIIth, self.get_address, self.get_branch])
                 messagebox.showinfo("showinfo", "Data Inserted sucessfully.")
 
 # ---------------add new coloumn to attendance table

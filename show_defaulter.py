@@ -46,6 +46,11 @@ class take_attendance:
         self.subject.place(x=450, y=self.y, width=100, height=21)
         self.subject.current(0)
 
+        # self.sem = ttk.Combobox(self.root, text="days", font=("times new roman",self.font), state="readonly", justify=CENTER)
+        # self.sem['values'] = ("Select","last 30 days", "last 60 days","last 6 months" )
+        # self.sem.place(x=600, y=self.y, width=10, height=21)
+        # self.sem.current(0)
+
         Button(self.root, text="Search",command=self.get_sorting_data,cursor="hand2",bg="#1ab402",fg="black" ,bd=0, font=("times new roman",self.font)).place(x=1000, y=self.y)
         Button(self.root, text="Back",command=self.submit,cursor="hand2",bg="#1ab402",fg="black" ,bd=0, font=("times new roman",self.font)).place(x=1080, y=550)
 
@@ -146,7 +151,7 @@ class take_attendance:
                 print("main else")
 
             try:   
-                    query1 = f"select gr_no, name, email from students where sem = '{self.get_sem}' and branch='{self.get_branch}' ;"
+                    query1 = f"select gr_no, avg_attendacne from sem{self.get_sem[-1]}_{self.get_subject}_performance where avg_attendacne < 75.00 ;"
                     mycursor.execute(query1)
                     result1 = mycursor.fetchall()
                     a=0
@@ -154,14 +159,14 @@ class take_attendance:
 
 # ---------------display the data to the table
                     for i in result1:
-                        query = f"select avg_attendance from sem{self.get_sem[-1]}_{self.get_subject}_performance where avg_attendance < 75.00 ;"
-                        mycursor.execute(query)
-                        result = mycursor.fetchall()
+                        # query = f"select gr_no, avg_attendacne from sem{self.get_sem[-1]}_{self.get_subject}_performance where avg_attendacne < 75.00 ;"
+                        # mycursor.execute(query)
+                        # result = mycursor.fetchall()
 
-                        query2 = f"select roll_no from sem{self.get_sem[-1]}_students where name = '{i[1]}' and email = '{i[2]}' ;"
+                        query2 = f"select roll_no, name, email from sem{self.get_sem[-1]}students where gr_no = '{i[0]}';"
                         mycursor.execute(query2)
                         result2 = mycursor.fetchone() 
-                        self.my_table.insert(parent='',index='end',iid=a,text='',values=(i[0],result2[0], i[1], i[2], result[0]))
+                        self.my_table.insert(parent='',index='end',iid=a,text='',values=(i[0],result2[0], result2[1], result2[2], i[1]))
                         a+=1
             except Exception as e:
                 messagebox.showerror("error", e)       

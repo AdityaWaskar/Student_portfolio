@@ -1,3 +1,5 @@
+from cgitb import reset
+from itertools import count
 import os
 from tkinter import messagebox
 import mysql.connector as sql
@@ -83,6 +85,8 @@ class take_attendance:
         
         button = Button(self.root,text="Present", command=self.put_present).place(x=900, y=self.table_from_y+50, height=100, width=100)        
         button = Button(self.root,text="Absent", command=self.put_absent).place(x=900, y=self.table_from_y+200, height=100, width=100)        
+        button = Button(self.root,text="Present ALL", command=self.put_present_all).place(x=1020, y=self.table_from_y+50, height=100, width=100)        
+        button = Button(self.root,text="Absent ALL", command=self.put_absent_all).place(x=1020, y=self.table_from_y+200, height=100, width=100)        
 
 #-----------------------------------------------Create Headings 
         self.my_table.heading("Gr No.",text="Gr No.",anchor=CENTER)
@@ -149,9 +153,14 @@ class take_attendance:
             print("main else")
 
         try:
+            self.my_table.delete(*self.my_table.get_children())
             if(flag):
 # ----------------inserting the date into the database
-                abc = f"insert into sem{self.get_sem[-1]}_{self.get_subject}_attendance (date) values ('{self.date.get()}');"
+                abc1 = f"select count(*) from sem{self.get_sem[-1]}_{self.get_subject}_attendance;"
+                mycursor.execute(abc1)
+                result_abc1 = mycursor.fetchall()
+                mydb.commit()
+                abc = f"insert into sem{self.get_sem[-1]}_{self.get_subject}_attendance (sr_no, date) values ({int(result_abc1[0][0]+1)},'{self.date.get()}');"
                 mycursor.execute(abc)
                 mydb.commit()     
 
@@ -200,6 +209,38 @@ class take_attendance:
 # -----------destroying the current frame
         self.root.destroy()
         os.system("python take_attendance.py")
+
+    def put_present_all(self):
+        print("present all")
+        query1 = f"select gr_no, name, email from students where sem = '{self.get_sem}' and branch='{self.get_branch}' ;"
+        mycursor.execute(query1)
+        result1 = mycursor.fetchall()
+
+        a=0
+        self.my_table.delete(*self.my_table.get_children())        
+        for i in result1:
+            query2 = f"select roll_no from sem{self.get_sem[-1]}_students where name = '{i[1]}' and email = '{i[2]}' ;"
+            mycursor.execute(query2)
+            result2 = mycursor.fetchone() 
+            self.my_table.insert(parent='',index='end',iid=a,text='',values=(i[0],result2[0], i[1], "Present"))
+            self.table_values1.append([i[0], 'Present'])
+            a+=1
+
+    def put_absent_all(self):
+        print("present all")
+        query1 = f"select gr_no, name, email from students where sem = '{self.get_sem}' and branch='{self.get_branch}' ;"
+        mycursor.execute(query1)
+        result1 = mycursor.fetchall()
+
+        a=0
+        self.my_table.delete(*self.my_table.get_children())        
+        for i in result1:
+            query2 = f"select roll_no from sem{self.get_sem[-1]}_students where name = '{i[1]}' and email = '{i[2]}' ;"
+            mycursor.execute(query2)
+            result2 = mycursor.fetchone() 
+            self.my_table.insert(parent='',index='end',iid=a,text='',values=(i[0],result2[0], i[1], "Absent"))
+            self.table_values1.append([i[0], 'Absent'])
+            a+=1
 
 if __name__ == "__main__":
     root=Tk()

@@ -137,32 +137,32 @@ class take_attendance:
             
 
 # --------------getting the student data
-            try:   
-                    query1 = f"select gr_no, name, email from students where sem = '{self.get_sem}' and branch='{self.get_branch}' ;"
-                    mycursor.execute(query1)
-                    result1 = mycursor.fetchall()
+        try:   
+                query1 = f"select gr_no, name, email from students where sem = '{self.get_sem}' and branch='{self.get_branch}' ;"
+                mycursor.execute(query1)
+                result1 = mycursor.fetchall()
 
 # ---------------display the data to the table
-                    a=0
-                    self.my_table.delete(*self.my_table.get_children())
-                    for i in result1:
-                        query = f"select (count(a{i[0]})*100/(select count(*) from sem{self.get_sem[-1]}_{self.get_subject}_attendance)) as score from sem{self.get_sem[-1]}_{self.get_subject}_attendance where a{i[0]} = 'Present' ;"
-                        mycursor.execute(query)
-                        result = mycursor.fetchall()
-
-                        query_a = f"UPDATE sem{self.get_sem[-1]}_{self.get_subject}_performance set avg_attendacne = {result[0][0]} where gr_no = '{i[0]}'"
-                        mycursor.execute(query_a)
-                        
-                        query2 = f"select roll_no from sem{self.get_sem[-1]}_students where name = '{i[1]}' and email = '{i[2]}' ;"
-                        mycursor.execute(query2)
-                        result2 = mycursor.fetchone()
-                        
-                        mydb.commit() 
-                        
-                        self.my_table.insert(parent='',index='end',iid=a,text='',values=(i[0],result2[0], i[1], i[2], f"{result[0][0]}%"))
-                        a+=1
-            except Exception as e:
-                messagebox.showerror("error", e)       
+                a=0
+                self.my_table.delete(*self.my_table.get_children())
+                for i in result1:
+                    query = f"select (count(a{i[0]})*100/(select count(*) from sem{self.get_sem[-1]}_{self.get_subject}_attendance)) as score from sem{self.get_sem[-1]}_{self.get_subject}_attendance where a{i[0]} = 'Present' ;"
+                    mycursor.execute(query)
+                    result = mycursor.fetchall()
+                    
+                    query_a = f"UPDATE sem{self.get_sem[-1]}_{self.get_subject}_performance set avg_attendacne = {result[0][0]} where gr_no = '{i[0]}'"
+                    mycursor.execute(query_a)
+                    
+                    query2 = f"select roll_no from sem{self.get_sem[-1]}_students where name = '{i[1]}' and email = '{i[2]}' ;"
+                    mycursor.execute(query2)
+                    result2 = mycursor.fetchone()
+                    
+                    mydb.commit() 
+                    
+                    self.my_table.insert(parent='',index='end',iid=a,text='',values=(i[0],result2[0], i[1], i[2], f"{result[0][0]}%"))
+                    a+=1
+        except Exception as e:
+            messagebox.showerror("error", e)       
 
     def back(self):
         self.root.destroy()
