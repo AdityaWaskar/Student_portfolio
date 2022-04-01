@@ -1,5 +1,3 @@
-from cgitb import reset
-from itertools import count
 import os
 from tkinter import messagebox
 import mysql.connector as sql
@@ -11,6 +9,7 @@ import datetime as dt
 # ----------------------Connection with database
 mydb = sql.connect(host="localhost", user="root", passwd="", database="SP")
 mycursor = mydb.cursor()
+
 
 class take_attendance:
     def __init__(self, root):
@@ -27,6 +26,12 @@ class take_attendance:
         self.current_month = int(f"{date:%m}")
         self.current_year = int(f"{date:%Y}")
 
+# ---------------------------batchs
+        date = dt.datetime.now()
+        self.current_year = int(f"{date:%Y}")
+        a = {'Select',2016,2017,2018,2019,2020,2021}
+        a.add(self.current_year)
+        self.batch_years = list(a)
 # ---------------------------defining variables
         self.table_width = 800
         self.table_height = 350
@@ -42,17 +47,23 @@ class take_attendance:
         
         self.sem = ttk.Combobox(self.root, text="semester", font=("times new roman",self.font), state="readonly", justify=CENTER)
         self.sem['values'] = ("Select","sem 1", "sem 2", "sem 3", "sem 4", "sem 5", "sem 6", "sem 7", "sem 8")
-        self.sem.place(x=300, y=self.y, width=100, height=21)
+        self.sem.place(x=280, y=self.y, width=100, height=21)
         self.sem.current(0)
         
         self.subject = ttk.Combobox(self.root, text="Subject", font=("times new roman",self.font), state="readonly", justify=CENTER)
         self.subject['values'] = ("Select","-------", "EM_1", "EC_1", "EP_1", "BEE", "Mechanics_1", "------", "EM_2", "EC_2", "EP_2", "C_Programming", "ED", "-----", "EM_1", "Java", "DSA", "DBMS", "PCE_1", "-----", "EM_4", "Python", "CNND", "OS", "COA","-----","Internet_Programming","-----","Data_Mining","-----","Enterprise_Network_Design","-----", "Big_data_analytics")
-        self.subject.place(x=450, y=self.y, width=100, height=21)
+        self.subject.place(x=430, y=self.y, width=100, height=21)
         self.subject.current(0)
+        
+        self.batch = ttk.Combobox(self.root, text="Batch", font=("times new roman",self.font), state="readonly", justify=CENTER)
+        self.batch['values'] = list(self.batch_years)
+        self.batch.place(x=580, y=self.y, width=100, height=21)
+        index1 = self.batch_years.index('Select')
+        self.batch.current(index1)
 
-        date = Label(self.root, text="Date", font=("times new roman",self.font), fg="black", bg="#d1e2f4").place(x=550, y=self.y, width=150, height=20)
+        date = Label(self.root, text="Date", font=("times new roman",self.font), fg="black", bg="#d1e2f4").place(x=680, y=self.y, width=100, height=20)
         self.date = DateEntry(self.root, selectmode="day",date_pattern = 'dd/mm/yyyy',background="blue",Cursor="hand1",year=self.current_year, month=self.current_month, date=self.current_date,foreground='black', font=("Arial", 12))
-        self.date.place(x=670, y=self.y, width=150, height=21)
+        self.date.place(x=760, y=self.y, width=150, height=21)
 
         Button(self.root, text="Search",command=self.get_sorting_data,cursor="hand2",bg="#1ab402",fg="black" ,bd=0, font=("times new roman",self.font)).place(x=1000, y=self.y)
         Button(self.root, text="Submit",command=self.submit,cursor="hand2",bg="#1ab402",fg="black" ,bd=0, font=("times new roman",self.font)).place(x=1050, y=550)

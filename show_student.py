@@ -81,7 +81,7 @@ class add_student:
 # --------------table
         scrollx = Scrollbar(self.Frame, orient=HORIZONTAL)
         scrolly = Scrollbar(self.Frame, orient=VERTICAL)
-        self.student_table = ttk.Treeview(self.Frame,xscrollcommand=scrollx.set, yscrollcommand=scrolly.set, columns=("Gr No.", "Name", "DOB", "Email", "Phone No.", "Xth", "XIIth", "Address", "Semester","Branch"))
+        self.student_table = ttk.Treeview(self.Frame,xscrollcommand=scrollx.set, yscrollcommand=scrolly.set, columns=("Gr No.", "Name", "DOB", "Email", "Phone No.", "Xth", "XIIth", "Address", "Semester","Branch", "Batch"))
         scrollx.pack(side=BOTTOM, fill=X)
         scrolly.pack(side=RIGHT, fill=Y)
         scrollx.config(command=self.student_table.xview)
@@ -96,6 +96,7 @@ class add_student:
         self.student_table.heading("Address", text="Address")
         self.student_table.heading("Semester", text="Semester")
         self.student_table.heading("Branch", text="Branch")
+        self.student_table.heading("Batch", text="Batch")
         self.student_table["show"] = 'headings'
         self.student_table.column("Gr No.", width=40)
         self.student_table.column("Name", width=150)
@@ -107,6 +108,7 @@ class add_student:
         self.student_table.column("Address", width=150)
         self.student_table.column("Semester", width=80)
         self.student_table.column("Branch", width=150)
+        self.student_table.column("Batch", width=80)
         self.student_table.pack(fill=BOTH, expand=1)
 
 # --------------buttons
@@ -129,13 +131,19 @@ class add_student:
                         if(result == None):
                                 messagebox.showerror("Error", "Invalid Gr No.")
                         else:
+                                self.name.delete(0, 'end')
                                 self.name.insert(0, result[1])
                                 self.dob.delete(0, 'end')
                                 self.dob.insert(0, result[2])
+                                self.email.delete(0, 'end')
                                 self.email.insert(0, result[3])
+                                self.phone_no.delete(0, 'end')
                                 self.phone_no.insert(0, result[4])
+                                self.xth.delete(0, 'end')
                                 self.xth.insert(0, result[5])
+                                self.xiith.delete(0, 'end')
                                 self.xiith.insert(0, result[6])
+                                self.address.delete(0, 'end')
                                 self.address.insert(0, result[7])
                                 self.sem.delete(0, 'end')
                                 self.sem.insert(0, result[8])
@@ -145,6 +153,7 @@ class add_student:
                                 sql_query2 = f"SELECT roll_no FROM sem{self.pre_sem[-1]}_students where name = %s"
                                 mycursor.execute(sql_query2, [result[1]])
                                 result1 = mycursor.fetchone()
+                                self.roll_no.delete(0, 'end')
                                 self.roll_no.insert(0, result1[0])
                 self.show()
             except Exception as e:
