@@ -141,6 +141,7 @@ select * from sem1_EP_1_attendance;
 select * from sem1_BEE_attendance;
 select * from sem1_Mechanics_attendance;
 
+
 select * from sem1_EM_1_performance;
 select * from sem1_EC_1_performance;
 select * from sem1_EP_1_performance;

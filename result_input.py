@@ -1,12 +1,16 @@
-from cProfile import label
-from cgitb import text
-from email.mime import image
+from argparse import _MutuallyExclusiveGroup
+import base64
+from fileinput import filename
 from tkinter import*
 from PIL import Image,ImageTk
 from tkinter import ttk,messagebox
 from tkinter import filedialog
+import mysql.connector as sql
 
-subjects =[["EM_1", "EC_1", "EP_1", "BEE", "Mechanics_1"],
+mydb = sql.connect(host="localhost", user="root", passwd="", database="SP")
+mycursor = mydb.cursor()
+
+subjects =[["EM_1", "EC_1", "EP_1", "BEE", "Mechanics"],
             ["EM_2", "EC_2", "EP_2", "C_Programming", "ED"],
             ["EM_3", "Java", "DSA", "DBMS", "PCE_1"],
             ["EM_4", "Python", "CNND", "OS", "COA"],
@@ -28,8 +32,9 @@ class enter_marks:
 
         #==============search=============
         self.var_search=StringVar()
-        lbl_search=Label(self.root,text="ENTER GR NO.",font=("times new roman",15,"bold"),bg="white").place(x=140,y=100)
-        mark_search=Entry(self.root,textvariable=self.var_search,font=("times new roman",20),bg="lightyellow").place(x=340,y=100,width=150)
+        gr_no=Label(self.root,text="ENTER GR NO.",font=("times new roman",15,"bold"),bg="white").place(x=140,y=100)
+        self.gr_no=Entry(self.root,textvariable=self.var_search,font=("times new roman",20),bg="lightyellow")
+        self.gr_no.place(x=340,y=100,width=150)
         btn_search=Button(self.root,text='Search',font=("times new roman",15,"bold"),bg="#03a9f4",fg="white",cursor="hand2").place(x=500,y=100,width=100,height=35)
         btn_clear=Button(self.root,text='Clear',font=("times new roman",15,"bold"),bg="gray",fg="white",cursor="hand2").place(x=620,y=100,width=100,height=35)
         btn_submit=Button(self.root,text='Submit',font=("times new roman",15,"bold"),bg="#03a9f4",fg="white",cursor="hand2").place(x=1400,y=100,width=100,height=35)
@@ -193,30 +198,38 @@ class enter_marks:
         self.ut_out_sub5 = Entry(m3_Frame,font=("goudy old style",11,"bold"), justify=CENTER,bg="lightgray", fg="black")
         self.ut_out_sub5.place(x=280, y=190, width=100, height=30)
 
-        Button(self.root,text='Upload',font=("times new roman",15,"bold"),bg="#03a9f4",fg="white",cursor="hand2").place(x=1400,y=800,width=100,height=35)
+        Button(self.root,command=self.upload,text='Upload',font=("times new roman",15,"bold"),bg="#03a9f4",fg="white",cursor="hand2").place(x=1400,y=500,width=100,height=35)
 
     def set_subject1(self):
+        self.sem = 'sem1'
         self.count = 0
         self.set()
     def set_subject2(self):
+        self.sem = 'sem2'
         self.count = 1
         self.set()
     def set_subject3(self):
+        self.sem = 'sem3'
         self.count = 2
         self.set()
     def set_subject4(self):
+        self.sem = 'sem4'
         self.count = 3
         self.set()
     def set_subject5(self):
+        self.sem = 'sem5'
         self.count = 4
         self.set()
     def set_subject6(self):
+        self.sem = 'sem6'
         self.count = 5
         self.set()
     def set_subject7(self):
+        self.sem = 'sem7'
         self.count = 6
         self.set()
     def set_subject8(self):
+        self.sem = 'sem8'
         self.count = 7
         self.set()
     def set(self):
@@ -238,14 +251,12 @@ class enter_marks:
         self.tt1_lbl_sub3.insert(0, subjects[self.count][2])
         self.tt1_lbl_sub4.insert(0, subjects[self.count][3])
         self.tt1_lbl_sub5.insert(0, subjects[self.count][4])
-        try:
-            self.tt1_lbl_sub1.config(state='readonly', fg='')
-            self.tt1_lbl_sub2.config(state='readonly', fg='')
-            self.tt1_lbl_sub3.config(state='readonly', fg='')
-            self.tt1_lbl_sub4.config(state='readonly', fg='')
-            self.tt1_lbl_sub5.config(state='readonly', fg='')
-        except:
-            print("e")
+
+        self.tt1_lbl_sub1.config(state='readonly', fg="#0e064d")
+        self.tt1_lbl_sub2.config(state='readonly', fg="#0e064d")
+        self.tt1_lbl_sub3.config(state='readonly', fg="#0e064d")
+        self.tt1_lbl_sub4.config(state='readonly', fg="#0e064d")
+        self.tt1_lbl_sub5.config(state='readonly', fg="#0e064d")
         
 # ---------------setting the tt2 subjects
         self.tt2_lbl_sub1.config(state=NORMAL)
@@ -265,14 +276,12 @@ class enter_marks:
         self.tt2_lbl_sub3.insert(0, subjects[self.count][2])
         self.tt2_lbl_sub4.insert(0, subjects[self.count][3])
         self.tt2_lbl_sub5.insert(0, subjects[self.count][4])
-        try:
-            self.tt2_lbl_sub1.config(state='readonly', fg='')
-            self.tt2_lbl_sub2.config(state='readonly', fg='')
-            self.tt2_lbl_sub3.config(state='readonly', fg='')
-            self.tt2_lbl_sub4.config(state='readonly', fg='')
-            self.tt2_lbl_sub5.config(state='readonly', fg='')
-        except:
-            print("e")
+
+        self.tt2_lbl_sub1.config(state='readonly', fg="#0e064d")
+        self.tt2_lbl_sub2.config(state='readonly', fg="#0e064d")
+        self.tt2_lbl_sub3.config(state='readonly', fg="#0e064d")
+        self.tt2_lbl_sub4.config(state='readonly', fg="#0e064d")
+        self.tt2_lbl_sub5.config(state='readonly', fg="#0e064d")
         
 # ---------------setting the ut subjects
         self.ut_lbl_sub1.config(state=NORMAL)
@@ -293,22 +302,105 @@ class enter_marks:
         self.ut_lbl_sub3.insert(0, subjects[self.count][2])
         self.ut_lbl_sub4.insert(0, subjects[self.count][3])
         self.ut_lbl_sub5.insert(0, subjects[self.count][4])
-        try:
-            self.ut_lbl_sub1.config(state='readonly', fg='')
-            self.ut_lbl_sub2.config(state='readonly', fg='')
-            self.ut_lbl_sub3.config(state='readonly', fg='')
-            self.ut_lbl_sub4.config(state='readonly', fg='')
-            self.ut_lbl_sub5.config(state='readonly', fg='')
-        except:
-            print("e")
+
+        self.ut_lbl_sub1.config(state='readonly', fg="#0e064d")
+        self.ut_lbl_sub2.config(state='readonly', fg="#0e064d")
+        self.ut_lbl_sub3.config(state='readonly', fg="#0e064d")
+        self.ut_lbl_sub4.config(state='readonly', fg="#0e064d")
+        self.ut_lbl_sub5.config(state='readonly', fg="#0e064d")
+
+    def submit(self):
+# -----------getting input 
+        self.get_gr_no = self.gr_no.get()
+        self.get_tt1_sub1_marks = self.tt1_mark_sub1.get()
+        self.get_tt1_sub2_marks = self.tt1_mark_sub2.get()
+        self.get_tt1_sub3_marks = self.tt1_mark_sub3.get()
+        self.get_tt1_sub4_marks = self.tt1_mark_sub4.get()
+        self.get_tt1_sub5_marks = self.tt1_mark_sub5.get()
         
+        self.get_tt1_sub1_out = self.tt1_out_sub1.get()
+        self.get_tt1_sub2_out = self.tt1_out_sub2.get()
+        self.get_tt1_sub3_out = self.tt1_out_sub3.get()
+        self.get_tt1_sub4_out = self.tt1_out_sub4.get()
+        self.get_tt1_sub5_out = self.tt1_out_sub5.get()
+
+        self.get_tt2_sub1_marks = self.tt2_mark_sub1.get()
+        self.get_tt2_sub2_marks = self.tt2_mark_sub2.get()
+        self.get_tt2_sub3_marks = self.tt2_mark_sub3.get()
+        self.get_tt2_sub4_marks = self.tt2_mark_sub4.get()
+        self.get_tt2_sub5_marks = self.tt2_mark_sub5.get()
+
+        self.get_tt2_sub1_out = self.tt2_out_sub1.get()
+        self.get_tt2_sub2_out = self.tt2_out_sub2.get()
+        self.get_tt2_sub3_out = self.tt2_out_sub3.get()
+        self.get_tt2_sub4_out = self.tt2_out_sub4.get()
+        self.get_tt2_sub5_out = self.tt2_out_sub5.get()
+        
+        self.get_ut_sub1_marks = self.ut_mark_sub1.get()
+        self.get_ut_sub2_marks = self.ut_mark_sub2.get()
+        self.get_ut_sub3_marks = self.ut_mark_sub3.get()
+        self.get_ut_sub4_marks = self.ut_mark_sub4.get()
+        self.get_ut_sub5_marks = self.ut_mark_sub5.get()
+        
+        self.get_ut_sub1_out = self.ut_out_sub1.get()
+        self.get_ut_sub2_out = self.ut_out_sub2.get()
+        self.get_ut_sub3_out = self.ut_out_sub3.get()
+        self.get_ut_sub4_out = self.ut_out_sub4.get()
+        self.get_ut_sub5_out = self.ut_out_sub5.get()
+
+# # ---------queries
+#         query1 = f"update {self.sem1}_em_1_performance set tt1 = {self.get_tt1_sub1_marks},tt2 = {self.get_tt2_sub1_marks},  ut = {self.get_ut_sub1_marks} where gr_no {}"
+#         query2 = f"update {self.sem1}_ec_1_performance set tt1 = {self.get_tt1_sub2_marks},tt2 = {self.get_tt2_sub2_marks},  ut = {self.get_ut_sub2_marks}"
+#         query3 = f"update {self.sem1}_ep_1_performance set tt1 = {self.get_tt1_sub3_marks},tt2 = {self.get_tt2_sub3_marks},  ut = {self.get_ut_sub3_marks}"
+#         query4 = f"update {self.sem1}_bee_performance set tt1 = {self.get_tt1_sub4_marks},tt2 = {self.get_tt2_sub4_marks},  ut = {self.get_ut_sub4_marks}"
+#         query5 = f"update {self.sem1}_mechanics_performance set tt1 = {self.get_tt1_sub5_marks},tt2 = {self.get_tt2_sub5_marks},  ut = {self.get_ut_sub5_marks}"
+
+        marks =[[self.get_tt1_sub1_marks, self.get_tt1_sub2_marks, self.get_tt1_sub3_marks, self.get_tt1_sub4_marks, self.get_tt1_sub5_marks ],
+                [self.get_tt2_sub1_marks, self.get_tt2_sub2_marks, self.get_tt2_sub3_marks, self.get_tt2_sub4_marks, self.get_tt2_sub5_marks ],
+                [self.get_ut_sub1_marks, self.get_ut_sub2_marks, self.get_ut_sub3_marks, self.get_ut_sub4_marks, self.get_ut_sub5_marks ],
+        ] 
+        sum = 0
+        for i in marks[2]:
+            sum += int(i)
+        cgpa = (sum/5)/9.5
+        query = f"update students set {self.sem} = {cgpa}"
+        print(query)
+        for i in range(5):
+            query = f"update {self.sem}_{subjects[0][i]}_performance set tt1={marks[0][i]} , tt2={marks[1][i]}, ut={marks[2][i]} where gr_no = {self.get_gr_no};"
+            # query = f"update {self.sem1}_{subjects[0][i]}_performance set tt1={marks[0][i]} , tt2={marks[1][0]}, ut={marks[2][0]}"
+            print(query)
+
+    def convertToBinary(self, filename):
+        with open(filename, 'rb') as f:
+            binary = f.read()
+        return binary
+    def upload(self):
+        try:
+            # filename= filedialog.askopenfilename(initialdir="/Downloads",title="Select A File ",filetypes=(("png files","*.png"),("all files","*.*")))
+            # print(filename)
+            global filename,img
+            f_types =[('Png files','*.png'),('Jpg Files', '*.jpg')]
+            filename = filedialog.askopenfilename(filetypes=f_types)
+            img = ImageTk.PhotoImage(file=filename)
+            picture = self.convertToBinary(filename)
+            query = "insert into img (sr, i) values (1,%s);"
+            # mycursor.execute(query, base64.b64encode(picture))
+            mycursor.execute(query, picture)
+            print(query)
+            mydb.commit()
+        except Exception as e:
+            print(e)
+
+        # my_label = Label(self.root,text=self.root.filename).pack()
+        # my_image = ImageTk.PhotoImage(Image.open(root.filename))
+        # my_image_label = Label(image=my_image).pack()
+        # my_btn = Button(root,text="open File")
+    
+
+        
+
 
 
 root=Tk()
 bj=enter_marks(root)
-# root.filename= filedialog.askopenfilename(initialdir="/gui/images",title="Select A File ",filetypes=(("png files","*.png"),("all files","*.*")))
-# my_label = Label(root,text=root.filename).pack()
-# my_image = ImageTk.PhotoImage(Image.open(root.filename))
-# my_image_label = Label(image=my_image).pack()
-# my_btn = Button(root,text="open File")
 root.mainloop()
