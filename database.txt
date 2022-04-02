@@ -3,7 +3,9 @@ use SP;
 
 create table login(
 	username varchar(20),
-	password varchar(20)
+	password varchar(20),
+	question varchar(200),
+	answer varchar(200),
 );
 
 create table sem8_students(
@@ -89,7 +91,7 @@ delete from sem3_EM_3_attendance;
 delete from sem3_Java_attendance;
 delete from sem3_DSA_3_attendance;
 delete from sem3_DBMS_attendance;
-delete from sem3_PCE-1_attendance;
+delete from sem3_PCE_1_attendance;
 
 delete from sem4_EM_4_attendance;
 delete from sem4_Python_attendance;
@@ -206,11 +208,10 @@ drop table sem6_EM_6_attendance;
 
 
 desc sem1_EM_1_attendance;
-desc sem2_EM_2_attendance;
-desc sem3_EM_3_attendance;
-desc sem4_EM_4_attendance;
-desc sem5_EM_5_attendance;
-desc sem6_EM_6_attendance;
+desc sem1_Ep_1_attendance;
+desc sem1_Ec_1_attendance;
+desc sem1_bee_attendance;
+desc sem1_mechanics_attendance;
 
 -------subject attendance
 
@@ -301,12 +302,12 @@ drop table sem4_CNND_attendance;
 drop table sem4_OS_attendance;
 drop table sem4_COA_attendance;
 
-alter table sem1_EM_1_attendance drop column a1000;
-alter table sem1_EC_1_attendance drop column a1000 ;
-alter table sem1_EP_1_attendance drop column a1000;
+alter table sem1_EM_1_attendance drop column a1001;
+alter table sem1_EC_1_attendance drop column a1001 ;
+alter table sem1_EP_1_attendance drop column a1001;
 
-alter table sem1_BEE_attendance drop column a1000;
-alter table sem1_Mechanics_attendance drop column a1000;
+alter table sem1_BEE_attendance drop column a1001;
+alter table sem1_Mechanics_attendance drop column a1001;
 alter table sem2_EM_2_attendance drop column ;
 alter table sem2_EC_2_attendance drop column ;
 alter table sem2_EP_2_attendance drop column ;

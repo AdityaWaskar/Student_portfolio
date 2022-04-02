@@ -117,6 +117,7 @@ class take_attendance:
         self.get_sem = self.sem.get()
         self.get_subject = self.subject.get()
         self.get_date = self.date.get()
+        self.get_batch = self.batch.get()
         flag = False
 # -------------------if-else ladder for selecting right option
         if(self.get_sem=='sem 1'):
@@ -163,34 +164,57 @@ class take_attendance:
         else:
             print("main else")
 
-        try:
+        if(True):
             self.my_table.delete(*self.my_table.get_children())
             if(flag):
-# ----------------inserting the date into the database
-                abc1 = f"select count(*) from sem{self.get_sem[-1]}_{self.get_subject}_attendance;"
-                mycursor.execute(abc1)
-                result_abc1 = mycursor.fetchall()
-                mydb.commit()
-                abc = f"insert into sem{self.get_sem[-1]}_{self.get_subject}_attendance (sr_no, date) values ({int(result_abc1[0][0]+1)},'{self.date.get()}');"
-                mycursor.execute(abc)
-                mydb.commit()     
+                print("adflk")
 
 # ----------------getting the student data into the database
-                query1 = f"select gr_no, name, email from students where sem = '{self.get_sem}' and branch='{self.get_branch}' ;"
-                mycursor.execute(query1)
-                result1 = mycursor.fetchall()
+                try:
+                    query1 = f"select gr_no, name, email from students where sem = '{self.get_sem}' and branch='{self.get_branch}' and batch = '{self.get_batch}' ;"
+                    print(query1)
+                    mycursor.execute(query1)
+                    result1 = mycursor.fetchall()
+                except Exception as e:
+                    print(e)
+
+# ----------------inserting the date into the database
+                try:
+                    abc1 = f"select count(*) from sem{self.get_sem[-1]}_{self.get_subject}_attendance;"
+                    mycursor.execute(abc1)
+                    result_abc1 = mycursor.fetchall()
+                    mydb.commit()
+                    abc = f"insert into sem{self.get_sem[-1]}_{self.get_subject}_attendance (sr_no, date) values ({int(result_abc1[0][0]+1)},'{self.date.get()}');"
+                    mycursor.execute(abc)
+                    mydb.commit()     
+                    print("inserint ")
 
 # ---------------display the data to the table
-                a=0
-                for i in result1:
-                    print(i)
-                    query2 = f"select roll_no from sem{self.get_sem[-1]}_students where name = '{i[1]}' and email = '{i[2]}' ;"
-                    mycursor.execute(query2)
-                    result2 = mycursor.fetchone() 
-                    self.my_table.insert(parent='',index='end',iid=a,text='',values=(i[0],result2[0], i[1], "none"))
-                    a+=1
-        except Exception as e:
-            messagebox.showerror("error", f"Attendance of {self.get_date} is already taken.{e}")       
+                    a=0
+                    for i in result1:
+                        print(i)
+                        query2 = f"select roll_no from sem{self.get_sem[-1]}_students where gr_no = {i[0]};"
+                        mycursor.execute(query2)
+                        result2 = mycursor.fetchone() 
+                        self.my_table.insert(parent='',index='end',iid=a,text='',values=(i[0],result2[0], i[1], "none"))
+                        a+=1
+                except:
+
+                    a=0
+                    for i in result1:
+                        abc1 = f"select a{i[0]} from sem{self.get_sem[-1]}_{self.get_subject}_attendance where  date = '{self.get_date}';"
+                        print(abc1)
+                        mycursor.execute(abc1)
+                        abc = mycursor.fetchall()
+                        print(i)
+                        query2 = f"select roll_no from sem{self.get_sem[-1]}_students where gr_no = {i[0]};"
+                        mycursor.execute(query2)
+                        result2 = mycursor.fetchone() 
+                        self.my_table.insert(parent='',index='end',iid=a,text='',values=(i[0],result2[0], i[1], abc[0][0]))
+                        a+=1
+                        mydb.commit()     
+        # except Exception as e:
+        #     messagebox.showerror("error", e)       
 
     def put_present(self):
         selected=self.my_table.focus()
@@ -239,14 +263,14 @@ class take_attendance:
 
     def put_absent_all(self):
         print("present all")
-        query1 = f"select gr_no, name, email from students where sem = '{self.get_sem}' and branch='{self.get_branch}' ;"
+        query1 = f"select gr_no, name, email from students where sem = '{self.get_sem}' and branch='{self.get_branch}' and batch ='{self.get_batch}' ;"
         mycursor.execute(query1)
         result1 = mycursor.fetchall()
 
         a=0
         self.my_table.delete(*self.my_table.get_children())        
         for i in result1:
-            query2 = f"select roll_no from sem{self.get_sem[-1]}_students where name = '{i[1]}' and email = '{i[2]}' ;"
+            query2 = f"select roll_no from sem{self.get_sem[-1]}_students where gr_no = {i[0]}; ;"
             mycursor.execute(query2)
             result2 = mycursor.fetchone() 
             self.my_table.insert(parent='',index='end',iid=a,text='',values=(i[0],result2[0], i[1], "Absent"))

@@ -22,9 +22,14 @@ class take_attendance:
 
         # ---------------------------getting current date, month and year 
         date = dt.datetime.now()
-        self.current_date = int(f"{date:%d}")
-        self.current_month = int(f"{date:%m}")
         self.current_year = int(f"{date:%Y}")
+
+        # ---------------------------batchs
+        date = dt.datetime.now()
+        self.current_year = int(f"{date:%Y}")
+        a = {'Select',2016,2017,2018,2019,2020,2021}
+        a.add(self.current_year)
+        self.batch_years = list(a)
 
         # ---------------------------defining variables
         self.table_width = 1000  
@@ -48,6 +53,12 @@ class take_attendance:
         self.subject['values'] = ("Select","-------", "EM_1", "EC_1", "EP_1", "BEE", "Mechanics_1", "------", "EM_2", "EC_2", "EP_2", "C_Programming", "ED", "-----", "EM_1", "Java", "DSA", "DBMS", "PCE_1", "-----", "EM_4", "Python", "CNND", "OS", "COA","-----","Internet_Programming","-----","Data_Mining","-----","Enterprise_Network_Design","-----", "Big_data_analytics")
         self.subject.place(x=450, y=self.y, width=100, height=21)
         self.subject.current(0)
+
+        self.batch = ttk.Combobox(self.root, text="Batch", font=("times new roman",self.font), state="readonly", justify=CENTER)
+        self.batch['values'] = list(self.batch_years)
+        self.batch.place(x=580, y=self.y, width=100, height=21)
+        index1 = self.batch_years.index('Select')
+        self.batch.current(index1)
 
 # --------------buttons
         Button(self.root, text="Search",command=self.get_sorting_data,cursor="hand2",bg="#1ab402",fg="black" ,bd=0, font=("times new roman",self.font)).place(x=1000, y=self.y)
@@ -98,6 +109,7 @@ class take_attendance:
         self.get_branch = self.branch.get()
         self.get_sem = self.sem.get()
         self.get_subject = self.subject.get()
+        self.get_batch = self.batch.get()
         
 # -------------------if-else ladder for selecting right option
         try:
@@ -137,8 +149,9 @@ class take_attendance:
             
 
 # --------------getting the student data
-        try:   
-                query1 = f"select gr_no, name, email from students where sem = '{self.get_sem}' and branch='{self.get_branch}' ;"
+        # try:
+        if(True):   
+                query1 = f"select gr_no, name, email from students where sem = '{self.get_sem}' and branch='{self.get_branch}' and batch = {self.get_batch} ;"
                 mycursor.execute(query1)
                 result1 = mycursor.fetchall()
 
@@ -152,21 +165,24 @@ class take_attendance:
                     
                     query_a = f"UPDATE sem{self.get_sem[-1]}_{self.get_subject}_performance set avg_attendacne = {result[0][0]} where gr_no = '{i[0]}'"
                     mycursor.execute(query_a)
-                    
-                    query2 = f"select roll_no from sem{self.get_sem[-1]}_students where name = '{i[1]}' and email = '{i[2]}' ;"
+
+                    query_b = f"Select * from sem{self.get_sem[-1]}_{self.get_subject}_performance where gr_no = {i[0]}"
+                    mycursor.execute(query_b)
+                    result_b = mycursor.fetchone()
+                    print(query_b,result_b)
+                    query2 = f"select roll_no from sem{self.get_sem[-1]}_students where gr_no = {i[0]};"
                     mycursor.execute(query2)
                     result2 = mycursor.fetchone()
                     
                     mydb.commit() 
                     
-                    self.my_table.insert(parent='',index='end',iid=a,text='',values=(i[0],result2[0], i[1], i[2], f"{result[0][0]}%"))
+                    self.my_table.insert(parent='',index='end',iid=a,text='',values=(i[0],result2[0], i[1], i[2], f"{result_b[1]}%"))
                     a+=1
-        except Exception as e:
-            messagebox.showerror("error", e)       
+        # except Exception as e:
+        #     messagebox.showerror("error", e)       
 
     def back(self):
         self.root.destroy()
-        os.system("main_page.py")
 
 if __name__ == "__main__":
     root=Tk()

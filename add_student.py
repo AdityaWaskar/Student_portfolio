@@ -101,8 +101,8 @@ class add_student:
         self.sem.place(x=30, y=550, width=300, height=30)
         self.sem.current(0)
         
-        batch = Label(Frame_student, text="Batch", font=("times new roman",15), fg="black", bg="#d1e2f4").place(x=30, y=520)
-        self.batch = ttk.Combobox(Frame_student, text="semester", font=("times new roman",15), state="readonly", justify=CENTER)
+        batch = Label(Frame_student, text="Batch", font=("times new roman",15), fg="black", bg="#d1e2f4").place(x=450, y=520)
+        self.batch = ttk.Combobox(Frame_student, text="Batch", font=("times new roman",15), state="readonly", justify=CENTER)
         self.batch['values'] = list(self.batch_years)
         self.batch.place(x=450, y=550, width=300, height=30)
         self.batch.current(0)
@@ -144,11 +144,11 @@ class add_student:
                         query4 = f"ALTER TABLE sem1_BEE_attendance ADD a{self.stu_gr.get()} varchar(10) default 'Absent';"
                         query5 = f"ALTER TABLE sem1_Mechanics_attendance ADD a{self.stu_gr.get()} varchar(10) default 'Absent';"
 
-                        query6= f"INSERT INTO sem1_em_1_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
-                        query7= f"INSERT INTO sem1_EC_1_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
-                        query8= f"INSERT INTO sem1_EP_1_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
-                        query9= f"INSERT INTO sem1_BEE_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
-                        query10= f"INSERT INTO sem1_Mechanics_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
+                        query6= f"INSERT INTO sem1_em_1_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
+                        query7= f"INSERT INTO sem1_EC_1_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
+                        query8= f"INSERT INTO sem1_EP_1_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
+                        query9= f"INSERT INTO sem1_BEE_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
+                        query10= f"INSERT INTO sem1_Mechanics_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
                      
 
                 if(self.get_sem == "sem 2"):
@@ -158,11 +158,11 @@ class add_student:
                         query4 = f"ALTER TABLE sem2_C_Programming_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
                         query5 = f"ALTER TABLE sem2_ED_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
 
-                        query6= f"INSERT INTO sem2_EM_2_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
-                        query7= f"INSERT INTO sem2_EC_2_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
-                        query8= f"INSERT INTO sem2_EP_2_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
-                        query9= f"INSERT INTO sem2_C_Programming_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
-                        query10= f"INSERT INTO sem2_ED_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
+                        query6= f"INSERT INTO sem2_EM_2_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
+                        query7= f"INSERT INTO sem2_EC_2_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
+                        query8= f"INSERT INTO sem2_EP_2_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
+                        query9= f"INSERT INTO sem2_C_Programming_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
+                        query10= f"INSERT INTO sem2_ED_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
 
                         
                 if(self.get_sem == "sem 3"):
@@ -172,11 +172,11 @@ class add_student:
                         query4 = f"ALTER TABLE sem3_DBMS_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
                         query5 = f"ALTER TABLE sem3_PCE_1_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
 
-                        query6= f"INSERT INTO sem3_EM_3_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
-                        query7= f"INSERT INTO sem3_Java_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
-                        query8= f"INSERT INTO sem3_DSA_3_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
-                        query9= f"INSERT INTO sem3_DBMS_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
-                        query10= f"INSERT INTO sem3_PCE_1_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
+                        query6= f"INSERT INTO sem3_EM_3_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
+                        query7= f"INSERT INTO sem3_Java_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
+                        query8= f"INSERT INTO sem3_DSA_3_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
+                        query9= f"INSERT INTO sem3_DBMS_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
+                        query10= f"INSERT INTO sem3_PCE_1_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
 
                 if(self.get_sem == "sem 4"):
                         query1 = f"ALTER TABLE sem4_EM_4_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
@@ -185,11 +185,11 @@ class add_student:
                         query4 = f"ALTER TABLE sem4_OS_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"                        
                         query5 = f"ALTER TABLE sem4_COA_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"                        
 
-                        query6= f"INSERT INTO sem4_EM_4_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
-                        query7= f"INSERT INTO sem4_Python_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
-                        query8= f"INSERT INTO sem4_CNND_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
-                        query9= f"INSERT INTO sem4_OS_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
-                        query10= f"INSERT INTO sem4_COA_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
+                        query6= f"INSERT INTO sem4_EM_4_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
+                        query7= f"INSERT INTO sem4_Python_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
+                        query8= f"INSERT INTO sem4_CNND_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
+                        query9= f"INSERT INTO sem4_OS_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
+                        query10= f"INSERT INTO sem4_COA_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
 
                 if(self.get_sem == "sem 5"):
                         query1 = f"ALTER TABLE sem5_Internet_Programming_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
@@ -197,7 +197,7 @@ class add_student:
                         # query3 = f"ALTER TABLE sem5_sub3_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
                         # query4 = f"ALTER TABLE sem5_sub4_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
 
-                        query5= f"INSERT INTO sem5_Internet_Programming_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
+                        query5= f"INSERT INTO sem5_Internet_Programming_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
  
                 if(self.get_sem == "sem 6"):
                         query1 = f"ALTER TABLE sem6_Data_Mining_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
@@ -205,7 +205,7 @@ class add_student:
                         # query3 = f"ALTER TABLE sem6_sub3_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
                         # query4 = f"ALTER TABLE sem6_sub4_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
 
-                        query5= f"INSERT INTO sem6_Data_Mining_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
+                        query5= f"INSERT INTO sem6_Data_Mining_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
  
                 if(self.get_sem == "sem 7"):
                         query1 = f"ALTER TABLE sem7_Enterprise_Network_Design_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
@@ -213,7 +213,7 @@ class add_student:
                         # query3 = f"ALTER TABLE sem7_sub3_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
                         # query4 = f"ALTER TABLE sem7_sub4_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
 
-                        query5= f"INSERT INTO sem7_Enterprise_Network_Design_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
+                        query5= f"INSERT INTO sem7_Enterprise_Network_Design_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
  
                 if(self.get_sem == "sem 8"):
                         query1 = f"ALTER TABLE sem8_Big_data_analytics_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
@@ -221,7 +221,7 @@ class add_student:
                         # query3 = f"ALTER TABLE sem8_sub3_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
                         # query4 = f"ALTER TABLE sem8_sub4_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
 
-                        query5= f"INSERT INTO sem8_Big_data_analytics_performance(gr_no, batch) values ({self.stu_gr.get(), self.batch.get()})"
+                        query5= f"INSERT INTO sem8_Big_data_analytics_performance(gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
  
                 mycursor.execute(query1)
                 mycursor.execute(query2)
