@@ -1,6 +1,4 @@
-from ast import Global
-from cProfile import label
-from cgitb import text
+
 from tkinter import*
 from PIL import Image,ImageTk
 from tkinter import ttk,messagebox

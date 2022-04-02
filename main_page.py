@@ -1,29 +1,71 @@
+from cProfile import label
+from logging import root
 from tkinter import *
-from PIL import ImageTk
-import os
+ 
+from PIL import Image, ImageTk
+root = Tk()
+root.geometry("1600x800")
+root.title("Student Portfolio")
+ 
+#photo = PhotoImage(file="himanshu123.png")
+# for jpg images
+ 
+image = Image.open("D:\\VS CODE\\Python\\Lovepik_com-501679643-millennium-university-of-hunan-university.jpg")
+image=image.resize((1600,800))
+photo = ImageTk.PhotoImage(image)
+label1 = Label(root,image=photo)
+label1.pack()
+ 
+#root.config(bg='red')
+'''
+bg = PhotoImage(file = "D:\\VS CODE\\Python\\univ.png")
+label1 = Label(root, image = bg)
+label1.place(x=0,y=0)
+bg.pack()
+'''
+def myfunc():
+    print("Himanshu Upadhyay")
+ 
+ 
+ 
+filemenu = Menu(root)  #mainmenu
+ 
+m1 = Menu(filemenu,tearoff=0)
+m1.add_command(label="ADD TEACHER",command=myfunc)
+m1.add_command(label="ADD STUDENT",command=myfunc)
+root.config(menu=filemenu)
+filemenu.add_cascade(label="ADD",menu=m1)
+ 
+m2 = Menu(filemenu,tearoff=0)
+m2.add_command(label="TEACHER",command=myfunc)
+m2.add_command(label="STUDENT",command=myfunc)
+root.config(menu=filemenu)
+filemenu.add_cascade(label="DETAILS",menu=m2)
+ 
+m3 = Menu(filemenu,tearoff=0)
+m3.add_command(label="ATTENDENCE",command=myfunc)
+root.config(menu=filemenu)
+filemenu.add_cascade(label="ATTENDENCE",menu=m3)
+ 
+m4 = Menu(filemenu,tearoff=0)
+m4.add_command(label="PERFORMANCE",command=myfunc)
+m4.add_command(label="DEFAULTER LIST",command=myfunc)
+root.config(menu=filemenu)
+filemenu.add_cascade(label="REPORT",menu=m4)
+ 
+m5 = Menu(filemenu,tearoff=0)
+m5.add_command(label="ADD MARKS",command=myfunc)
+m5.add_command(label="SHOW MARKS",command=myfunc)
+root.config(menu=filemenu)
+filemenu.add_cascade(label="MARKS",menu=m5)
+ 
+m6 = Menu(filemenu,tearoff=0)
+m6.add_command(label="EXIT",command=exit,accelerator="ctrl+Q")
+root.config(menu=filemenu)
+filemenu.add_cascade(label="LOGOUT",menu=m6)
+ 
+ 
+ 
+ 
+root.mainloop()
 
-
-class Login:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("Login Page")
-        self.root.geometry("1199x600+150+100") 
-        self.root.resizable(False, False)
-        self.bg = ImageTk.PhotoImage(file="images/bg1.jpg")
-        self.bg_img = Label(self.root, image=self.bg).place(x=0,y=0,relwidth=1, relheight=1)
-
-    # title
-        title = Label(self.root, text="Main Page", font=("Impact",35,"bold"), fg="skyblue", bg="white").place(x=90, y=30)
-        # desc = Label(Frame_login, text="Account Employee Login Area", font=("Goudy old style",15,"bold"), fg="#d25d17", bg="white").place(x=90, y=100)
-
-       
-    
-
-
-
-              
-        
-if __name__ == "__main__":
-    root=Tk()
-    obj = Login(root)
-    root.mainloop()
