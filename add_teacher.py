@@ -84,7 +84,7 @@ class add_teacher:
 # --------------------row 5
         branch = Label(Frame_student, text="branch", font=("times new roman",15), fg="black", bg="#d1e2f4").place(x=30, y=420)
         self.branch = ttk.Combobox(Frame_student, font=("times new roman", 15),state="readonly", justify=CENTER)
-        self.branch['values'] = ("Select","Informatin Technology")
+        self.branch['values'] = ("Select","Information Technology")
         self.branch.place(x=30, y=450, width=300, height=30)
         self.branch.current(0)
 

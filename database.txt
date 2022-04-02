@@ -6,7 +6,8 @@ create table login(
 	password varchar(20)
 );
 
-create table sem1_students(
+create table sem8_students(
+	gr_no int,
 	roll_no int,
 	name varchar(50),
 	DOB varchar(15),
@@ -16,11 +17,11 @@ create table sem1_students(
 	XIIth varchar(10),
 	address varchar(100),
 	branch varchar(50),
-	PRIMARY KEY(roll_no)
+	PRIMARY KEY(gr_no)
 );
 
 create table students(
-	gr_no int AUTO_INCREMENT,
+	gr_no int,
 	name varchar(50),
 	DOB varchar(15),
 	email varchar(50),
@@ -47,11 +48,9 @@ create table teachers(
 );
 
 
+
 ----Reset Autoincrement
-alter table students AUTO_INCREMENT = 1;
-
-
-
+alter table students AUTO_INCREMENT = 1000;
 
 -----Deleting cmds
 delete from login;
@@ -65,6 +64,60 @@ delete from sem6_students;
 delete from sem7_students;
 delete from sem8_students;
 
+delete from sem1_EM_1_attendance;
+delete from sem1_EC_1_attendance;
+delete from sem1_EP_1_attendance;
+delete from sem1_BEE_attendance;
+delete from sem1_Mechanics_1_attendance;
+delete from sem1_EM_1_performance;
+delete from sem1_EC_1_performance;
+delete from sem1_EP_1_performance;
+delete from sem1_BEE_performance;
+delete from sem1_Mechanics_1_performance;
+
+delete from sem2_EM_2_attendance;
+delete from sem2_EC_2_attendance;
+delete from sem2_EP_2_attendance;
+delete from sem2_C_Programming_attendance;
+delete from sem2_ED_attendance;
+
+
+delete from sem3_EM_3_attendance;
+delete from sem3_Java_attendance;
+delete from sem3_DSA_3_attendance;
+delete from sem3_DBMS_attendance;
+delete from sem3_PCE-1_attendance;
+
+delete from sem4_EM_4_attendance;
+delete from sem4_Python_attendance;
+delete from sem4_CNND_attendance;
+delete from sem4_OS_attendance;
+delete from sem4_COA_attendance;
+
+delete from sem5_Internet_Programming_attendance;
+delete from sem5_CNS_attendance;
+delete from sem5_EEB_attendance;
+delete from sem5_Software_Engineering_5_attendance;
+delete from sem5_PCE_2_attendance;
+
+delete from sem6_Data_Mining_attendance;
+delete from sem6_Web_X_attendance;
+delete from sem6_wireless_technology_attendance;
+delete from sem6_AI_and_DS_attendance;
+delete from sem6_Ethical_Hacking_attendance;
+
+delete from sem7_Enterprise_Network_Design_attendance;
+delete from sem7_Infrastruction_Security_attendance;
+delete from sem7_Soft_computing_attendance;
+delete from sem7_Cyber_security_and_Law_attendance;
+delete from sem7_AI_attendance;
+
+delete from sem8_Big_data_analytics_attendance;
+delete from sem8_Internet_of_Everything_attendance;
+delete from sem8_R_Programming_attendance;
+delete from sem8_Robotics_attendance;
+delete from sem8_Project_management_attendance;
+
 -------selecting cmds
 select * from login;
 select * from students;
@@ -75,9 +128,64 @@ select * from sem4_students;
 select * from sem5_students;
 select * from sem6_students;
 select * from sem7_students;
-select * from sem8_students;	
+select * from sem8_students;
 
-----Droping cmds
+select * from sem1_EM_1_attendance;
+select * from sem1_EC_1_attendance;
+select * from sem1_EP_1_attendance;
+select * from sem1_BEE_attendance;
+select * from sem1_Mechanics_attendance;
+
+select * from sem1_EM_1_performance;
+select * from sem1_EC_1_performance;
+select * from sem1_EP_1_performance;
+select * from sem1_BEE_performance;
+select * from sem1_Mechanics_performance;
+
+select * from sem2_EM_2_attendance;
+select * from sem2_EC_2_attendance;
+select * from sem2_EP_2_attendance;
+select * from sem2_C_Programming_attendance;
+select * from sem2_ED_attendance;
+
+
+select * from sem3_EM_3_attendance;
+select * from sem3_Java_attendance;
+select * from sem3_DSA_3_attendance;
+select * from sem3_DBMS_attendance;
+select * from sem3_PCE_1_attendance;
+
+select * from sem4_EM_4_attendance;
+select * from sem4_Python_attendance;
+select * from sem4_CNND_attendance;
+select * from sem4_OS_attendance;
+select * from sem4_COA_attendance;
+
+select * from sem5_Internet_Programming_attendance;
+select * from sem5_CNS_attendance;
+select * from sem5_EEB_attendance;
+select * from sem5_Software_Engineering_5_attendance;
+select * from sem5_PCE_2_attendance;
+
+select * from sem6_Data_Mining_attendance;
+select * from sem6_Web_X_attendance;
+select * from sem6_wireless_technology_attendance;
+select * from sem6_AI_and_DS_attendance;
+select * from sem6_Ethical_Hacking_attendance;
+
+select * from sem7_Enterprise_Network_Design_attendance;
+select * from sem7_Infrastruction_Security_attendance;
+select * from sem7_Soft_computing_attendance;
+select * from sem7_Cyber_security_and_Law_attendance;
+select * from sem7_AI_attendance;
+
+select * from sem8_Big_data_analytics_attendance;
+select * from sem8_Internet_of_Everything_attendance;
+select * from sem8_R_Programming_attendance;
+select * from sem8_Robotics_attendance;
+select * from sem8_Project_management_attendance;
+
+------Droping cmds
 drop table sem1_students;
 drop table sem2_students;
 drop table sem3_students;
@@ -86,3 +194,134 @@ drop table sem5_students;
 drop table sem6_students;
 drop table sem7_students;
 drop table sem8_students;
+drop table sem1_EM_1_attendance;
+drop table sem2_EM_2_attendance;
+drop table sem3_EM_3_attendance;
+drop table sem4_EM_4_attendance;
+drop table sem5_EM_5_attendance;
+drop table sem6_EM_6_attendance;
+
+-------subject attendance
+
+create table sem1_EM_1_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem1_EC_1_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem1_EP_1_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem1_BEE_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem1_Mechanics_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+
+create table sem2_EM_2_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem2_EC_2_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem2_EP_2_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem2_C_Programming_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem2_ED_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+
+create table sem3_EM_3_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem3_Java_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem3_DSA_3_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem3_DBMS_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem3_PCE_1_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+
+create table sem4_EM_4_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem4_Python_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem4_CNND_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem4_OS_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem4_COA_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+
+create table sem5_Internet_Programming_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+
+create table sem6_Data_Mining_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+
+create table sem7_Enterprise_Network_Design_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+
+create table sem8_Big_data_analytics_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+
+---------------------------performance
+create table sem1_EM_1_performance(gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem1_EC_1_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem1_EP_1_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem1_BEE_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem1_Mechanics_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+
+create table sem2_EM_2_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem2_EC_2_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem2_EP_2_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem2_C_Programming_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem2_ED_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+
+create table sem3_EM_3_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem3_Java_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem3_DSA_3_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem3_DBMS_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem3_PCE_1_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+
+create table sem4_EM_4_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem4_Python_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem4_CNND_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem4_OS_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem4_COA_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+
+create table sem5_Internet_Programming_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+
+create table sem6_Data_Mining_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+
+create table sem7_Enterprise_Network_Design_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+
+create table sem8_Big_data_analytics_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+
+
+drop table sem1_EM_1_attendance;
+drop table sem1_EC_1_attendance;
+drop table sem1_EP_1_attendance;
+drop table sem1_BEE_attendance;
+drop table sem1_Mechanics_attendance;
+drop table sem2_EM_2_attendance;
+drop table sem2_EC_2_attendance;
+drop table sem2_EP_2_attendance;
+drop table sem2_C_Programming_attendance;
+drop table sem2_ED_attendance;
+drop table sem3_EM_3_attendance;
+drop table sem3_Java_attendance;
+drop table sem3_DSA_3_attendance;
+drop table sem3_DBMS_attendance;
+drop table sem3_PCE_1_attendance;
+drop table sem4_EM_4_attendance;
+drop table sem4_Python_attendance;
+drop table sem4_CNND_attendance;
+drop table sem4_OS_attendance;
+drop table sem4_COA_attendance;
+
+alter table sem1_EM_1_attendance drop column a1000;
+alter table sem1_EC_1_attendance drop column a1000 ;
+alter table sem1_EP_1_attendance drop column a1000;
+
+alter table sem1_BEE_attendance drop column a1000;
+alter table sem1_Mechanics_attendance drop column a1000;
+alter table sem2_EM_2_attendance drop column ;
+alter table sem2_EC_2_attendance drop column ;
+alter table sem2_EP_2_attendance drop column ;
+alter table sem2_C_Programming_attendance drop column ;
+alter table sem2_ED_attendance drop column ;
+alter table sem3_EM_3_attendance drop column ;
+alter table sem3_Java_attendance drop column ;
+alter table sem3_DSA_3_attendance drop column ;
+alter table sem3_DBMS_attendance drop column ;
+alter table sem3_PCE_1_attendance drop column ;
+alter table sem4_EM_4_attendance drop column ;
+alter table sem4_Python_attendance drop column ;
+alter table sem4_CNND_attendance drop column ;
+alter table sem4_OS_attendance drop column ;
+alter table sem4_COA_attendance drop column ;
+
+
+
+
+
+
+
+
+
+select (count(a1000)*100/(select count(*) from sem1_EM_1_attendance)) as score from sem1_EM_1_attendance order by sr_no desc limit 1 where a1000 = 'true';
+select (count(a1000)*100/(select count(*) from sem1_EP_1_attendance)) as score from sem1_EP_1_attendance where a1000 = 'Present';
+
+select avg_attendance from sem1_EM_1_performance where avg_attendance < 75.00
+select * from sem1_EM_1_attendance order by sr_no desc limit 1;
