@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import messagebox
 from PIL import ImageTk
 import mysql.connector as sql
+from forgot_page import forgot
 
 mydb = sql.connect(host="localhost", user="root", passwd="", database="SP")
 mycursor = mydb.cursor()
@@ -57,7 +58,12 @@ class teacher_Login:
         os.system("python student_login.py")
 
     def forgot_pass(self):
-        print("Forgot Password")
+        if(self.txt_user.get() == ''):
+            self.txt_user.config(highlightthickness=1,highlightbackground="red")
+            messagebox.showerror('error', 'Enter Username!')
+        else:
+            self.new_win = Toplevel(self.root)
+            self.new_obj = forgot(self.new_win)
          
 if __name__ == "__main__":
     root=Tk()
