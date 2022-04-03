@@ -43,14 +43,14 @@ class enter_marks:
         #===================
         self.m_Frame = LabelFrame(self.root, text= "SEMESTER", font=("times new roman", 15), bg="white")
 
-        btn_sem1 = Button(self.m_Frame, text="Sem 1", command=self.set_subject1,cursor="hand2",font=("times new roman",15,"bold"), bg="#0b5377", fg="white").place(x=40, y=5, width=100, height=30)
-        btn_sem2 = Button(self.m_Frame, text="Sem 2", command=self.set_subject2,cursor="hand2",font=("times new roman",15,"bold"), bg="#0b5377", fg="white").place(x=210, y=5, width=100, height=30)
-        btn_sem3 = Button(self.m_Frame, text="Sem 3", command=self.set_subject3,cursor="hand2",font=("times new roman",15,"bold"), bg="#0b5377", fg="white").place(x=380, y=5, width=100, height=30)
-        btn_sem4 = Button(self.m_Frame, text="Sem 4", command=self.set_subject4,cursor="hand2",font=("times new roman",15,"bold"), bg="#0b5377", fg="white").place(x=550, y=5, width=100, height=30)
-        btn_sem5 = Button(self.m_Frame, text="Sem 5", command=self.set_subject5,cursor="hand2",font=("times new roman",15,"bold"), bg="#0b5377", fg="white").place(x=720, y=5, width=100, height=30)
-        btn_sem6 = Button(self.m_Frame, text="Sem 6", command=self.set_subject6,cursor="hand2",font=("times new roman",15,"bold"), bg="#0b5377", fg="white").place(x=890, y=5, width=100, height=30)
-        btn_sem7 = Button(self.m_Frame, text="Sem 7", command=self.set_subject7,cursor="hand2",font=("times new roman",15,"bold"), bg="#0b5377", fg="white").place(x=1060, y=5, width=100, height=30)
-        btn_sem8 = Button(self.m_Frame, text="Sem 8", command=self.set_subject8,cursor="hand2",font=("times new roman",15,"bold"), bg="#0b5377", fg="white").place(x=1230, y=5, width=100, height=30)
+        self.btn_sem1 = Button(self.m_Frame, text="Sem 1", command=self.set_subject1,cursor="hand2",font=("times new roman",15,"bold"), bg="#0b5377", fg="white")
+        self.btn_sem2 = Button(self.m_Frame, text="Sem 2", command=self.set_subject2,cursor="hand2",font=("times new roman",15,"bold"), bg="#0b5377", fg="white")
+        self.btn_sem3 = Button(self.m_Frame, text="Sem 3", command=self.set_subject3,cursor="hand2",font=("times new roman",15,"bold"), bg="#0b5377", fg="white")
+        self.btn_sem4 = Button(self.m_Frame, text="Sem 4", command=self.set_subject4,cursor="hand2",font=("times new roman",15,"bold"), bg="#0b5377", fg="white")
+        self.btn_sem5 = Button(self.m_Frame, text="Sem 5", command=self.set_subject5,cursor="hand2",font=("times new roman",15,"bold"), bg="#0b5377", fg="white")
+        self.btn_sem6 = Button(self.m_Frame, text="Sem 6", command=self.set_subject6,cursor="hand2",font=("times new roman",15,"bold"), bg="#0b5377", fg="white")
+        self.btn_sem7 = Button(self.m_Frame, text="Sem 7", command=self.set_subject7,cursor="hand2",font=("times new roman",15,"bold"), bg="#0b5377", fg="white")
+        self.btn_sem8 = Button(self.m_Frame, text="Sem 8", command=self.set_subject8,cursor="hand2",font=("times new roman",15,"bold"), bg="#0b5377", fg="white")
         #==========================tt1=============
         self.m1_Frame = LabelFrame(self.root, text= "TERM TEST 1", font=("times new roman", 15), bg="white")
 
@@ -212,6 +212,7 @@ class enter_marks:
             result = mycursor.fetchone()
 
             if(result):
+                self.show_sem()
                 self.m1_Frame.place(x=80, y=230, width=680, height=280)
                 self.m2_Frame.place(x=770, y=230, width=690, height=280)
                 self.m3_Frame.place(x=350, y=520, width=680, height=280)
@@ -221,6 +222,56 @@ class enter_marks:
             else:
                 messagebox.showinfo('message', 'gr_no and dob no match!')
 
+    def show_sem(self):
+        query = f"select sem from students where gr_no = {self.gr_no.get()}"
+        mycursor.execute(query)
+        result = mycursor.fetchone()
+        print(result[0])
+        print(result)
+        if(result[0] == 'sem 1'):
+            self.btn_sem1.place(x=40, y=5, width=100, height=30)
+        elif(result[0] == 'sem 2'):
+            self.btn_sem1.place(x=40, y=5, width=100, height=30)
+            self.btn_sem2.place(x=210, y=5, width=100, height=30)
+        elif(result[0] == 'sem 3'):
+            self.btn_sem1.place(x=40, y=5, width=100, height=30)
+            self.btn_sem2.place(x=210, y=5, width=100, height=30)
+            self.btn_sem3.place(x=380, y=5, width=100, height=30)
+        elif(result[0] == 'sem 4'):
+            self.btn_sem1.place(x=40, y=5, width=100, height=30)
+            self.btn_sem2.place(x=210, y=5, width=100, height=30)
+            self.btn_sem3.place(x=380, y=5, width=100, height=30)
+            self.btn_sem4.place(x=550, y=5, width=100, height=30)
+        elif(result[0] == 'sem 5'):
+            self.btn_sem1.place(x=40, y=5, width=100, height=30)
+            self.btn_sem2.place(x=210, y=5, width=100, height=30)
+            self.btn_sem3.place(x=380, y=5, width=100, height=30)
+            self.btn_sem4.place(x=550, y=5, width=100, height=30)
+            self.btn_sem5.place(x=720, y=5, width=100, height=30)
+        elif(result[0] == 'sem 6'):
+            self.btn_sem1.place(x=40, y=5, width=100, height=30)
+            self.btn_sem2.place(x=210, y=5, width=100, height=30)
+            self.btn_sem3.place(x=380, y=5, width=100, height=30)
+            self.btn_sem4.place(x=550, y=5, width=100, height=30)
+            self.btn_sem5.place(x=720, y=5, width=100, height=30)
+            self.btn_sem6.place(x=890, y=5, width=100, height=30)
+        elif(result[0] == 'sem 7'):
+            self.btn_sem1.place(x=40, y=5, width=100, height=30)
+            self.btn_sem2.place(x=210, y=5, width=100, height=30)
+            self.btn_sem3.place(x=380, y=5, width=100, height=30)
+            self.btn_sem4.place(x=550, y=5, width=100, height=30)
+            self.btn_sem5.place(x=720, y=5, width=100, height=30)
+            self.btn_sem6.place(x=890, y=5, width=100, height=30)
+            self.btn_sem7.place(x=1060, y=5, width=100, height=30)
+        elif(result[0] == 'sem 8'):
+            self.btn_sem1.place(x=40, y=5, width=100, height=30)
+            self.btn_sem2.place(x=210, y=5, width=100, height=30)
+            self.btn_sem3.place(x=380, y=5, width=100, height=30)
+            self.btn_sem4.place(x=550, y=5, width=100, height=30)
+            self.btn_sem5.place(x=720, y=5, width=100, height=30)
+            self.btn_sem6.place(x=890, y=5, width=100, height=30)
+            self.btn_sem7.place(x=1060, y=5, width=100, height=30)
+            self.btn_sem8.place(x=1230, y=5, width=100, height=30)
 
 
     def set_subject1(self):
@@ -406,26 +457,32 @@ class enter_marks:
         self.get_ut_sub3_out = self.ut_out_sub3.get()
         self.get_ut_sub4_out = self.ut_out_sub4.get()
         self.get_ut_sub5_out = self.ut_out_sub5.get()
-
+    
+        if(self.get_tt1_sub1_marks=='' or self.get_tt1_sub2_marks=='' or self.get_tt1_sub3_marks=='' or self.get_tt1_sub4_marks=='' or self.get_tt1_sub5_marks=='' or
+           self.get_tt2_sub1_marks=='' or self.get_tt2_sub2_marks=='' or self.get_tt2_sub3_marks=='' or self.get_tt2_sub4_marks=='' or self.get_tt2_sub5_marks=='' or
+           self.get_ut_sub1_marks=='' or self.get_ut_sub2_marks=='' or self.get_ut_sub3_marks=='' or self.get_ut_sub4_marks=='' or self.get_ut_sub5_marks==''):
+           messagebox.showwarning('warn',"All field must be required!")
+        else:
 # ---------queries
-
-        marks =[[self.get_tt1_sub1_marks, self.get_tt1_sub2_marks, self.get_tt1_sub3_marks, self.get_tt1_sub4_marks, self.get_tt1_sub5_marks ],
-                [self.get_tt2_sub1_marks, self.get_tt2_sub2_marks, self.get_tt2_sub3_marks, self.get_tt2_sub4_marks, self.get_tt2_sub5_marks ],
-                [self.get_ut_sub1_marks, self.get_ut_sub2_marks, self.get_ut_sub3_marks, self.get_ut_sub4_marks, self.get_ut_sub5_marks ],
-               ] 
-        sum = 0
-        for i in marks[2]:
-            sum += int(i)
-        cgpa = (sum/5)/9.5
-        query = f"update students set {self.sem} = {cgpa}"
-        print(query)
-        try:
-            for i in range(5):
-                query = f"update {self.sem}_{subjects[self.count][i]}_performance set tt1={marks[0][i]} , tt2={marks[1][i]}, ut={marks[2][i]} where gr_no = {self.get_gr_no};"
-                mycursor.execute(query)
-                mydb.commit()
-        except Exception as e:
-            print(e)
+            marks =[[self.get_tt1_sub1_marks, self.get_tt1_sub2_marks, self.get_tt1_sub3_marks, self.get_tt1_sub4_marks, self.get_tt1_sub5_marks ],
+                    [self.get_tt2_sub1_marks, self.get_tt2_sub2_marks, self.get_tt2_sub3_marks, self.get_tt2_sub4_marks, self.get_tt2_sub5_marks ],
+                    [self.get_ut_sub1_marks, self.get_ut_sub2_marks, self.get_ut_sub3_marks, self.get_ut_sub4_marks, self.get_ut_sub5_marks ],
+                   ] 
+            sum = 0
+            for i in marks[2]:
+                sum += int(i)
+            cgpa = (sum/5)/9.5
+            query = f"update students set {self.sem} = {cgpa}"
+            print(query)
+            try:
+                for i in range(5):
+                    query = f"update {self.sem}_{subjects[self.count][i]}_performance set tt1={marks[0][i]} , tt2={marks[1][i]}, ut={marks[2][i]} where gr_no = {self.get_gr_no};"
+                    mycursor.execute(query)
+                    mydb.commit()
+            except Exception as e:
+                print(e)
+            messagebox.showinfo('message', 'marks inserted sucessfully.')
+            self.root.destroy()
             
 
     # def convertToBinary(self, filename):
