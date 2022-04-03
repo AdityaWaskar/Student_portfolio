@@ -1,5 +1,6 @@
 import os
 from tkinter import messagebox
+from turtle import update
 import mysql.connector as sql
 from tkinter import *
 from tkinter import ttk
@@ -10,7 +11,7 @@ mydb = sql.connect(host="localhost", user="root", passwd="", database="SP")
 mycursor = mydb.cursor()
 
 
-class add_student:
+class show_student:
     def __init__(self, root):
         self.root = root
         self.root.title("Student Details")
@@ -23,7 +24,7 @@ class add_student:
         title = Label(self.root, text="Student Details", font=("goudy old style",20,"bold"), fg="white", bg="#033054").place(x=30, y=10,width= 1140, height=50)
 
 # ---------------labels
-        stu_gr = Label(self.root, text="GR No.", font=("goudy old style",15) ,fg="black", bg="#d1e2f4").place(x=50, y=120)
+        gr_no = Label(self.root, text="GR No.", font=("goudy old style",15) ,fg="black", bg="#d1e2f4").place(x=50, y=120)
         name = Label(self.root, text="Name", font=("goudy old style",15) ,fg="black", bg="#d1e2f4").place(x=50, y=200)
         Roll_no = Label(self.root, text="Roll No.", font=("goudy old style",15) ,fg="black", bg="#d1e2f4").place(x=50, y=250)
         DOB = Label(self.root, text="DOB", font=("goudy old style",15) ,fg="black", bg="#d1e2f4").place(x=350, y=250)
@@ -183,18 +184,99 @@ class add_student:
             self.updated_address = self.address.get()
             self.updated_branch = self.branch.get()
             self.updated_sem = self.sem.get()
+            print(self.updated_sem)
+            print("test1")
             
-            query1 = "UPDATE students SET name = %s, DOB = %s, email = %s, phone_no = %s, Xth = %s, XIIth = %s, address = %s, sem = %s, branch = %s WHERE gr_no = %s"
-            mycursor.execute(query1, [self.updated_name, self.updated_dob, self.updated_email, self.updated_phone_no, self.updated_xth, self.updated_xiith, self.updated_address, self.updated_sem, self.updated_branch, self.get_gr_no])
+            query111 = "UPDATE students SET name = %s, DOB = %s, email = %s, phone_no = %s, Xth = %s, XIIth = %s, address = %s, sem = %s, branch = %s WHERE gr_no = %s"
+            a = [self.updated_name, self.updated_dob, self.updated_email, self.updated_phone_no, self.updated_xth, self.updated_xiith, self.updated_address, self.updated_sem, self.updated_branch, self.gr_no.get()]
+            print(query111)
+            mycursor.execute(query111, a)
+            print("test2")
            
             if(self.pre_sem != self.updated_sem):
-                query2 = f"DELETE FROM sem{self.pre_sem[-1]}_students WHERE name = %s OR DOB = %s OR email = %s OR phone_no = %s"
-                query3 = f"INSERT INTO sem{self.updated_sem[-1]}_students(roll_no, name, DOB, email, phone_no, Xth, XIIth, address, branch) values(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                mycursor.execute(query2, [self.updated_name, self.updated_dob, self.updated_email, self.updated_phone_no])
-                mycursor.execute(query3, [int(self.updated_roll_no), self.updated_name, self.updated_dob, self.updated_email, self.updated_phone_no, self.updated_xth, self.updated_xiith, self.updated_address, self.updated_branch])
+                q = f"select batch from students where gr_no = {self.get_gr_no};"
+                mycursor.execute(q)
+                self.batch = mycursor.fetchall() 
+                print(self.batch)
+                # query2 = f"DELETE FROM sem{self.pre_sem[-1]}_students WHERE name = %s OR DOB = %s OR email = %s OR phone_no = %s;"
+                query3 = f"INSERT INTO sem{self.updated_sem[-1]}_students(gr_no,roll_no, name, DOB, email, phone_no, Xth, XIIth, address, branch, batch) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
+                # mycursor.execute(query2, [self.updated_name, self.updated_dob, self.updated_email, self.updated_phone_no])
+                mycursor.execute(query3, [self.gr_no.get(),int(self.updated_roll_no), self.updated_name, self.updated_dob, self.updated_email, self.updated_phone_no, self.updated_xth, self.updated_xiith, self.updated_address, self.updated_branch, self.batch[0][0]])
+                if(self.updated_sem == 'sem 2'):
+                        print("test4")
+                        query5 = f"ALTER TABLE sem2_EM_2_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query6 = f"ALTER TABLE sem2_EC_2_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query7 = f"ALTER TABLE sem2_EP_2_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query8 = f"ALTER TABLE sem2_C_Programming_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query9 = f"ALTER TABLE sem2_ED_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+
+                        query10= f"INSERT INTO sem2_EM_2_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        print(query10)
+                        query11= f"INSERT INTO sem2_EC_2_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query12= f"INSERT INTO sem2_EP_2_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query13= f"INSERT INTO sem2_C_Programming_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query14= f"INSERT INTO sem2_ED_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                elif(self.updated_sem == 'sem 3'):
+                        query5 = f"ALTER TABLE sem3_EM_3_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query6 = f"ALTER TABLE sem3_Java_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query7 = f"ALTER TABLE sem3_DSA_3_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query8 = f"ALTER TABLE sem3_DBMS_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query9 = f"ALTER TABLE sem3_PCE_1_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+
+                        query10= f"INSERT INTO sem3_EM_3_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query11= f"INSERT INTO sem3_Java_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query12= f"INSERT INTO sem3_DSA_3_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query13= f"INSERT INTO sem3_DBMS_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query14= f"INSERT INTO sem3_PCE_1_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+
+                elif(self.updated_sem == 'sem 4'):
+                        query5 = f"ALTER TABLE sem4_EM_4_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query6 = f"ALTER TABLE sem4_Python_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query7 = f"ALTER TABLE sem4_CNND_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query8 = f"ALTER TABLE sem4_OS_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"                        
+                        query9 = f"ALTER TABLE sem4_COA_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+
+                        query10= f"INSERT INTO sem4_EM_4_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query11= f"INSERT INTO sem4_Python_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query12= f"INSERT INTO sem4_CNND_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query13= f"INSERT INTO sem4_OS_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query14= f"INSERT INTO sem4_COA_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+
+                elif(self.updated_sem == 'sem 5'):
+                        print("seh")
+                        # query5 = f"ALTER TABLE sem2_EM_2_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        # query6 = f"ALTER TABLE sem2_EC_2_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        # query7 = f"ALTER TABLE sem2_EP_2_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        # query8 = f"ALTER TABLE sem2_C_Programming_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        # query9 = f"ALTER TABLE sem2_ED_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                elif(self.updated_sem == 'sem 6'):
+                        query5 = f"ALTER TABLE sem2_EM_2_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query6 = f"ALTER TABLE sem2_EC_2_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query7 = f"ALTER TABLE sem2_EP_2_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query8 = f"ALTER TABLE sem2_C_Programming_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query9 = f"ALTER TABLE sem2_ED_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                elif(self.updated_sem == 'sem 7'):
+                        query5 = f"ALTER TABLE sem2_EM_2_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query6 = f"ALTER TABLE sem2_EC_2_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query7 = f"ALTER TABLE sem2_EP_2_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query8 = f"ALTER TABLE sem2_C_Programming_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query9 = f"ALTER TABLE sem2_ED_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                mycursor.execute(query5)
+                mycursor.execute(query6)
+                mycursor.execute(query7)
+                mycursor.execute(query8)
+                mycursor.execute(query9)
+                mycursor.execute(query10)
+                mycursor.execute(query11)
+                mycursor.execute(query12)
+                mycursor.execute(query13)
+                mycursor.execute(query14)
+                mydb.commit()
+                        
             else:
                 query4 = f"UPDATE sem{self.updated_sem[-1]}_students SET  roll_no=%s, name = %s, DOB = %s, email = %s, phone_no = %s, Xth = %s, XIIth = %s, address = %s, branch = %s WHERE name = %s OR DOB = %s OR email = %s OR phone_no = %s "
                 mycursor.execute(query4, [int(self.updated_roll_no), self.updated_name, self.updated_dob, self.updated_email, self.updated_phone_no, self.updated_xth, self.updated_xiith, self.updated_address, self.updated_branch, self.updated_name, self.updated_dob, self.updated_email, self.updated_phone_no])
+            
             self.show()
             mydb.commit()
             messagebox.showinfo("showinfo", f"Dara Updated")
@@ -222,5 +304,5 @@ class add_student:
     
 if __name__ == "__main__":
     root=Tk()
-    obj = add_student(root)
+    obj = show_student(root)
     root.mainloop()

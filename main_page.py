@@ -1,71 +1,110 @@
-from cProfile import label
-from logging import root
 from tkinter import *
- 
+from logging import root
 from PIL import Image, ImageTk
-root = Tk()
-root.geometry("1600x800")
-root.title("Student Portfolio")
- 
-#photo = PhotoImage(file="himanshu123.png")
-# for jpg images
- 
-image = Image.open("D:\\VS CODE\\Python\\Lovepik_com-501679643-millennium-university-of-hunan-university.jpg")
-image=image.resize((1600,800))
-photo = ImageTk.PhotoImage(image)
-label1 = Label(root,image=photo)
-label1.pack()
- 
-#root.config(bg='red')
-'''
-bg = PhotoImage(file = "D:\\VS CODE\\Python\\univ.png")
-label1 = Label(root, image = bg)
-label1.place(x=0,y=0)
-bg.pack()
-'''
-def myfunc():
-    print("Himanshu Upadhyay")
- 
- 
- 
-filemenu = Menu(root)  #mainmenu
- 
-m1 = Menu(filemenu,tearoff=0)
-m1.add_command(label="ADD TEACHER",command=myfunc)
-m1.add_command(label="ADD STUDENT",command=myfunc)
-root.config(menu=filemenu)
-filemenu.add_cascade(label="ADD",menu=m1)
- 
-m2 = Menu(filemenu,tearoff=0)
-m2.add_command(label="TEACHER",command=myfunc)
-m2.add_command(label="STUDENT",command=myfunc)
-root.config(menu=filemenu)
-filemenu.add_cascade(label="DETAILS",menu=m2)
- 
-m3 = Menu(filemenu,tearoff=0)
-m3.add_command(label="ATTENDENCE",command=myfunc)
-root.config(menu=filemenu)
-filemenu.add_cascade(label="ATTENDENCE",menu=m3)
- 
-m4 = Menu(filemenu,tearoff=0)
-m4.add_command(label="PERFORMANCE",command=myfunc)
-m4.add_command(label="DEFAULTER LIST",command=myfunc)
-root.config(menu=filemenu)
-filemenu.add_cascade(label="REPORT",menu=m4)
- 
-m5 = Menu(filemenu,tearoff=0)
-m5.add_command(label="ADD MARKS",command=myfunc)
-m5.add_command(label="SHOW MARKS",command=myfunc)
-root.config(menu=filemenu)
-filemenu.add_cascade(label="MARKS",menu=m5)
- 
-m6 = Menu(filemenu,tearoff=0)
-m6.add_command(label="EXIT",command=exit,accelerator="ctrl+Q")
-root.config(menu=filemenu)
-filemenu.add_cascade(label="LOGOUT",menu=m6)
- 
- 
- 
- 
-root.mainloop()
 
+from add_student import add_student
+from add_teacher import add_teacher
+from show_student import show_student
+from show_teacher import show_teacher
+from take_attendance import take_attendance
+from show_performance import show_performance
+from show_defaulter import show_defaulter 
+from result_input import enter_marks
+from Report import report
+
+
+class Login:
+    def __init__(self, root):
+        self.root = root                                                                                                                                    
+        self.root.title("Login Page")
+        self.root.geometry("1600x800") 
+        self.root.resizable(False, False)
+
+        image = Image.open("images\\Lovepik_com-501679643-millennium-university-of-hunan-university.jpg")
+        image=image.resize((1600,800))
+        photo = ImageTk.PhotoImage(image)
+        label1 = Label(root,image=photo) 
+        label1.pack()
+
+        filemenu = Menu(self.root)  #mainmenu
+
+        m1 = Menu(filemenu,tearoff=0)
+        m1.add_command(label="ADD TEACHER",command=self.add_teacher)
+        m1.add_command(label="ADD STUDENT",command=self.add_students)
+        self.root.config(menu=filemenu)
+        filemenu.add_cascade(label="ADD",menu=m1)
+
+        m2 = Menu(filemenu,tearoff=0)
+        m2.add_command(label="TEACHER",command=self.show_teacher)
+        m2.add_command(label="STUDENT",command=self.show_students)
+        self.root.config(menu=filemenu)
+        filemenu.add_cascade(label="DETAILS",menu=m2)
+
+        m3 = Menu(filemenu,tearoff=0)
+        m3.add_command(label="ATTENDENCE",command=self.take_attendance)
+        self.root.config(menu=filemenu)
+        filemenu.add_cascade(label="ATTENDENCE",menu=m3)
+
+        m4 = Menu(filemenu,tearoff=0)
+        m4.add_command(label="PERFORMANCE",command=self.show_performance)
+        m4.add_command(label="DEFAULTER LIST",command=self.show_defaulter)
+        self.root.config(menu=filemenu)
+        filemenu.add_cascade(label="REPORT",menu=m4)
+
+        m5 = Menu(filemenu,tearoff=0)
+        m5.add_command(label="ADD MARKS",command=self.result_input)
+        m5.add_command(label="SHOW MARKS",command=self.report)
+        self.root.config(menu=filemenu)
+        filemenu.add_cascade(label="MARKS",menu=m5)
+
+        m6 = Menu(filemenu,tearoff=0)
+        m6.add_command(label="EXIT",command=exit,accelerator="ctrl+Q")
+        self.root.config(menu=filemenu)
+        filemenu.add_cascade(label="LOGOUT",menu=m6)
+
+    def myfunc(self):
+        pass
+    def add_teacher(self):
+        self.new_win = Toplevel(self.root)
+        self.new_obj = add_teacher(self.new_win)
+    
+    def add_students(self):
+        self.new_win = Toplevel(self.root)
+        self.new_obj = add_student(self.new_win)
+    
+    def show_students(self):
+        self.new_win = Toplevel(self.root)
+        self.new_obj = show_student(self.new_win)
+        
+    def show_teacher(self):
+        self.new_win = Toplevel(self.root)
+        self.new_obj = show_teacher(self.new_win)
+        
+    def take_attendance(self):
+        self.new_win = Toplevel(self.root)
+        self.new_obj = take_attendance(self.new_win)
+
+    def show_performance(self):
+        self.new_win = Toplevel(self.root)
+        self.new_obj = show_performance(self.new_win)
+
+    def show_defaulter(self):
+        self.new_win = Toplevel(self.root)
+        self.new_obj = show_defaulter(self.new_win)
+
+    def result_input(self):
+        self.new_win = Toplevel(self.root)
+        self.new_obj = enter_marks(self.new_win)
+    
+    def report(self):
+        self.new_win = Toplevel(self.root)
+        self.new_obj = report(self.new_win)
+
+
+
+              
+        
+if __name__ == "__main__":
+    root=Tk()
+    obj = Login(root)
+    root.mainloop()

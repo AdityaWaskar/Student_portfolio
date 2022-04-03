@@ -11,7 +11,7 @@ import datetime as dt
 mydb = sql.connect(host="localhost", user="root", passwd="", database="SP")
 mycursor = mydb.cursor()
 
-class take_attendance:
+class show_performance:
     def __init__(self, root):
         self.root = root
         self.root.title("Login Page")
@@ -186,5 +186,5 @@ class take_attendance:
 
 if __name__ == "__main__":
     root=Tk()
-    obj = take_attendance(root)
+    obj = show_performance(root)
     root.mainloop()

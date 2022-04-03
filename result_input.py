@@ -515,7 +515,7 @@ class enter_marks:
         
 
 
-
-root=Tk()
-bj=enter_marks(root)
-root.mainloop()
+if __name__ == "__main__":
+    root=Tk()
+    obj=enter_marks(root)
+    root.mainloop()

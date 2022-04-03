@@ -208,6 +208,8 @@ class take_attendance:
                         abc = mycursor.fetchall()
                         print(i)
                         query2 = f"select roll_no from sem{self.get_sem[-1]}_students where gr_no = {i[0]};"
+                        print(query2)
+                        print(abc1)
                         mycursor.execute(query2)
                         result2 = mycursor.fetchone() 
                         self.my_table.insert(parent='',index='end',iid=a,text='',values=(i[0],result2[0], i[1], abc[0][0]))
