@@ -17,6 +17,7 @@ class teacher_Login:
         self.root.resizable(False, False)
         self.bg = ImageTk.PhotoImage(file="images/bg1.jpg")
         self.bg_img = Label(self.root, image=self.bg).place(x=0,y=0,relwidth=1, relheight=1)
+        self.root.focus_force()
 
         Frame_login = Frame(self.root, bg="White")
         Frame_login.place(x=150, y=150, height=340, width=500)

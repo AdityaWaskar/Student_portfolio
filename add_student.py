@@ -18,6 +18,7 @@ class add_student:
         self.root.geometry("900x750+350+50") 
         self.root.resizable(False, False)
         self.root.config(bg="#d1e2f4")
+        self.root.focus_force()
 
 
 #-----------------------getting Current year

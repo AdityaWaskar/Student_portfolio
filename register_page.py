@@ -2,12 +2,14 @@ from tkinter import*
 from tkinter import ttk,messagebox
 from PIL import Image,ImageTk
 
+
 class Register:
     def __init__(self,root):
         self.root=root
         self.root.title("Regiseration Window")
         self.root.geometry("1350x700+0+0")
         self.root.config(bg="white")
+        self.root.focus_force()
         #-----bg Image-------
         self.bg=ImageTk.PhotoImage(file="images\wallpaper.jpg")
         bg=Label(self.root,image=self.bg).place(x=250,y=0,relwidth=1,relheight=1)

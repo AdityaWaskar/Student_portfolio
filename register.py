@@ -8,6 +8,7 @@ class Register:
         self.root.title("Regiseration Window")
         self.root.geometry("1350x700+0+0")
         self.root.config(bg="white")
+        self.root.focus_force()
         #-----bg Image-------
         self.bg=ImageTk.PhotoImage(file="D:\VS CODE\Miniproject\wallpaper.jpg")
         bg=Label(self.root,image=self.bg).place(x=250,y=0,relwidth=1,relheight=1)

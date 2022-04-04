@@ -18,6 +18,7 @@ class add_teacher:
         self.root.geometry("900x730+350+50") 
         self.root.resizable(False, False)
         self.root.config(bg="#d1e2f4")
+        self.root.focus_force()
 
 # --------------------queries
         sql = "select count(*) from teachers"

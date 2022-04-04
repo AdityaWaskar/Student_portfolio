@@ -19,6 +19,7 @@ class take_attendance:
         self.root.resizable(False, False)
         self.root.config(bg="#d1e2f4")
         title = Label(self.root, text="Attendance", font=("goudy old style",20,"bold"), fg="white", bg="#033054").place(x=30, y=10,width= 1090, height=50)
+        self.root.focus_force()
 
 # ---------------------------getting current date, month and year 
         date = dt.datetime.now()

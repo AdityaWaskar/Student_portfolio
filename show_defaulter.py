@@ -15,6 +15,7 @@ class show_defaulter:
         self.root.geometry("1150x600+180+120")
         self.root.resizable(False, False)
         self.root.config(bg="#d1e2f4")
+        self.root.focus_force()
         title = Label(self.root, text="Performance", font=("goudy old style",20,"bold"), fg="white", bg="#033054").place(x=30, y=10,width= 1090, height=50)
 
         # ---------------------------getting current date, month and year 

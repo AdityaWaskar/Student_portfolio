@@ -1,12 +1,11 @@
-from argparse import _MutuallyExclusiveGroup
 import base64
 from fileinput import filename
-from itertools import count
 from tkinter import*
 from PIL import Image,ImageTk
 from tkinter import ttk,messagebox
 from tkinter import filedialog
 import mysql.connector as sql
+from tkcalendar import DateEntry
 
 mydb = sql.connect(host="localhost", user="root", passwd="", database="SP")
 mycursor = mydb.cursor()
@@ -36,8 +35,11 @@ class enter_marks:
         gr_no=Label(self.root,text="ENTER GR NO.",font=("times new roman",15,"bold"),bg="white").place(x=140,y=100)
         self.gr_no=Entry(self.root,textvariable=self.var_search,font=("times new roman",20),bg="lightyellow")
         self.gr_no.place(x=340,y=100,width=150)
-        btn_search=Button(self.root,text='Search',command=self.search,font=("times new roman",15,"bold"),bg="#03a9f4",fg="white",cursor="hand2").place(x=500,y=100,width=100,height=35)
-        btn_clear=Button(self.root,text='Clear',font=("times new roman",15,"bold"),bg="gray",fg="white",cursor="hand2").place(x=620,y=100,width=100,height=35)
+        lbl_dob=Label(self.root,text="DOB.",font=("times new roman",15),bg="white").place(x=500,y=100)
+        self.dob=DateEntry(self.root, selectmode="day",date_pattern = 'dd/mm/yyyy',background="blue",Cursor="hand1",year=2003, month=1,foreground='black', font=("Arial", 12))
+        self.dob.place(x=560,y=100,width=150)
+        btn_search=Button(self.root,text='Search',command=self.search,font=("times new roman",15,"bold"),bg="#03a9f4",fg="white",cursor="hand2").place(x=800,y=100,width=100,height=35)
+        btn_clear=Button(self.root,text='Clear',font=("times new roman",15,"bold"),bg="gray",fg="white",cursor="hand2").place(x=920,y=100,width=100,height=35)
         btn_submit=Button(self.root,command=self.submit,text='Submit',font=("times new roman",15,"bold"),bg="#03a9f4",fg="white",cursor="hand2").place(x=1400,y=100,width=100,height=35)
 
         #===================
@@ -201,7 +203,7 @@ class enter_marks:
 
     def search(self):
         self.get_gr_no = self.gr_no.get()
-        self.get_dob = '03/01/2003'
+        self.get_dob = self.dob.get()
         if(self.get_gr_no == ''):
             messagebox.showerror('error', 'Enter gr no')
         elif(self.get_dob == ''):
@@ -472,8 +474,9 @@ class enter_marks:
             for i in marks[2]:
                 sum += int(i)
             cgpa = (sum/5)/9.5
-            query = f"update students set {self.sem} = {cgpa}"
-            print(query)
+            query1 = f"update students set {self.sem} = {cgpa}"
+            mycursor.execute(query1)
+            mydb.commit()
             try:
                 for i in range(5):
                     query = f"update {self.sem}_{subjects[self.count][i]}_performance set tt1={marks[0][i]} , tt2={marks[1][i]}, ut={marks[2][i]} where gr_no = {self.get_gr_no};"
