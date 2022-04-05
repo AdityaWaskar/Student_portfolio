@@ -48,7 +48,7 @@ class student_Login:
             messagebox.showerror("Error", "All fields are required",parent=self.root)
         elif result:
             self.root.destroy()
-            os.system("python main_page.py")
+            os.system("python student_main_page.py")
         else:
             messagebox.showerror("Error", "password/username not match!",parent=self.root)
 
