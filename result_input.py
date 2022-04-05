@@ -26,6 +26,7 @@ class enter_marks:
         self.root.geometry("1600x800+0+0")
         self.root.config(bg="white")
         self.root.focus_force()
+        self.root.grab_set()
         self.count = -1
         #================title===================
         title=Label(self.root,text="Enter Your Marks",font=("times new roman",20,"bold"),bg="orange",fg="white").place(x=10,y=15,width=1600,height=50)
