@@ -247,12 +247,28 @@ create table sem4_OS_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
 create table sem4_COA_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
 
 create table sem5_Internet_Programming_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem5_CNS_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem5_EEB_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem5_Software_Engineering_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem5_PCE_2_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
 
 create table sem6_Data_Mining_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem6_Web_X_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem6_wireless_technology_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem6_AI_and_DS_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem6_AI_and_DS_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
 
 create table sem7_Enterprise_Network_Design_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem7_Infrastruction_Security_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem7_Soft_computing_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem7_Cyber_security_and_Law_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem7_AI_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
 
 create table sem8_Big_data_analytics_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem8_Internet_of_Everything_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem8_R_Programming_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem8_Robotics_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem8_Project_management_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
 
 ---------------------------performance
 create table sem1_EM_1_performance(gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
@@ -280,13 +296,28 @@ create table sem4_OS_performance( gr_no int not null, avg_attendance float, tt1 
 create table sem4_COA_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
 
 create table sem5_Internet_Programming_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem5_CNS_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem5_EEB_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem5_Software_Engineering_5_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem5_PCE_2_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
 
 create table sem6_Data_Mining_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem6_Web_X_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem6_wireless_technology_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem6_AI_and_DS_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem6_Ethical_Hacking_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
 
 create table sem7_Enterprise_Network_Design_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem7_Infrastruction_Security_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem7_Soft_computing_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem7_Cyber_security_and_Law_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem7_AI_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
 
 create table sem8_Big_data_analytics_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
-
+create table sem8_Internet_of_Everything_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem8_R_Programming_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem8_Robotics_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem8_Project_management_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
 
 drop table sem1_EM_1_attendance;
 drop table sem1_EC_1_attendance;
@@ -377,6 +408,25 @@ alter table sem4_CNND_performance add batch int;
 alter table sem4_OS_performance add batch int;
 alter table sem4_COA_performance add batch int;
 alter table sem5_Internet_Programming_performance add batch int;
+alter table sem5_CNS_performance add batch int;
+alter table sem5_EEB_performance add batch int;
+alter table sem5_Software_Engineering_5_performance add batch int;
+alter table sem5_PCE_2_performance add batch int;
+
 alter table sem6_Data_Mining_performance add batch int;
+alter table sem6_Web_X_performance add batch int;
+alter table sem6_wireless_technology_performance add batch int;
+alter table sem6_AI_and_DS_performance add batch int;
+alter table sem6_Ethical_Hacking_performance add batch int;
+
 alter table sem7_Enterprise_Network_Design_performance add batch int;
+alter table sem7_Infrastruction_Security_performance add batch int;
+alter table sem7_Soft_computing_performance add batch int;
+alter table sem7_Cyber_security_and_Law_performance add batch int;
+alter table sem7_AI_performance add batch int;
+
 alter table sem8_Big_data_analytics_performance add batch int;
+alter table sem8_Internet_of_Everything_performance add batch int;
+alter table sem8_R_Programming_performance add batch int;
+alter table sem8_Robotics_performance add batch int;
+alter table sem8_Project_management_performance add batch int;
