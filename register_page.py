@@ -62,7 +62,7 @@ class Register:
 
         #------------Terms-----------
         self.var_chk=IntVar()
-        chk=Checkbutton(frame1,text="I Agree The Terms & Conditions",variable=self.var_chk,onvalue=1,offvalue=0,bg="white",font=("times new roman",12)).place(x=50,y=380)
+        #chk=Checkbutton(frame1,text="I Agree The Terms & Conditions",variable=self.var_chk,onvalue=1,offvalue=0,bg="white",font=("times new roman",12)).place(x=50,y=380)
 
        # self.btn_img=ImageTk.PhotoImage(file="D:\VS CODE\Miniproject\abc.png")
        # btn=Button(frame1,image=self.btn_img).place(x=50,y=420)

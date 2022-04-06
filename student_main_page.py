@@ -11,8 +11,12 @@ from Report import report
 class RMS:
     def __init__(self, root):
         self.root= root
+        screen_width = self.root.winfo_screenwidth()
+        screen_heigth = self.root.winfo_screenheight()
         self.root.title("Result Management System")
-        self.root.geometry("1600x800+0+0")
+        self.root.geometry("%dx%s+-10+0"%(screen_width,screen_heigth -35)) 
+        
+        #self.root.geometry("1600x800+0+0")
         self.root.config(bg="white")
 
         self.bg_img = Image.open("images/bg1.jpg") 

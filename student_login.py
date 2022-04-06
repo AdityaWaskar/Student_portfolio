@@ -31,7 +31,7 @@ class student_Login:
         self.txt_user = Entry(Frame_login, font=("times new roman", 15), bg="lightgrey")
         self.txt_user.place(x=90, y=170, width=350, height=35)
         
-        lbl_pass = Label(Frame_login, text="Birdthday", font=("Goudy old style",15,"bold"), fg="grey", bg="white").place(x=90, y=210)
+        lbl_pass = Label(Frame_login, text="Password", font=("Goudy old style",15,"bold"), fg="grey", bg="white").place(x=90, y=210)
         self.txt_pass = DateEntry(Frame_login, selectmode="day",state="readonly",date_pattern = 'dd/mm/yyyy',background="blue",Cursor="hand1",year=2003, month=1, foreground='black', font=("Arial", 12))
         self.txt_pass.place(x=90, y=240, width=350, height=35)
 

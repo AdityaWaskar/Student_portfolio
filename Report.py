@@ -27,11 +27,11 @@ class report:
         self.root.config(bg="white")
         self.root.focus_force()
 # -------------------------title
-        title=Entry(self.root,text="View Student Results",font=("times new roman",20,"bold"),bg="orange",fg="white").place(x=10,y=15,width=1600,height=50)
+        title=Label(self.root,text="View Student Results",font=("times new roman",20,"bold"),bg="orange",fg="white").place(x=10,y=15,width=1600,height=50)
 # -------------------------search box
         self.var_search=StringVar()
-        gr_no=Label(self.root, text="Search by GR no.", justify=CENTER,font=("goudy old style",15,"bold"),bg="white").place(x=150,y=100)
-        self.gr_no=Entry(self.root,textvariable=self.var_search,justify=CENTER,font=("goudy old style",20),bg="lightyellow")
+        gr_no=Label(self.root, text="Search by GR no.", justify=CENTER,font=("times new roman",15,"bold"),bg="white").place(x=150,y=100)
+        self.gr_no=Entry(self.root,textvariable=self.var_search,justify=CENTER,font=("times new roman",15),bg="lightyellow")
         self.gr_no.place(x=300,y=100,width=150)
         lbl_dob=Label(self.root,text="DOB.",font=("times new roman",15),bg="white").place(x=500,y=100)
         self.dob=DateEntry(self.root, selectmode="day",date_pattern = 'dd/mm/yyyy',background="blue",Cursor="hand1",year=2003, month=1,foreground='black', font=("Arial", 12))
@@ -130,32 +130,32 @@ class report:
         self.m1_Frame.place(x=880, y=230, width=550, height=330)
 
         lbl_gr_no = Label(self.m1_Frame, text="Gr No. =", cursor="hand2",font=("goudy lod style",15), bg="white", fg="black").place(x=140-80, y=30, width=100, height=30)
-        self.lbl_gr_no = Label(self.m1_Frame,font=("goudy lod style",15,"bold"), bg="white", fg="black")
-        self.lbl_gr_no.place(x=250-80, y=30, width=150, height=30)
+        self.lbl_gr_no = Label(self.m1_Frame,font=("times new roman",15), bg="white", fg="#0b5377")
+        self.lbl_gr_no.place(x=250-80, y=30, width=250, height=30)
         
                
         lbl_name = Label(self.m1_Frame, text="Name =", cursor="hand2",font=("goudy lod style",15), bg="white", fg="black").place(x=140-80, y=70, width=100, height=30)
-        self.lbl_name = Label(self.m1_Frame,font=("goudy lod style",15,"bold"), bg="white", fg="black")
-        self.lbl_name.place(x=250-80, y=70, width=150, height=30)
+        self.lbl_name = Label(self.m1_Frame,font=("times new roman",15), bg="white", fg="#0b5377")
+        self.lbl_name.place(x=250-80, y=70, width=250, height=30)
         
 
         lbl_dob = Label(self.m1_Frame, text="DOB =", cursor="hand2",font=("goudy lod style",15), bg="white", fg="black").place(x=140-80, y=110, width=100, height=30)
-        self.lbl_dob = Label(self.m1_Frame,font=("goudy lod style",15,"bold"), bg="white", fg="black")
-        self.lbl_dob.place(x=250-80, y=110, width=150, height=30)
+        self.lbl_dob = Label(self.m1_Frame,font=("times new roman",15), bg="white", fg="#0b5377")
+        self.lbl_dob.place(x=250-80, y=110, width=250, height=30)
        
 
         lbl_email = Label(self.m1_Frame, text="Email =", cursor="hand2",font=("goudy lod style",15), bg="white", fg="black").place(x=140-80, y=150, width=100, height=30)
-        self.lbl_email = Label(self.m1_Frame,font=("goudy old style",15,"bold"), bg="white", fg="black")
-        self.lbl_email.place(x=250-80, y=150, width=150, height=30)
+        self.lbl_email = Label(self.m1_Frame,font=("times new roman",15), bg="white", fg="#0b5377")
+        self.lbl_email.place(x=250-80, y=150, width=250, height=30)
         
 
         lbl_sem = Label(self.m1_Frame, text="Semester =", cursor="hand2",font=("goudy lod style",15), bg="white", fg="black").place(x=140-80, y=190, width=100, height=30)
-        self.lbl_sem = Label(self.m1_Frame,font=("goudy old style",15,"bold"), bg="white", fg="black")
-        self.lbl_sem.place(x=250-80, y=190, width=150, height=30)
+        self.lbl_sem = Label(self.m1_Frame,font=("times new roman",15), bg="white", fg="#0b5377")
+        self.lbl_sem.place(x=250-80, y=190, width=250, height=30)
         
         lbl_pointer = Label(self.m1_Frame, text="POINTER=", cursor="hand2",font=("goudy lod style",15), bg="white", fg="black").place(x=140-80, y=230, width=100, height=30)
-        self.lbl_pointer = Label(self.m1_Frame,font=("goudy lod style",15,"bold"), bg="white", fg="black")
-        self.lbl_pointer.place(x=250-80, y=230, width=150, height=30)
+        self.lbl_pointer = Label(self.m1_Frame,font=("times new roman",15), bg="white", fg="#0b5377")
+        self.lbl_pointer.place(x=250-80, y=230, width=250, height=30)
     
         # btn_search=Button(self.root,text='Delete',justify=CENTER,font=("goudy old style",15,"bold"),bg="red",fg="white",cursor="hand2").place(x=650,y=700,width=150,height=35)
 # -------------------------methods

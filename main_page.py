@@ -16,9 +16,14 @@ from Report import report
 class Login:
     def __init__(self, root):
         self.root = root                                                                                                                                    
+        screen_width = self.root.winfo_screenwidth()
+        screen_heigth = self.root.winfo_screenheight()
         self.root.title("Login Page")
-        self.root.geometry("1600x800") 
-        self.root.resizable(False, False)
+        self.root.geometry("%dx%s+-10+0"%(screen_width,screen_heigth)) 
+        
+        print(screen_heigth)
+        print(screen_width)
+        # self.root.attributes('-fullscreen',True)
 
         image = Image.open("images\\Lovepik_com-501679643-millennium-university-of-hunan-university.jpg")
         image=image.resize((1600,800))

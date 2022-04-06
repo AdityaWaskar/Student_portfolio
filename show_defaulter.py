@@ -23,6 +23,11 @@ class show_defaulter:
         self.current_date = int(f"{date:%d}")
         self.current_month = int(f"{date:%m}")
         self.current_year = int(f"{date:%Y}")
+# ------------------------batches
+        
+        a = {'Select',2016,2017,2018,2019,2020,2021}
+        a.add(self.current_year)
+        self.batch_years = list(a)
 
         # ---------------------------defining variables
         self.table_width = 1000  
@@ -46,6 +51,12 @@ class show_defaulter:
         self.subject['values'] = ("Select","-------", "EM_1", "EC_1", "EP_1", "BEE", "Mechanics_1", "------", "EM_2", "EC_2", "EP_2", "C_Programming", "ED", "-----", "EM_1", "Java", "DSA", "DBMS", "PCE_1", "-----", "EM_4", "Python", "CNND", "OS", "COA","-----","Internet_Programming","-----","Data_Mining","-----","Enterprise_Network_Design","-----", "Big_data_analytics")
         self.subject.place(x=450, y=self.y, width=100, height=21)
         self.subject.current(0)
+
+        self.batch = ttk.Combobox(self.root, text="Batch", font=("times new roman",self.font), state="readonly", justify=CENTER)
+        self.batch['values'] = list(self.batch_years)
+        self.batch.place(x=600, y=self.y, width=100, height=21)
+        index1 = self.batch_years.index('Select')
+        self.batch.current(index1)
 
         # self.sem = ttk.Combobox(self.root, text="days", font=("times new roman",self.font), state="readonly", justify=CENTER)
         # self.sem['values'] = ("Select","last 30 days", "last 60 days","last 6 months" )
@@ -100,6 +111,7 @@ class show_defaulter:
         self.get_branch = self.branch.get()
         self.get_sem = self.sem.get()
         self.get_subject = self.subject.get()
+        self.get_batch = self.batch.get()
         flag = False
 
 # -------------------if-else ladder for selecting right option
@@ -152,23 +164,28 @@ class show_defaulter:
                 print("main else")
 
             try:   
-                    query1 = f"select gr_no, avg_attendacne from sem{self.get_sem[-1]}_{self.get_subject}_performance where avg_attendacne < 75.00 ;"
+                    query1 = f"select gr_no, avg_attendacne from sem{self.get_sem[-1]}_{self.get_subject}_performance where avg_attendacne < 75.00 and batch = {self.get_batch};"
+                    print(query1)
                     mycursor.execute(query1)
                     result1 = mycursor.fetchall()
                     a=0
                     self.my_table.delete(*self.my_table.get_children())
 
 # ---------------display the data to the table
-                    for i in result1:
-                        # query = f"select gr_no, avg_attendacne from sem{self.get_sem[-1]}_{self.get_subject}_performance where avg_attendacne < 75.00 ;"
-                        # mycursor.execute(query)
-                        # result = mycursor.fetchall()
+                    if result1:
+                        for i in result1:
+                            # query = f"select gr_no, avg_attendacne from sem{self.get_sem[-1]}_{self.get_subject}_performance where avg_attendacne < 75.00 ;"
+                            # mycursor.execute(query)
+                            # result = mycursor.fetchall()
 
-                        query2 = f"select roll_no, name, email from sem{self.get_sem[-1]}students where gr_no = '{i[0]}';"
-                        mycursor.execute(query2)
-                        result2 = mycursor.fetchone() 
-                        self.my_table.insert(parent='',index='end',iid=a,text='',values=(i[0],result2[0], result2[1], result2[2], i[1]))
-                        a+=1
+                            query2 = f"select roll_no, name, email from sem{self.get_sem[-1]}_students where gr_no = '{i[0]}';"
+                            print(query2)
+                            mycursor.execute(query2)
+                            result2 = mycursor.fetchone() 
+                            self.my_table.insert(parent='',index='end',iid=a,text='',values=(i[0],result2[0], result2[1], result2[2], i[1]))
+                            a+=1
+                    else:
+                        messagebox.showinfo('info',f'There is no student in {self.get_batch}')
             except Exception as e:
                 messagebox.showerror("error", e)       
 
