@@ -14,10 +14,10 @@ subjects =[["EM_1", "EC_1", "EP_1", "BEE", "Mechanics"],
             ["EM_2", "EC_2", "EP_2", "C_Programming", "ED"],
             ["EM_3", "Java", "DSA", "DBMS", "PCE_1"],
             ["EM_4", "Python", "CNND", "OS", "COA"],
-            ["Internet_Programming"],
-            ["Data_Mining"],
-            ["Enterprise_Network_Design"],
-            ["Big_data_analytics"]]
+            ["Data_Mining", "Web_X", "Wireless_Technology", "AI_and_DS", "Ethical_Hacking"],
+            ["Internet_Programming", "CNS", "EEB", "Software_Engineering", "PCE_2"],
+            ["Enterprise_Network_Design", "Infrastruction_Security","Soft_computing", "Cyber_security_and_Law", "AI"],
+            ["Big_data_analytics", "Big_data_analytics", "Internet_of_Everything", "R_Programming", "Robotics" , "Project_management"]]
 
 class enter_marks:
     def __init__(self,root):

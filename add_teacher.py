@@ -1,3 +1,4 @@
+from cgitb import text
 import os
 from tkinter import messagebox
 from click import command
@@ -19,6 +20,7 @@ class add_teacher:
         self.root.resizable(False, False)
         self.root.config(bg="#d1e2f4")
         self.root.focus_force()
+        self.root.grab_set()
 
 # --------------------queries
         sql = "select count(*) from teachers"
@@ -117,15 +119,18 @@ class add_teacher:
                 sql1 = "INSERT INTO teachers(name, DOB, email, phone_no, aadhar_no, gender, address, branch) values(%s, %s, %s, %s, %s, %s, %s, %s)"
                 mycursor.execute(sql1, [self.get_name, self.get_DOB, self.get_email, self.get_phone_no, self.get_aadhar_no,self.get_gender, self.get_address, self.get_branch])
                 messagebox.showinfo("showinfo", "Data Inserted sucessfully.")
+                msg = Message(self.root, text="Data Inserted sucessfully.")
+                msg.pack()
                 mydb.commit()
 # --------------destorying the frame
                 self.root.destroy()
-                os.system("python main_page.py")
+                # os.system("python main_page.py")
 
         
 
     
 if __name__ == "__main__":
+
     root=Tk()
     obj = add_teacher(root)
     root.mainloop()

@@ -2,10 +2,13 @@ create database SP;
 use SP;
 
 create table login(
+	name varchar(200),
 	username varchar(20),
+	phone_no varchar(20),
+	email varchar(50),
 	password varchar(20),
 	question varchar(200),
-	answer varchar(200),
+	answer varchar(200)
 );
 
 create table sem8_students(
@@ -255,7 +258,7 @@ create table sem5_PCE_2_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
 create table sem6_Data_Mining_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
 create table sem6_Web_X_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
 create table sem6_wireless_technology_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
-create table sem6_AI_and_DS_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem6_Ethical_Hacking_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
 create table sem6_AI_and_DS_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
 
 create table sem7_Enterprise_Network_Design_attendance(sr_no int ,date varchar(20) PRIMARY KEY);

@@ -136,6 +136,7 @@ class add_student:
                 sql = f"INSERT INTO sem{self.get_sem[-1]}_students(gr_no, roll_no, name, DOB, email, phone_no, Xth, XIIth, address, branch, batch) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
                 mycursor.execute(sql, [self.stu_gr.get() ,int(self.get_roll_no), self.get_name, self.get_DOB, self.get_email, self.get_phone_no, self.get_Xth, self.get_XIIth, self.get_address, self.get_branch, self.batch.get()])
                 messagebox.showinfo("showinfo", "Data Inserted sucessfully.")
+                import show_student
 
 # ---------------add new coloumn to attendance table
                 if(self.get_sem == "sem 1"):
@@ -238,7 +239,6 @@ class add_student:
                         query4 = f"ALTER TABLE sem8_Robotics_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
                         query5 = f"ALTER TABLE sem8_Project_management_attendance ADD {self.stu_gr.get()} varchar(10) default 'Absent';"
 
-
                         query6= f"INSERT INTO sem8_Big_data_analytics_performance (gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
                         query7= f"INSERT INTO sem8_Internet_of_Everything_performance (gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
                         query8= f"INSERT INTO sem8_R_Programming_performance (gr_no, batch) values ({self.stu_gr.get()}, {self.batch.get()})"
@@ -258,10 +258,6 @@ class add_student:
                 mydb.commit()
 # --------------destorying the frame
                 self.root.destroy()
-                os.system("python main_page.py")
-
-
-
     
 if __name__ == "__main__":
     root=Tk()

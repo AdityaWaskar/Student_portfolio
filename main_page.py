@@ -20,7 +20,8 @@ class Login:
         screen_heigth = self.root.winfo_screenheight()
         self.root.title("Login Page")
         self.root.geometry("%dx%s+-10+0"%(screen_width,screen_heigth)) 
-        
+        self.root.focus_force()
+        self.root.grab_set()
         print(screen_heigth)
         print(screen_width)
         # self.root.attributes('-fullscreen',True)
@@ -76,7 +77,7 @@ class Login:
     def add_students(self):
         self.new_win = Toplevel(self.root)
         self.new_obj = add_student(self.new_win)
-    
+
     def show_students(self):
         self.new_win = Toplevel(self.root)
         self.new_obj = show_student(self.new_win)

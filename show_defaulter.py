@@ -48,13 +48,20 @@ class show_defaulter:
         self.sem.current(0)
         
         self.subject = ttk.Combobox(self.root, text="Subject", font=("times new roman",self.font), state="readonly", justify=CENTER)
-        self.subject['values'] = ("Select","-------", "EM_1", "EC_1", "EP_1", "BEE", "Mechanics_1", "------", "EM_2", "EC_2", "EP_2", "C_Programming", "ED", "-----", "EM_1", "Java", "DSA", "DBMS", "PCE_1", "-----", "EM_4", "Python", "CNND", "OS", "COA","-----","Internet_Programming","-----","Data_Mining","-----","Enterprise_Network_Design","-----", "Big_data_analytics")
-        self.subject.place(x=450, y=self.y, width=100, height=21)
+        self.subject['values'] = ("Select","---sem1----", "EM_1", "EC_1", "EP_1", "BEE", "Mechanics_1",
+                                  "---sem2---", "EM_2", "EC_2", "EP_2", "C_Programming", "ED", 
+                                  "---sem3--", "EM_1", "Java", "DSA", "DBMS", "PCE_1",
+                                  "---sem4--", "EM_4", "Python", "CNND", "OS", "COA",
+                                  "---sem5--","Internet_Programming","CNS", "EEB", "Software_Engineering", "PCE_2", 
+                                  "---sem6--","Data_Mining", "Web_X", "Wireless_Technology", "AI_and_DS", "Ethical_Hacking",
+                                  "---sem7--","Enterprise_Network_Design","Infrastruction_Security","Soft_computing", "Cyber_security_and_Law", "AI",
+                                  "---sem8--", "Big_data_analytics", "Internet_of_Everything", "R_Programming", "Robotics" , "Project_management")
+        self.subject.place(x=450, y=self.y, width=150, height=21)
         self.subject.current(0)
 
         self.batch = ttk.Combobox(self.root, text="Batch", font=("times new roman",self.font), state="readonly", justify=CENTER)
         self.batch['values'] = list(self.batch_years)
-        self.batch.place(x=600, y=self.y, width=100, height=21)
+        self.batch.place(x=650, y=self.y, width=100, height=21)
         index1 = self.batch_years.index('Select')
         self.batch.current(index1)
 

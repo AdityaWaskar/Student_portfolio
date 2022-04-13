@@ -48,23 +48,30 @@ class take_attendance:
         
         self.sem = ttk.Combobox(self.root, text="semester", font=("times new roman",self.font), state="readonly", justify=CENTER)
         self.sem['values'] = ("Select","sem 1", "sem 2", "sem 3", "sem 4", "sem 5", "sem 6", "sem 7", "sem 8")
-        self.sem.place(x=280, y=self.y, width=100, height=21)
+        self.sem.place(x=270, y=self.y, width=100, height=21)
         self.sem.current(0)
         
         self.subject = ttk.Combobox(self.root, text="Subject", font=("times new roman",self.font), state="readonly", justify=CENTER)
-        self.subject['values'] = ("Select","-------", "EM_1", "EC_1", "EP_1", "BEE", "Mechanics_1", "------", "EM_2", "EC_2", "EP_2", "C_Programming", "ED", "-----", "EM_1", "Java", "DSA", "DBMS", "PCE_1", "-----", "EM_4", "Python", "CNND", "OS", "COA","-----","Internet_Programming","-----","Data_Mining","-----","Enterprise_Network_Design","-----", "Big_data_analytics")
-        self.subject.place(x=430, y=self.y, width=100, height=21)
+        self.subject['values'] = ("Select","---sem1----", "EM_1", "EC_1", "EP_1", "BEE", "Mechanics_1",
+                                  "---sem2---", "EM_2", "EC_2", "EP_2", "C_Programming", "ED", 
+                                  "---sem3--", "EM_1", "Java", "DSA", "DBMS", "PCE_1",
+                                  "---sem4--", "EM_4", "Python", "CNND", "OS", "COA",
+                                  "---sem5--","Internet_Programming","CNS", "EEB", "Software_Engineering", "PCE_2", 
+                                  "---sem6--","Data_Mining", "Web_X", "Wireless_Technology", "AI_and_DS", "Ethical_Hacking",
+                                  "---sem7--","Enterprise_Network_Design","Infrastruction_Security","Soft_computing", "Cyber_security_and_Law", "AI",
+                                  "---sem8--", "Big_data_analytics", "Internet_of_Everything", "R_Programming", "Robotics" , "Project_management")
+        self.subject.place(x=390, y=self.y, width=150, height=21)
         self.subject.current(0)
         
         self.batch = ttk.Combobox(self.root, text="Batch", font=("times new roman",self.font), state="readonly", justify=CENTER)
         self.batch['values'] = list(self.batch_years)
-        self.batch.place(x=580, y=self.y, width=100, height=21)
+        self.batch.place(x=560, y=self.y, width=100, height=21)
         index1 = self.batch_years.index('Select')
         self.batch.current(index1)
 
-        date = Label(self.root, text="Date", font=("times new roman",self.font), fg="black", bg="#d1e2f4").place(x=680, y=self.y, width=100, height=20)
+        date = Label(self.root, text="Date", font=("times new roman",self.font), fg="black", bg="#d1e2f4").place(x=660, y=self.y, width=100, height=20)
         self.date = DateEntry(self.root, selectmode="day",date_pattern = 'dd/mm/yyyy',background="blue",Cursor="hand1",year=self.current_year, month=self.current_month, date=self.current_date,foreground='black', font=("Arial", 12))
-        self.date.place(x=760, y=self.y, width=150, height=21)
+        self.date.place(x=740, y=self.y, width=150, height=21)
 
         Button(self.root, text="Search",command=self.get_sorting_data,cursor="hand2",bg="#1ab402",fg="black" ,bd=0, font=("times new roman",self.font)).place(x=1000, y=self.y)
         Button(self.root, text="Submit",command=self.submit,cursor="hand2",bg="#1ab402",fg="black" ,bd=0, font=("times new roman",self.font)).place(x=1050, y=550)
@@ -143,23 +150,23 @@ class take_attendance:
             else:
                 flag=True
         elif(self.get_sem == 'sem 5' ):
-            if(self.get_subject !='Internet_Programming'):
-                messagebox.showerror('error', 'Select Internet_Programming ')
+            if(self.get_subject !='Internet_Programming' and self.get_subject !='CNS' and self.get_subject !='EEB' and self.get_subject !='Software_Engineering' and self.get_subject !='PCE_2'):
+                messagebox.showerror('error', 'Select Internet_Programming or CNS or EEB or Software_Engineering or PCE_2')
             else:
                 flag=True
         elif(self.get_sem == 'sem 6' ):
-            if(self.get_subject !='Data_Mining' ):
-                messagebox.showerror('error', 'Select Data_Mining')
+            if(self.get_subject !='Data_Mining' and self.get_subject !='Web_X' and self.get_subject !='Wireless_Technology' and self.get_subject !='AI_and_DS' and self.get_subject !='Ethical_Hacking' ):
+                messagebox.showerror('error', 'Select Data_Mining or Web_X or Wireless_Technology or AI_and_DS or Ethical_Hacking ')
             else:
                 flag=True
         elif(self.get_sem == 'sem 7' ):
-            if(self.get_subject !='Enterprise_Network'):
-                messagebox.showerror('error', 'Select Enterprise_Network')
+            if(self.get_subject !='Enterprise_Network' and self.get_subject !='Infrastruction_Security' and self.get_subject !='Soft_computing' and self.get_subject !='Cyber_security_and_Law' and self.get_subject !='AI'):
+                messagebox.showerror('error', 'Select Enterprise_Network or Infrastruction_Security or Soft_computing or Cyber_security_and_Law or AI ')
             else:
                 flag=True
         elif(self.get_sem == 'sem 8' ):
-            if(self.get_subject !='Big_data_analytics'):
-                messagebox.showerror('error', 'Select Big_data_analytics')
+            if(self.get_subject != 'Big_data_analytics' and self.get_subject !='Project_management' and self.get_subject !='Internet_of_Everything' and self.get_subject !='R_Programming' and self.get_subject !='Robotics'):
+                messagebox.showerror('error', 'Select Big_data_analytics or Project_management or Insternet_of_Everything or R_Programming or Robotics ')
             else:
                 flag=True
         else:
