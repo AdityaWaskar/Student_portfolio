@@ -1,11 +1,16 @@
-import base64
+from cgitb import text
+from faulthandler import disable
 from fileinput import filename
+from sre_parse import State
 from tkinter import*
-from PIL import Image,ImageTk
 from tkinter import ttk,messagebox
-from tkinter import filedialog
+from turtle import bgcolor
+from click import style
 import mysql.connector as sql
 from tkcalendar import DateEntry
+from tkPDFViewer import tkPDFViewer as pdf
+import shutil
+from tkinter import Tk, filedialog
 
 mydb = sql.connect(host="localhost", user="root", passwd="", database="SP")
 mycursor = mydb.cursor()
@@ -200,7 +205,11 @@ class enter_marks:
         self.ut_out_sub5 = Entry(self.m3_Frame,font=("goudy old style",11,"bold"), justify=CENTER,bg="lightgray", fg="black")
         self.ut_out_sub5.place(x=280, y=190, width=100, height=30)
 
-        Button(self.root,text='Upload',font=("times new roman",15,"bold"),bg="#03a9f4",fg="white",cursor="hand2").place(x=1400,y=500,width=100,height=35)
+        self.upload = Button(self.root,text='Upload',font=("times new roman",15,"bold"),command = self.upload,bg="#03a9f4",fg="white",cursor="hand2")
+        self.upload_warn = Label(self.root, bg= "white", fg="red", justify=CENTER)
+
+# ---------progress bar 
+        self.progress = ttk.Progressbar(self.root, orient = HORIZONTAL,length = 100, mode = 'determinate')
 
     def search(self):
         self.get_gr_no = self.gr_no.get()
@@ -278,10 +287,12 @@ class enter_marks:
 
 
     def set_subject1(self):
+        self.progress['value'] = 0
         self.sem = 'sem1'
         self.count = 0
         self.set()
     def set_subject2(self):
+        self.progress['value'] = 0
         self.sem = 'sem2'
         self.count = 1
         self.set()
@@ -310,6 +321,9 @@ class enter_marks:
         self.count = 7
         self.set()
     def set(self):
+        self.upload.place(x=1350,y=700,width=100,height=35)
+        self.upload_warn.config(text="*upload your result in pdf file.", fg= "red")
+        self.upload_warn.place(x=1340 ,y=750)
 # ---------------setting the tt1 subjects
         self.tt1_lbl_sub1.config(state=NORMAL)
         self.tt1_lbl_sub2.config(state=NORMAL)
@@ -515,8 +529,57 @@ class enter_marks:
         # my_image_label = Label(image=my_image).pack()
         # my_btn = Button(root,text="open File")
     
+    def upload(self):
+        source= 'sds'
+        if(source=="sd"):
+            print("ksdajf")
+        # elif(self.tt1_mark_sub1.get()=='' or self.tt1_mark_sub2.get()=='' or self.tt1_mark_sub3.get()=='' or self.tt1_mark_sub4.get()=='' or self.tt1_mark_sub5.get()=='' or
+        #    self.tt2_mark_sub1.get()=='' or self.tt2_mark_sub2.get()=='' or self.tt2_mark_sub3.get()=='' or self.tt2_mark_sub4.get()=='' or self.tt2_mark_sub5.get()=='' or
+        #    self.ut_mark_sub1.get()=='' or self.ut_mark_sub2.get()=='' or self.ut_mark_sub3.get()=='' or self.ut_mark_sub4.get()=='' or self.ut_mark_sub5.get()==''):
+        #     messagebox.showerror("error", "All field must be required!")
+        else:
+            f_types =[('pdf files','*.pdf')]
+            source = filedialog.askopenfilename(filetypes=f_types)
+            if(source == ""):
+                print("no")
+                self.upload_warn.place(x=1340, y=750)
+            else:
+                v1 = pdf.ShowPdf()
+                destination = f"E:/python/project/Student Portfoilo/student_documents/results/Information Technology/{self.sem}/{self.get_gr_no}.pdf"
+                dest = shutil.copy(source, destination)
+                self.bar()
+                # self.progress.place(x=1350,y=740)
+                self.upload_warn.config(text="Sucessfully Uploaded", fg="green")
+                self.upload_warn.place(x=1340 ,y=750)
 
-        
+                
+                # v2 = v1.pdf_view(self.root, pdf_location = f'E:/python/project/Student Portfoilo/student_documents/results/Information Technology/{self.sem}/{self.get_gr_no}.pdf', width = 100, height=100)
+                # v2.place(x=1100, y=550, height=100, width=100)
+
+# -----------progress bar running method
+    def bar(self):
+            self.progress.place(x=1350,y=740, height=10)
+            import time
+            self.progress['value'] = 20
+            root.update_idletasks()
+            time.sleep(1)
+
+            self.progress['value'] = 40
+            root.update_idletasks()
+            time.sleep(1)
+
+            self.progress['value'] = 50
+            root.update_idletasks()
+            time.sleep(1)
+
+            self.progress['value'] = 60
+            root.update_idletasks()
+            time.sleep(1)
+
+            self.progress['value'] = 80
+            root.update_idletasks()
+            time.sleep(1)
+            self.progress['value'] = 100
 
 
 if __name__ == "__main__":
