@@ -65,15 +65,8 @@ class Register:
         self.cpassword=Entry(frame1,font=("times new roman",15),bg="lightgray")
         self.cpassword.place(x=370,y=340,width=250)
 
-        #------------Terms-----------
-        self.var_chk=IntVar()
-        #chk=Checkbutton(frame1,text="I Agree The Terms & Conditions",variable=self.var_chk,onvalue=1,offvalue=0,bg="white",font=("times new roman",12)).place(x=50,y=380)
-
-       # self.btn_img=ImageTk.PhotoImage(file="D:\VS CODE\Miniproject\abc.png")
-       # btn=Button(frame1,image=self.btn_img).place(x=50,y=420)
 
         btn_register=Button(frame1,text="Register Now",font=("times new roman",15,"bold"),bg="green",fg="black",bd=0,cursor="hand2",command=self.register_data).place(x=270,y=420)
-
         btn_login=Button(self.root,text="Sign In",font=("times new roman",20,"bold"),bg="green",fg="black",bd=0,cursor="hand2").place(x=200,y=460,width=180)
 
     def register_data(self):
@@ -82,20 +75,16 @@ class Register:
             messagebox.showerror("Error","All Field Are Required",parent=self.root)
         elif self.password.get() != self.cpassword.get():
             messagebox.showerror("Error","Password & Confirm Password Should Be Same",parent=self.root)
-        # elif self.var_chk.get()==0:
-        #     messagebox.showerror("Error","Please Agree Our Terms & Conditions",parent=self.root)
         else:
-            messagebox.showinfo("Success","Register Successful",parent=self.root)
-            query = f"Insert into table login (name, username, phone_no, question, answer, password) values ({self.name.get()},{self.username.get()}, {self.Phone_no.get()}, {self.cnb_quest.get(), {self.txt_answer.get()}, {self.password.get()}})"
-            mycursor.execute(query)
-            mydb.commit()
-
-        #print(self.txt_fname.get(),self.txt_lname.get())
-        #print(self.txt_contact.get(),self.txt_email.get())
-        #print(self.cnb_quest.get(),self.txt_answer.get())
-        #print(self.txt_password.get(),self.txt_cpassword.get())
-
-
-root=Tk()
-obj=Register(root)
-root.mainloop()
+            try:
+                query = f"Insert into login (name, username, phone_no, question, answer, password) values ('{self.name.get()}','{self.username.get()}', '{self.Phone_no.get()}', '{self.cnb_quest.get()}', '{self.txt_answer.get()}', '{self.password.get()}');"
+                mycursor.execute(query)
+                mydb.commit()
+                messagebox.showinfo("Success","Register Successful",parent=self.root)
+                self.root.destroy()
+            except Exception as e:
+                messagebox.showinfo("error",e,parent=self.root)
+if __name__ == "__main__":
+    root=Tk()
+    obj = Register(root)
+    root.mainloop()

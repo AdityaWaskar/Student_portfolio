@@ -252,8 +252,9 @@ class take_attendance:
         except Exception as e:
             print(e)
 # -----------destroying the current frame
+        messagebox.showinfo('info', f"{self.get_date} attendance is inserted sucessfully.")
         self.root.destroy()
-        os.system("python take_attendance.py")
+        
 
     def put_present_all(self):
         print("present all")

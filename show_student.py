@@ -129,6 +129,7 @@ class show_student:
                         sql_query1 = "SELECT * FROM students where gr_no = %s"
                         mycursor.execute(sql_query1, [int(self.get_gr_no)])
                         result = mycursor.fetchone()
+                        print(result)
                         if(result == None):
                                 messagebox.showerror("Error", "Invalid Gr No.")
                         else:
@@ -151,8 +152,8 @@ class show_student:
                                 self.branch.delete(0, 'end')
                                 self.branch.insert(0, result[9])
                                 self.pre_sem = result[8]
-                                sql_query2 = f"SELECT roll_no FROM sem{self.pre_sem[-1]}_students where name = %s"
-                                mycursor.execute(sql_query2, [result[1]])
+                                sql_query2 = f"SELECT roll_no FROM sem{self.pre_sem[-1]}_students where gr_no = {result[0]};"
+                                mycursor.execute(sql_query2)
                                 result1 = mycursor.fetchone()
                                 self.roll_no.delete(0, 'end')
                                 self.roll_no.insert(0, result1[0])

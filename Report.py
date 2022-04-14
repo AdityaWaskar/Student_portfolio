@@ -25,14 +25,14 @@ class report:
 # ---------------frame root
         self.root=root
         self.root.title("Student Result ")
-        self.root.geometry("1600x800+0+0")
+        self.root.geometry("1520x820+0+6")
         self.root.config(bg="white")
         self.root.focus_force()
 # -------------------------title
-        title=Label(self.root,text="View Student Results",font=("times new roman",20,"bold"),bg="orange",fg="white").place(x=10,y=15,width=1600,height=50)
+        title=Label(self.root,text="View Student Results",font=("times new roman",20,"bold"),bg="orange",fg="white").place(x=20,y=15,width=1500,height=50)
 # -------------------------search box
         self.var_search=StringVar()
-        gr_no=Label(self.root, text="Search by GR no.", justify=CENTER,font=("times new roman",15,"bold"),bg="white").place(x=150,y=100)
+        gr_no=Label(self.root, text="Search by GR no.", justify=CENTER,font=("times new roman",15),bg="white").place(x=150,y=100)
         self.gr_no=Entry(self.root,textvariable=self.var_search,justify=CENTER,font=("times new roman",15),bg="lightyellow")
         self.gr_no.place(x=300,y=100,width=150)
         lbl_dob=Label(self.root,text="DOB.",font=("times new roman",15),bg="white").place(x=500,y=100)
@@ -129,7 +129,7 @@ class report:
 
 # ----------------information
         self.m1_Frame = LabelFrame(self.root, text= "DETAILS", font=("times new roman", 15), bg="white")
-        self.m1_Frame.place(x=880, y=230, width=550, height=330)
+        self.m1_Frame.place(x=900, y=300, width=550, height=330)
 
         lbl_gr_no = Label(self.m1_Frame, text="Gr No. =", cursor="hand2",font=("goudy lod style",15), bg="white", fg="black").place(x=140-80, y=30, width=100, height=30)
         self.lbl_gr_no = Label(self.m1_Frame,font=("times new roman",15), bg="white", fg="#0b5377")
@@ -159,10 +159,10 @@ class report:
         self.lbl_pointer = Label(self.m1_Frame,font=("times new roman",15), bg="white", fg="#0b5377")
         self.lbl_pointer.place(x=250-80, y=230, width=250, height=30)
     
-        self.document = Button(self.root,text='See the uploaded documents.',command = self.show_document ,justify=CENTER,font=("goudy old style",15,"bold"),bg="red",fg="white",cursor="hand2")
-        self.document.place(x=650,y=700,width=150,height=35)
+        self.document = Button(self.root,bd=0,text='See the uploaded documents.',bg="white",command = self.show_document ,justify=CENTER,font=("goudy old style",15,"bold","underline"),fg="orange",cursor="hand2")
+        self.document.place(x=650,y=700,width=300,height=35)
 # -------------------------methods
-
+ 
     def search_by_gr(self):
         self.get_gr_no = self.gr_no.get()
         self.get_dob = self.dob.get()

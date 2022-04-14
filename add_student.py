@@ -128,7 +128,7 @@ class add_student:
         self.get_sem = self.sem.get()
 
         if(self.get_name=="" or self.get_roll_no=="" or self.get_DOB=="" or self.email=="" or self.phone_no=="" or self.get_Xth=="" or self.get_XIIth=="" or self.address=="" or self.branch=="Select" or self.get_sem=="Select"):
-                messagebox.showerror("showerror", "All field must be required!")
+                messagebox.showerror("showerror", "All field must be required!",parent=self.root)
         else:
                 sql1 = "INSERT INTO students(gr_no, name, DOB, email, phone_no, Xth, XIIth, address, branch, sem, batch) values(%s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
                 mycursor.execute(sql1, [self.stu_gr.get(),self.get_name, self.get_DOB, self.get_email, self.get_phone_no, self.get_Xth, self.get_XIIth, self.get_address, self.get_branch, self.get_sem, self.batch.get()])

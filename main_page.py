@@ -26,10 +26,11 @@ class Login:
         print(screen_width)
         # self.root.attributes('-fullscreen',True)
 
-        image = Image.open("images\\Lovepik_com-501679643-millennium-university-of-hunan-university.jpg")
-        image=image.resize((1600,800))
+        image = Image.open("images\\main_bg.jpg")
+        image=image.resize((1600,830))
         photo = ImageTk.PhotoImage(image)
         label1 = Label(root,image=photo) 
+        label1.image = photo
         label1.pack()
 
         filemenu = Menu(self.root)  #mainmenu
