@@ -4,6 +4,8 @@ from tkinter import ttk,messagebox
 import mysql.connector as sql
 from tkcalendar import DateEntry
 
+from show_document import document
+
 mydb = sql.connect(host="localhost", user="root", passwd="", database="SP")
 mycursor = mydb.cursor()
 
@@ -157,7 +159,8 @@ class report:
         self.lbl_pointer = Label(self.m1_Frame,font=("times new roman",15), bg="white", fg="#0b5377")
         self.lbl_pointer.place(x=250-80, y=230, width=250, height=30)
     
-        # btn_search=Button(self.root,text='Delete',justify=CENTER,font=("goudy old style",15,"bold"),bg="red",fg="white",cursor="hand2").place(x=650,y=700,width=150,height=35)
+        self.document = Button(self.root,text='See the uploaded documents.',command = self.show_document ,justify=CENTER,font=("goudy old style",15,"bold"),bg="red",fg="white",cursor="hand2")
+        self.document.place(x=650,y=700,width=150,height=35)
 # -------------------------methods
 
     def search_by_gr(self):
@@ -443,7 +446,10 @@ class report:
         self.ut_sub5.config(state='readonly')
         
 
-
+    def show_document(self):
+        self.new_win = Toplevel(self.root)
+        self.new_obj = document(self.new_win, self.gr_no.get(),self.sem)
+        
 
 
 

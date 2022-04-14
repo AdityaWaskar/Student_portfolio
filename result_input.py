@@ -1,11 +1,6 @@
-from cgitb import text
-from faulthandler import disable
-from fileinput import filename
-from sre_parse import State
+
 from tkinter import*
 from tkinter import ttk,messagebox
-from turtle import bgcolor
-from click import style
 import mysql.connector as sql
 from tkcalendar import DateEntry
 from tkPDFViewer import tkPDFViewer as pdf
@@ -500,35 +495,8 @@ class enter_marks:
             except Exception as e:
                 print(e)
             messagebox.showinfo('message', 'marks inserted sucessfully.')
-            self.root.destroy()
-            
-
-    # def convertToBinary(self, filename):
-    #     with open(filename, 'rb') as f:
-    #         binary = f.read()
-    #     return binary
-    # def upload(self):
-    #     try:
-    #         # filename= filedialog.askopenfilename(initialdir="/Downloads",title="Select A File ",filetypes=(("png files","*.png"),("all files","*.*")))
-    #         # print(filename)
-    #         global filename,img
-    #         f_types =[('Png files','*.png'),('Jpg Files', '*.jpg')]
-    #         filename = filedialog.askopenfilename(filetypes=f_types)
-    #         img = ImageTk.PhotoImage(file=filename)
-    #         picture = self.convertToBinary(filename)
-    #         query = "insert into img (i, sr,abc, adc, adcd) values (%s, 1,2 ,3,4 );"
-    #         # mycursor.execute(query, base64.b64encode(picture))
-    #         mycursor.execute(query, picture)
-    #         print(query)
-    #         mydb.commit()
-    #     except Exception as e:
-    #         print(e)
-
-        # my_label = Label(self.root,text=self.root.filename).pack()
-        # my_image = ImageTk.PhotoImage(Image.open(root.filename))
-        # my_image_label = Label(image=my_image).pack()
-        # my_btn = Button(root,text="open File")
-    
+            self.root.destroy()    
+  
     def upload(self):
         source= 'sds'
         if(source=="sd"):
@@ -538,28 +506,25 @@ class enter_marks:
         #    self.ut_mark_sub1.get()=='' or self.ut_mark_sub2.get()=='' or self.ut_mark_sub3.get()=='' or self.ut_mark_sub4.get()=='' or self.ut_mark_sub5.get()==''):
         #     messagebox.showerror("error", "All field must be required!")
         else:
-            f_types =[('pdf files','*.pdf')]
+# --------------open the directory
+            f_types =[('jpg files','*.jpg')]
             source = filedialog.askopenfilename(filetypes=f_types)
+# --------------upload the filepath to database
             if(source == ""):
                 print("no")
                 self.upload_warn.place(x=1340, y=750)
             else:
-                v1 = pdf.ShowPdf()
-                destination = f"E:/python/project/Student Portfoilo/student_documents/results/Information Technology/{self.sem}/{self.get_gr_no}.pdf"
+                destination = f"E:/python/project/Student Portfoilo/student_documents/results/Information Technology/{self.sem}/{self.get_gr_no}.jpg"
                 dest = shutil.copy(source, destination)
                 self.bar()
-                # self.progress.place(x=1350,y=740)
                 self.upload_warn.config(text="Sucessfully Uploaded", fg="green")
                 self.upload_warn.place(x=1340 ,y=750)
                 try:
                     query = f"UPDATE {self.sem}_students set result_path = '{destination}' WHERE gr_no = {self.gr_no.get()} ;"
-                    print(query)
+                    mycursor.execute(query)
+                    mydb.commit()
                 except Exception as e:
-                    print(e)
-
-                
-                # v2 = v1.pdf_view(self.root, pdf_location = f'E:/python/project/Student Portfoilo/student_documents/results/Information Technology/{self.sem}/{self.get_gr_no}.pdf', width = 100, height=100)
-                # v2.place(x=1100, y=550, height=100, width=100)
+                    print("some error to upload the file!")
 
 # -----------progress bar running method
     def bar(self):
