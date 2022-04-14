@@ -533,7 +533,7 @@ class enter_marks:
         source= 'sds'
         if(source=="sd"):
             print("ksdajf")
-        # elif(self.tt1_mark_sub1.get()=='' or self.tt1_mark_sub2.get()=='' or self.tt1_mark_sub3.get()=='' or self.tt1_mark_sub4.get()=='' or self.tt1_mark_sub5.get()=='' or
+        # if(self.tt1_mark_sub1.get()=='' or self.tt1_mark_sub2.get()=='' or self.tt1_mark_sub3.get()=='' or self.tt1_mark_sub4.get()=='' or self.tt1_mark_sub5.get()=='' or
         #    self.tt2_mark_sub1.get()=='' or self.tt2_mark_sub2.get()=='' or self.tt2_mark_sub3.get()=='' or self.tt2_mark_sub4.get()=='' or self.tt2_mark_sub5.get()=='' or
         #    self.ut_mark_sub1.get()=='' or self.ut_mark_sub2.get()=='' or self.ut_mark_sub3.get()=='' or self.ut_mark_sub4.get()=='' or self.ut_mark_sub5.get()==''):
         #     messagebox.showerror("error", "All field must be required!")
@@ -551,6 +551,11 @@ class enter_marks:
                 # self.progress.place(x=1350,y=740)
                 self.upload_warn.config(text="Sucessfully Uploaded", fg="green")
                 self.upload_warn.place(x=1340 ,y=750)
+                try:
+                    query = f"UPDATE {self.sem}_students set result_path = '{destination}' WHERE gr_no = {self.gr_no.get()} ;"
+                    print(query)
+                except Exception as e:
+                    print(e)
 
                 
                 # v2 = v1.pdf_view(self.root, pdf_location = f'E:/python/project/Student Portfoilo/student_documents/results/Information Technology/{self.sem}/{self.get_gr_no}.pdf', width = 100, height=100)

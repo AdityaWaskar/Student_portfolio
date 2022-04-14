@@ -274,11 +274,11 @@ create table sem8_Robotics_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
 create table sem8_Project_management_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
 
 ---------------------------performance
-create table sem1_EM_1_performance(gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
-create table sem1_EC_1_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
-create table sem1_EP_1_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
-create table sem1_BEE_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
-create table sem1_Mechanics_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
+create table sem1_EM_1_performance(gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int, result_path varchar(200));
+create table sem1_EC_1_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int, result_path varchar(200));
+create table sem1_EP_1_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int, result_path varchar(200));
+create table sem1_BEE_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int, result_path varchar(200));
+create table sem1_Mechanics_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int, result_path varchar(200));
 
 create table sem2_EM_2_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
 create table sem2_EC_2_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int);
@@ -433,3 +433,62 @@ alter table sem8_Internet_of_Everything_performance add batch int;
 alter table sem8_R_Programming_performance add batch int;
 alter table sem8_Robotics_performance add batch int;
 alter table sem8_Project_management_performance add batch int;
+
+
+alter table sem1_EM_1_performance add result_path varchar(200);
+alter table sem1_EC_1_performance add result_path varchar(200);
+alter table sem1_EP_1_performance add result_path varchar(200);
+alter table sem1_BEE_performance add result_path varchar(200);
+alter table sem1_Mechanics_performance add result_path varchar(200);
+
+alter table sem2_EM_2_performance add result_path varchar(200);
+alter table sem2_EC_2_performance add result_path varchar(200);
+alter table sem2_EP_2_performance add result_path varchar(200);
+alter table sem2_C_Programming_performance add result_path varchar(200);
+alter table sem2_ED_performance add result_path varchar(200);
+
+alter table sem3_EM_3_performance add result_path varchar(200);
+alter table sem3_Java_performance add result_path varchar(200);
+alter table sem3_DSA_3_performance add result_path varchar(200);
+alter table sem3_DBMS_performance add result_path varchar(200);
+alter table sem3_PCE_1_performance add result_path varchar(200);
+
+alter table sem4_EM_4_performance add result_path varchar(200);
+alter table sem4_Python_performance add result_path varchar(200);
+alter table sem4_CNND_performance add result_path varchar(200);
+alter table sem4_OS_performance add result_path varchar(200);
+alter table sem4_COA_performance add result_path varchar(200);
+
+alter table sem5_Internet_Programming_performance add result_path varchar(200);
+alter table sem5_CNS_performance add result_path varchar(200);
+alter table sem5_EEB_performance add result_path varchar(200);
+alter table sem5_Software_Engineering_5_performance add result_path varchar(200);
+alter table sem5_PCE_2_performance add result_path varchar(200);
+
+alter table sem6_Data_Mining_performance add result_path varchar(200);
+alter table sem6_Web_X_performance add result_path varchar(200);
+alter table sem6_wireless_technology_performance add result_path varchar(200);
+alter table sem6_AI_and_DS_performance add result_path varchar(200);
+alter table sem6_Ethical_Hacking_performance add result_path varchar(200);
+
+alter table sem7_Enterprise_Network_Design_performance add result_path varchar(200);
+alter table sem7_Infrastruction_Security_performance add result_path varchar(200);
+alter table sem7_Soft_computing_performance add result_path varchar(200);
+alter table sem7_Cyber_security_and_Law_performance add result_path varchar(200);
+alter table sem7_AI_performance add result_path varchar(200);
+
+alter table sem8_Big_data_analytics_performance add result_path varchar(200);
+alter table sem8_Internet_of_Everything_performance add result_path varchar(200);
+alter table sem8_R_Programming_performance add result_path varchar(200);
+alter table sem8_Robotics_performance add result_path varchar(200);
+alter table sem8_Project_management_performance add result_path varchar(200);
+
+
+alter table sem1_students add result_path varchar(200);
+alter table sem2_students add result_path varchar(200);
+alter table sem3_students add result_path varchar(200);
+alter table sem4_students add result_path varchar(200);
+alter table sem5_students add result_path varchar(200);
+alter table sem6_students add result_path varchar(200);
+alter table sem7_students add result_path varchar(200);
+alter table sem8_students add result_path varchar(200);E:/python/project/Student Portfoilo/student_documents/results/Information Technology/sem1/1000.pdf
