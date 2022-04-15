@@ -3,6 +3,7 @@ from PIL import Image,ImageTk
 from tkinter import ttk,messagebox
 import mysql.connector as sql
 from tkcalendar import DateEntry
+from extracurriculaum_document import extracurriculaum_document
 
 from show_document import document
 
@@ -159,10 +160,11 @@ class report:
         self.lbl_pointer = Label(self.m1_Frame,font=("times new roman",15), bg="white", fg="#0b5377")
         self.lbl_pointer.place(x=250-80, y=230, width=250, height=30)
     
-        self.document = Button(self.root,bd=0,text='See the uploaded documents.',bg="white",command = self.show_document ,justify=CENTER,font=("goudy old style",15,"bold","underline"),fg="orange",cursor="hand2")
-        self.document.place(x=650,y=700,width=300,height=35)
+        self.document = Button(self.root,bd=0,text='See the uploaded documents(Result).',bg="white",command = self.show_document ,justify=CENTER,font=("goudy old style",13,"bold","underline"),fg="orange",cursor="hand2")
+        self.extra_activity_document = Button(self.root,bd=0,text='See the curriculum activity documents.',bg="white",command = self.show_extra_curriculm_document ,justify=CENTER,font=("goudy old style",13,"bold","underline"),fg="orange",cursor="hand2")
+
 # -------------------------methods
- 
+
     def search_by_gr(self):
         self.get_gr_no = self.gr_no.get()
         self.get_dob = self.dob.get()
@@ -183,7 +185,6 @@ class report:
 
     def get_marks(self):
         self.list = []
-        print('adi')
         for i in range(5):    
             query1 = f"select tt1, tt2, ut from {self.sem}_{subjects[self.count][i]}_performance where gr_no = {self.get_gr_no};"
             print(query1)
@@ -255,6 +256,7 @@ class report:
         self.get_marks()
         self.set()
         self.show_information()
+        
     def set_subject2(self):
         self.count = 1
         self.sem = 'sem2'
@@ -294,6 +296,20 @@ class report:
         self.set()
         self.show_information()
     def show_information(self):
+# Placing the buttons 
+        self.document.place(x=650,y=700,width=400,height=35)
+        query = f"select technical_event, non_technical_event from students where gr_no={self.gr_no.get()};"
+        mycursor.execute(query)
+        result= mycursor.fetchone()
+        print(result[0], result[1])
+        if(result[0] == None or result[1] == None):
+            pass
+        else:
+            self.extra_activity_document.place(x=650,y=730,width=400,height=35)
+            print(":)")
+
+
+
         query = f"select * from {self.sem}_students where gr_no ={self.get_gr_no};"
         mycursor.execute(query)
         result = mycursor.fetchall()
@@ -449,6 +465,13 @@ class report:
     def show_document(self):
         self.new_win = Toplevel(self.root)
         self.new_obj = document(self.new_win, self.gr_no.get(),self.sem)
+    
+     
+    def show_extra_curriculm_document(self):
+        self.new_win = Toplevel(self.root)
+        
+        # self.new_obj = extracurriculaum_document(self.new_win, self.gr_no.get(),self.destination, self.category.get())
+
         
 
 

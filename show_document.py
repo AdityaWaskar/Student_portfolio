@@ -27,24 +27,19 @@ class document:
             for i in result:
                 result = i.replace('\\','/')
                 print(result)
-        except:
-            messagebox.showerror("error", "Some error to fetch images! Try again later:) ")
-
-
-        try:
 # -----------------------------Create an object of tkinter ImageTk
             img = Image.open(f"student_documents/results/Information Technology/{self.sem}/{self.gr_no}.jpg")
         
 # ----------------------img = img.resize((500, 200), Image.ANTIALIAS)
             img = ImageTk.PhotoImage(img)
+            label = Label(self.frame, image = img)
+            label.image = img
+            label.pack()
 
         except:
             messagebox.showerror("error", "Some error to fetch images! Try again later:) ")
 
 # ----------------------Create a Label Widget to display the text or Image
-        label = Label(self.frame, image = img)
-        label.image = img
-        label.pack()
 
 if __name__ == "__main__":
     root=Tk()
