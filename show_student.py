@@ -275,12 +275,16 @@ class show_student:
                 mydb.commit()
                         
             else:
-                query4 = f"UPDATE sem{self.updated_sem[-1]}_students SET  roll_no=%s, name = %s, DOB = %s, email = %s, phone_no = %s, Xth = %s, XIIth = %s, address = %s, branch = %s WHERE name = %s OR DOB = %s OR email = %s OR phone_no = %s "
-                mycursor.execute(query4, [int(self.updated_roll_no), self.updated_name, self.updated_dob, self.updated_email, self.updated_phone_no, self.updated_xth, self.updated_xiith, self.updated_address, self.updated_branch, self.updated_name, self.updated_dob, self.updated_email, self.updated_phone_no])
+                try:
+                        query4 = f"UPDATE sem{self.updated_sem[-1]}_students SET  roll_no= %s, name = %s, DOB = %s, email = %s, phone_no = %s, Xth = %s, XIIth = %s, address = %s, branch = %s WHERE gr_no = %s "
+                        print(query4)
+                        mycursor.execute(query4, [int(self.updated_roll_no), self.updated_name, self.updated_dob, self.updated_email, self.updated_phone_no, self.updated_xth, self.updated_xiith, self.updated_address, self.updated_branch, self.get_gr_no])
+                        self.show()
+                        mydb.commit()
+                        messagebox.showinfo("showinfo", f"Dara Updated")
+                except Exception as e:
+                        messagebox.showerror("error", e)
             
-            self.show()
-            mydb.commit()
-            messagebox.showinfo("showinfo", f"Dara Updated")
 
     def back(self):
             self.root.destroy()
