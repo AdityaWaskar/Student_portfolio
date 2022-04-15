@@ -11,6 +11,7 @@ from show_performance import show_performance
 from show_defaulter import show_defaulter 
 from result_input import enter_marks
 from Report import report
+from extracurricular_activity import extracurricular
 
 
 class Login:
@@ -63,14 +64,23 @@ class Login:
         m5.add_command(label="SHOW MARKS",command=self.report)
         self.root.config(menu=filemenu)
         filemenu.add_cascade(label="MARKS",menu=m5)
-
+        
         m6 = Menu(filemenu,tearoff=0)
-        m6.add_command(label="EXIT",command=exit,accelerator="ctrl+Q")
+        m6.add_command(label="ADD ACTIVITY",command=self.activity)
         self.root.config(menu=filemenu)
-        filemenu.add_cascade(label="LOGOUT",menu=m6)
+        filemenu.add_cascade(label="ACTIVITY",menu=m6)
 
-    def myfunc(self):
-        pass
+        
+
+        m7 = Menu(filemenu,tearoff=0)
+        m7.add_command(label="EXIT",command=exit)
+        self.root.config(menu=filemenu)
+        filemenu.add_cascade(label="LOGOUT",menu=m7)
+
+    def activity(self):
+        self.new_win = Toplevel(self.root)
+        self.new_obj = extracurricular(self.new_win)
+
     def add_teacher(self):
         self.new_win = Toplevel(self.root)
         self.new_obj = add_teacher(self.new_win)

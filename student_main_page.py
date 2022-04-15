@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import messagebox
 from PIL import Image ,ImageTk
 from Report import report
+from extracurricular_activity import extracurricular
 
 from show_defaulter import show_defaulter 
 from result_input import enter_marks
@@ -37,8 +38,11 @@ class RMS:
         self.defaulter_btn = Button(self.root,command=self.defaulter, text="Defaulter List",cursor = 'hand2',font=("goundy old style", 20), bd=10,relief=RIDGE, bg="#038074", fg="white")
         self.defaulter_btn.place(x=350, y=400,width=300, height=100)
         
+        self.activity_btn = Button(self.root,command=self.activity, text="Add Activity",cursor = 'hand2',font=("goundy old style", 20), bd=10,relief=RIDGE, bg="#038074", fg="white")
+        self.activity_btn.place(x=850, y=400,width=300, height=100)
+        
         self.log_btn = Button(self.root,command=self.logout, text="Logout",cursor = 'hand2',font=("goundy old style", 20), bd=10,relief=RIDGE, bg="#038074", fg="white")
-        self.log_btn.place(x=850, y=400,width=300, height=100)
+        self.log_btn.place(x=600, y=600,width=300, height=100)
 
         #Footer
         footer =Label(self.root, text="SP = Student Portfolio\nContact Us for any technical issue: 1234567890",font=("goudy old style",12), bg="#262626", fg="white").pack(side=BOTTOM, fill=X)
@@ -52,6 +56,9 @@ class RMS:
     def defaulter(self):
         self.new_win = Toplevel(self.root)
         self.new_obj = show_defaulter(self.new_win)
+    def activity(self):
+        self.new_win = Toplevel(self.root)
+        self.new_obj = extracurricular(self.new_win)
     def logout(self):
         a = messagebox.askquestion("logout", "Are you sure?")
         print(a)

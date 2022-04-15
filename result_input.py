@@ -496,13 +496,10 @@ class enter_marks:
             self.root.destroy()    
   
     def upload(self):
-        source= 'sds'
-        if(source=="sd"):
-            print("ksdajf")
-        # if(self.tt1_mark_sub1.get()=='' or self.tt1_mark_sub2.get()=='' or self.tt1_mark_sub3.get()=='' or self.tt1_mark_sub4.get()=='' or self.tt1_mark_sub5.get()=='' or
-        #    self.tt2_mark_sub1.get()=='' or self.tt2_mark_sub2.get()=='' or self.tt2_mark_sub3.get()=='' or self.tt2_mark_sub4.get()=='' or self.tt2_mark_sub5.get()=='' or
-        #    self.ut_mark_sub1.get()=='' or self.ut_mark_sub2.get()=='' or self.ut_mark_sub3.get()=='' or self.ut_mark_sub4.get()=='' or self.ut_mark_sub5.get()==''):
-        #     messagebox.showerror("error", "All field must be required!")
+        if(self.tt1_mark_sub1.get()=='' or self.tt1_mark_sub2.get()=='' or self.tt1_mark_sub3.get()=='' or self.tt1_mark_sub4.get()=='' or self.tt1_mark_sub5.get()=='' or
+           self.tt2_mark_sub1.get()=='' or self.tt2_mark_sub2.get()=='' or self.tt2_mark_sub3.get()=='' or self.tt2_mark_sub4.get()=='' or self.tt2_mark_sub5.get()=='' or
+           self.ut_mark_sub1.get()=='' or self.ut_mark_sub2.get()=='' or self.ut_mark_sub3.get()=='' or self.ut_mark_sub4.get()=='' or self.ut_mark_sub5.get()==''):
+            messagebox.showerror("error", "All field must be required!")
         else:
 # --------------open the directory
             f_types =[('jpg files','*.jpg')]
