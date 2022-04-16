@@ -153,35 +153,49 @@ class show_performance:
 # --------------getting the student data
         # try:
         if(True):   
-                query1 = f"select gr_no, name, email from students where sem = '{self.get_sem}' and branch='{self.get_branch}' and batch = {self.get_batch} ;"
+                # query1 = f"select gr_no, name, email from students where sem = '{self.get_sem}' and branch='{self.get_branch}' and batch = {self.get_batch} ;"
+                query1 = f"select gr_no, name, email from sem{self.get_sem[-1]}_students where batch = {self.get_batch};"
                 mycursor.execute(query1)
                 result1 = mycursor.fetchall()
 
 # ---------------display the data to the table
                 a=0
                 self.my_table.delete(*self.my_table.get_children())
-                for i in result1:
-                    query = f"select (count(a{i[0]})*100/(select count(*) from sem{self.get_sem[-1]}_{self.get_subject}_attendance)) as score from sem{self.get_sem[-1]}_{self.get_subject}_attendance where a{i[0]} = 'Present' ;"
-                    mycursor.execute(query)
-                    result = mycursor.fetchall()
-                    
-                    query_a = f"UPDATE sem{self.get_sem[-1]}_{self.get_subject}_performance set avg_attendacne = {result[0][0]} where gr_no = '{i[0]}'"
-                    mycursor.execute(query_a)
+                # try:
+                if result1 :
+                    for i in result1:
+                        print("for loop")
+                        query = f"select (count(a{i[0]})*100/(select count(*) from sem{self.get_sem[-1]}_{self.get_subject}_attendance)) as score from sem{self.get_sem[-1]}_{self.get_subject}_attendance where a{i[0]} = 'Present' ;"
+                        mycursor.execute(query)
+                        result = mycursor.fetchall()
 
-                    query_b = f"Select * from sem{self.get_sem[-1]}_{self.get_subject}_performance where gr_no = {i[0]}"
-                    mycursor.execute(query_b)
-                    result_b = mycursor.fetchone()
-                    print(query_b,result_b)
-                    query2 = f"select roll_no from sem{self.get_sem[-1]}_students where gr_no = {i[0]};"
-                    mycursor.execute(query2)
-                    result2 = mycursor.fetchone()
+                        print("for --------------")
+                        if(result[0][0] != None):
+                            query_a = f"UPDATE sem{self.get_sem[-1]}_{self.get_subject}_performance set avg_attendacne = {result[0][0]} where gr_no = '{i[0]}'"
+                            print(query_a)
+                            mycursor.execute(query_a)
+                        else:
+                            query_a = f"UPDATE sem{self.get_sem[-1]}_{self.get_subject}_performance set avg_attendacne = 0 where gr_no = '{i[0]}'"
+                            print(query_a)
+                            mycursor.execute(query_a)
+
+                        print("for loopjdlkajsdlkasjd")
+                        query_b = f"Select * from sem{self.get_sem[-1]}_{self.get_subject}_performance where gr_no = {i[0]}"
+                        mycursor.execute(query_b)
+                        result_b = mycursor.fetchone()
+                        print(query_b,result_b)
+                        query2 = f"select roll_no from sem{self.get_sem[-1]}_students where gr_no = {i[0]};"
+                        mycursor.execute(query2)
+                        result2 = mycursor.fetchone()
                     
-                    mydb.commit() 
-                    
-                    self.my_table.insert(parent='',index='end',iid=a,text='',values=(i[0],result2[0], i[1], i[2], f"{result_b[1]}%"))
-                    a+=1
-        # except Exception as e:
-        #     messagebox.showerror("error", e)       
+                        mydb.commit() 
+                        print("slkdjf")
+                        self.my_table.insert(parent='',index='end',iid=a,text='',values=(i[0],result2[0], i[1], i[2], f"{result_b[1]}%"))
+                        a+=1    
+                else:
+                    messagebox.showerror("error", f"There is no students in batch no {self.get_batch}")
+                # except Exception as e:
+                #     messagebox.showerror("error", e)       
 
     def back(self):
         self.root.destroy()

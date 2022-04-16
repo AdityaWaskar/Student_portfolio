@@ -185,14 +185,16 @@ class report:
 
     def get_marks(self):
         self.list = []
-        for i in range(5):    
-            query1 = f"select tt1, tt2, ut from {self.sem}_{subjects[self.count][i]}_performance where gr_no = {self.get_gr_no};"
-            print(query1)
-            mycursor.execute(query1)
-            result = mycursor.fetchall()
-            self.list.append(result[0])
-            print(result)
-            print(result[0][0])
+        for i in range(5): 
+            try:   
+                query1 = f"select tt1, tt2, ut from {self.sem}_{subjects[self.count][i]}_performance where gr_no = {self.get_gr_no};"
+                print(query1)
+                mycursor.execute(query1)
+                result = mycursor.fetchall()
+                self.list.append(result[0])
+            except :
+                messagebox.showerror("error", "Please Enter your marks.")
+            
 
         '''query = f"update {self.sem}_{subjects[self.count][i]}_performance set tt1={marks[0][i]} , tt2={marks[1][i]}, ut={marks[2][i]} where gr_no = {self.get_gr_no};"
                     mycursor.execute(query)'''

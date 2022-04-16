@@ -526,23 +526,23 @@ class enter_marks:
             self.progress.place(x=1350,y=740, height=10)
             import time
             self.progress['value'] = 20
-            root.update_idletasks()
+            self.root.update_idletasks()
             time.sleep(1)
 
             self.progress['value'] = 40
-            root.update_idletasks()
+            self.root.update_idletasks()
             time.sleep(1)
 
             self.progress['value'] = 50
-            root.update_idletasks()
+            self.root.update_idletasks()
             time.sleep(1)
 
             self.progress['value'] = 60
-            root.update_idletasks()
+            self.root.update_idletasks()
             time.sleep(1)
 
             self.progress['value'] = 80
-            root.update_idletasks()
+            self.root.update_idletasks()
             time.sleep(1)
             self.progress['value'] = 100
 

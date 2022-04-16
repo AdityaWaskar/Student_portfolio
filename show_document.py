@@ -22,11 +22,13 @@ class document:
         self.frame.place(anchor='center', relx=0.5, rely=0.5)
         try:
             query = f"SELECT result_path from {self.sem}_students WHERE gr_no = {self.gr_no} "
+            print(query)
             mycursor.execute(query)
             result = mycursor.fetchone()
             for i in result:
                 result = i.replace('\\','/')
                 print(result)
+
 # -----------------------------Create an object of tkinter ImageTk
             img = Image.open(f"student_documents/results/Information Technology/{self.sem}/{self.gr_no}.jpg")
         

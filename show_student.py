@@ -212,7 +212,6 @@ class show_student:
                         query9 = f"ALTER TABLE sem2_ED_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
 
                         query10= f"INSERT INTO sem2_EM_2_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
-                        print(query10)
                         query11= f"INSERT INTO sem2_EC_2_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
                         query12= f"INSERT INTO sem2_EP_2_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
                         query13= f"INSERT INTO sem2_C_Programming_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
@@ -245,23 +244,54 @@ class show_student:
 
                 elif(self.updated_sem == 'sem 5'):
                         print("seh")
-                        # query5 = f"ALTER TABLE sem2_EM_2_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
-                        # query6 = f"ALTER TABLE sem2_EC_2_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
-                        # query7 = f"ALTER TABLE sem2_EP_2_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
-                        # query8 = f"ALTER TABLE sem2_C_Programming_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
-                        # query9 = f"ALTER TABLE sem2_ED_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query5 = f"ALTER TABLE sem5_Internet_Programming_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query6 = f"ALTER TABLE sem5_CNS_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query7 = f"ALTER TABLE sem5_EEB_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query8 = f"ALTER TABLE sem5_Software_Engineering_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query9 = f"ALTER TABLE sem5_PCE_2_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+
+                        query10= f"INSERT INTO sem5_Internet_Programming_performance (gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query11= f"INSERT INTO sem5_CNS_performance (gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query12= f"INSERT INTO sem5_EEB_performance (gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query13= f"INSERT INTO sem5_Software_Engineering_5_performance (gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query14= f"INSERT INTO sem5_PCE_2_performance (gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
                 elif(self.updated_sem == 'sem 6'):
-                        query5 = f"ALTER TABLE sem2_EM_2_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
-                        query6 = f"ALTER TABLE sem2_EC_2_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
-                        query7 = f"ALTER TABLE sem2_EP_2_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
-                        query8 = f"ALTER TABLE sem2_C_Programming_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
-                        query9 = f"ALTER TABLE sem2_ED_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query5 = f"ALTER TABLE sem6_Data_Mining_attendancea ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query6 = f"ALTER TABLE sem6_Web_X_attendancea ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query7 = f"ALTER TABLE sem6_wireless_technology_attendancea ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query8 = f"ALTER TABLE sem6_Ethical_Hacking_attendancea ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query9 = f"ALTER TABLE sem6_AI_and_DS_attendancea ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+
+                        query10= f"INSERT INTO sem6_Data_Mining_performance (gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query11= f"INSERT INTO sem6_Web_X_performance (gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query12= f"INSERT INTO sem6_wireless_technology_performance (gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query13= f"INSERT INTO sem6_AI_and_DS_performance (gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query14= f"INSERT INTO sem6_Ethical_Hacking_performance (gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
                 elif(self.updated_sem == 'sem 7'):
-                        query5 = f"ALTER TABLE sem2_EM_2_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
-                        query6 = f"ALTER TABLE sem2_EC_2_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
-                        query7 = f"ALTER TABLE sem2_EP_2_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
-                        query8 = f"ALTER TABLE sem2_C_Programming_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
-                        query9 = f"ALTER TABLE sem2_ED_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query5 = f"ALTER TABLE sem7_Enterprise_Network_Design_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query6 = f"ALTER TABLE sem7_Infrastruction_Security_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query7 = f"ALTER TABLE sem7_Soft_computing_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query8 = f"ALTER TABLE sem7_Cyber_security_and_Law_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query9 = f"ALTER TABLE sem7_AI_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+
+                        query10= f"INSERT INTO sem7_Enterprise_Network_Design_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query11= f"INSERT INTO sem7_Infrastruction_Security_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query12= f"INSERT INTO sem7_Soft_computing_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query13= f"INSERT INTO sem7_Cyber_security_and_Law_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query14= f"INSERT INTO sem7_AI_performance(gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                elif(self.updated_sem == 'sem 8'):
+                        query5 = f"ALTER TABLE sem8_Big_data_analytics_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query6 = f"ALTER TABLE sem8_Internet_of_Everything_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query7 = f"ALTER TABLE sem8_R_Programming_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query8 = f"ALTER TABLE sem8_Robotics_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query9 = f"ALTER TABLE sem8_Project_management_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+
+                        query10= f"INSERT INTO sem8_Big_data_analytics_performance (gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query11= f"INSERT INTO sem8_Internet_of_Everything_performance (gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query12= f"INSERT INTO sem8_R_Programming_performance (gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query13= f"INSERT INTO sem8_Robotics_performance (gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+                        query14= f"INSERT INTO sem8_Project_management_performance (gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
+
                 mycursor.execute(query5)
                 mycursor.execute(query6)
                 mycursor.execute(query7)
@@ -273,6 +303,8 @@ class show_student:
                 mycursor.execute(query13)
                 mycursor.execute(query14)
                 mydb.commit()
+                messagebox.showinfo("info", "Data Updated")
+                self.show()
                         
             else:
                 try:
@@ -281,14 +313,15 @@ class show_student:
                         mycursor.execute(query4, [int(self.updated_roll_no), self.updated_name, self.updated_dob, self.updated_email, self.updated_phone_no, self.updated_xth, self.updated_xiith, self.updated_address, self.updated_branch, self.get_gr_no])
                         self.show()
                         mydb.commit()
-                        messagebox.showinfo("showinfo", f"Dara Updated")
+                        messagebox.showinfo("showinfo", "Data Updated")
+                        self.show()
                 except Exception as e:
                         messagebox.showerror("error", e)
             
 
     def back(self):
             self.root.destroy()
-            os.system("python main_page.py")
+
     def clear(self):
             self.name.delete(0,'end')
         #     self.name.insert(0, '')

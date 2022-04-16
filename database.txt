@@ -11,7 +11,7 @@ create table login(
 	answer varchar(200)
 );
 
-create table sem8_students(
+create table sem1_students(
 	gr_no int,
 	roll_no int,
 	name varchar(50),
@@ -346,27 +346,27 @@ drop table sem4_CNND_attendance;
 drop table sem4_OS_attendance;
 drop table sem4_COA_attendance;
 
-alter table sem1_EM_1_attendance drop column a1000;
-alter table sem1_EC_1_attendance drop column a1000 ;
-alter table sem1_EP_1_attendance drop column a1000;
+alter table sem1_EM_1_attendance drop column a1006;
+alter table sem1_EC_1_attendance drop column a1006 ;
+alter table sem1_EP_1_attendance drop column a1006;
 
-alter table sem1_BEE_attendance drop column a1000;
-alter table sem1_Mechanics_attendance drop column a1000;
-alter table sem2_EM_2_attendance drop column a1000;
-alter table sem2_EC_2_attendance drop column a1000;
-alter table sem2_EP_2_attendance drop column a1000;
-alter table sem2_C_Programming_attendance drop column a1000;
-alter table sem2_ED_attendance drop column a1000;
-alter table sem3_EM_3_attendance drop column a1000;
-alter table sem3_Java_attendance drop column a1000;
-alter table sem3_DSA_3_attendance drop column a1000;
-alter table sem3_DBMS_attendance drop column a1000;
-alter table sem3_PCE_1_attendance drop column a1000;
-alter table sem4_EM_4_attendance drop column a1000;
-alter table sem4_Python_attendance drop column a1000;
-alter table sem4_CNND_attendance drop column a1000;
-alter table sem4_OS_attendance drop column a1000;
-alter table sem4_COA_attendance drop column a1000;
+alter table sem1_BEE_attendance drop column a1006;
+alter table sem1_Mechanics_attendance drop column a1006;
+alter table sem2_EM_2_attendance drop column a1006;
+alter table sem2_EC_2_attendance drop column a1006;
+alter table sem2_EP_2_attendance drop column a1006;
+alter table sem2_C_Programming_attendance drop column a1006;
+alter table sem2_ED_attendance drop column a1006;
+alter table sem3_EM_3_attendance drop column a1006;
+alter table sem3_Java_attendance drop column a1006;
+alter table sem3_DSA_3_attendance drop column a1006;
+alter table sem3_DBMS_attendance drop column a1006;
+alter table sem3_PCE_1_attendance drop column a1006;
+alter table sem4_EM_4_attendance drop column a1006;
+alter table sem4_Python_attendance drop column a1006;
+alter table sem4_CNND_attendance drop column a1006;
+alter table sem4_OS_attendance drop column a1006;
+alter table sem4_COA_attendance drop column a1006;
 
 
 

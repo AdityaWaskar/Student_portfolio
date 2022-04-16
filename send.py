@@ -1,86 +1,51 @@
-# import PyPDF2
-# from tkinter import *
-# from tkinter import filedialog
-# #Create an instance of tkinter frame
-# win= Tk()
-# #Set the Geometry
-# win.geometry("750x450")
-# #Create a Text Box
-# text= Text(win,width= 80,height=30)
-# text.pack(pady=20)
-# #Define a function to clear the text
-# def clear_text():
-#    text.delete(1.0, END)
-# #Define a function to open the pdf file
-# def open_pdf():
-#    file= filedialog.askopenfilename(title="Select a PDF", filetype=(("PDF    Files",".pdf"),("All Files",".*")))
-#    if file:
-#       #Open the PDF File
-#       pdf_file= PyPDF2.PdfFileReader(file)
-#       #Select a Page to read
-#       page= pdf_file.getPage(0)
-#       #Get the content of the Page
-#       content=page.extractText()
-#       #Add the content to TextBox
-#       text.insert(1.0,content)
 
-# #Define function to Quit the window
-# def quit_app():
-#    win.destroy()
-# #Create a Menu
-# my_menu= Menu(win)
-# win.config(menu=my_menu)
-# #Add dropdown to the Menus
-# file_menu=Menu(my_menu,tearoff=False)
-# my_menu.add_cascade(label="File",menu= file_menu)
-# file_menu.add_command(label="Open",command=open_pdf)
-# file_menu.add_command(label="Clear",command=clear_text)
-# file_menu.add_command(label="Quit",command=quit_app)
-# win.mainloop()
+from tkinter import *
+from tkinter import messagebox
+from unittest import result
+import mysql.connector as sql
+from PIL import ImageTk, Image
+
+mydb = sql.connect(host="localhost", user="root", passwd="", database="SP")
+mycursor = mydb.cursor()
+
+class extracurriculaum_document:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Documents")
+        self.root.geometry("800x800+0+0")
+        self.root.focus_force()
+        self.root.configure(bg='#d8dfed')
+        
+        query = "select technical_event, non_technical_event from students where gr_no=1001;"
+        mycursor.execute(query)
+        result= mycursor.fetchone()
+        print(f"{result[1]},{result[0]}")
+        if(result[0] == None or result[1] == None):
+            print("Yes")
+        else:
+            print("No")
+#         self.frame = Frame(self.root, width=600, height=400)
+#         # self.frame.pack()
+#         self.frame.place(anchor='center', relx=0.5, rely=0.5)
+    
 
 
+#         try:
+# # -----------------------------Create an object of tkinter ImageTk
+#             img = Image.open(f"student_documents/event/technical_event/1000.jpg")
+        
+# # ----------------------img = img.resize((500, 200), Image.ANTIALIAS)
+#             img = ImageTk.PhotoImage(img)
 
-# importing tkinter module
-from tkinter import * 
-from tkinter.ttk import *
+#         except:
+#             messagebox.showerror("error", "Some error to fetch images! Try again later:) ")
 
-# creating tkinter window
-root = Tk()
+# # ----------------------Create a Label Widget to display the text or Image
+#         label1 = Label(self.frame, image = img)
+#         label1.image = img
+#         label1.pack()
 
-# Progress bar widget
-progress = Progressbar(root, orient = HORIZONTAL,
-			length = 100, mode = 'determinate')
-
-# Function responsible for the updation
-# of the progress bar value
-def bar():
-	import time
-	progress['value'] = 20
-	root.update_idletasks()
-	time.sleep(1)
-
-	progress['value'] = 40
-	root.update_idletasks()
-	time.sleep(1)
-
-	progress['value'] = 50
-	root.update_idletasks()
-	time.sleep(1)
-
-	progress['value'] = 60
-	root.update_idletasks()
-	time.sleep(1)
-
-	progress['value'] = 80
-	root.update_idletasks()
-	time.sleep(1)
-	progress['value'] = 100
-
-progress.pack(pady = 10)
-
-# This button will initialize
-# the progress bar
-Button(root, text = 'Start', command = bar).pack(pady = 10)
-
-# infinite loop
-mainloop()
+if __name__ == "__main__":
+    root=Tk()
+    obj = extracurriculaum_document(root)
+    root.mainloop()
