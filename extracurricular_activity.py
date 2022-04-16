@@ -1,3 +1,4 @@
+from multiprocessing import parent_process
 import shutil
 from tkinter import*
 from tkinter import Tk, filedialog
@@ -76,9 +77,9 @@ class extracurricular:
         self.get_dob = self.dob.get()
 
         if(self.get_gr_no == ""):
-            messagebox.showinfo("info", "Enter Gr No.")
+            messagebox.showinfo("info", "Enter Gr No.", parent= self.root)
         elif(self.get_dob == ""):
-            messagebox.showinfo("info", "Enter DOB No.")
+            messagebox.showinfo("info", "Enter DOB No.", parent = self.root)
         else:
             query1 = f"SELECT name FROM students where gr_no = {self.get_gr_no} and dob = '{self.get_dob}';" 
             mycursor.execute(query1)
@@ -90,15 +91,15 @@ class extracurricular:
                 print(result1[0])
                 self.name.config(state="readonly")
             else:
-                messagebox.showerror("error", "Gr no. and DOB not match!" )
+                messagebox.showerror("error", "Gr no. and DOB not match!",parent= self.root )
 
     def upload(self):
         if(self.name.get() == "" or self.category.get() == "Select" or self.event_name.get() == ""):
-            messagebox.showerror("error", "All field must be required!")
+            messagebox.showerror("error", "All field must be required!", parent = self.root)
         else:
 # --------------open the directory
             f_types =[('jpg files','*.jpg')]
-            source = filedialog.askopenfilename(filetypes=f_types)
+            source = filedialog.askopenfilename(filetypes=f_types, parent=self.root)
 # --------------upload the filepath to database
         if(source == ""):
             print("no")
@@ -145,7 +146,7 @@ class extracurricular:
     def show_document(self):
         try:
             self.new_win = Toplevel(self.root)
-            self.new_obj = extracurriculaum_document(self.new_win, self.gr_no.get(),self.destination, self.category.get())
+            self.new_obj = extracurriculaum_document(self.new_win, self.gr_no.get(), self.category.get())
         except Exception as e:
             print(e)
 if __name__ == "__main__":

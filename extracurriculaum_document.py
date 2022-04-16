@@ -1,4 +1,5 @@
 from cgitb import text
+from cmath import e
 from tkinter import *
 from tkinter import messagebox
 import mysql.connector as sql
@@ -9,10 +10,10 @@ mycursor = mydb.cursor()
 
 
 class extracurriculaum_document:
-    def __init__(self, root, gr_no, filepath, category):
+    def __init__(self, root, gr_no, category):
         self.root = root
         self.gr_no = gr_no
-        self.filepath = filepath
+        # self.filepath = filepath
         self.category = category
         self.root.title("Documents")
         self.root.geometry("800x800+0+0")
@@ -31,17 +32,19 @@ class extracurriculaum_document:
             
 
             img = Image.open(f"student_documents/event/{self.category}/{self.gr_no}.jpg")
+            img = img.resize((700, 750))
             img = ImageTk.PhotoImage(img)
+            label1 = Label(self.frame, image = img)
+            label1.image = img
+            label1.pack()
 
-        except:
-            messagebox.showerror("error", "Some error to fetch images! Try again later:) ")
+        except Exception as e:
+            print(e)
+            # messagebox.showerror("error", "Some error to fetch images! Try again later:) ")
 
 # ----------------------Create a Label Widget to display the text or Image
-        label1 = Label(self.frame, image = img)
-        label1.image = img
-        label1.pack()
 
 if __name__ == "__main__":
     root=Tk()
-    obj = extracurriculaum_document(root, 1000, "sem1","technical_event")
+    obj = extracurriculaum_document(root, 1000,"technical_event")
     root.mainloop()

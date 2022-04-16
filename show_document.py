@@ -32,6 +32,10 @@ class document:
 # -----------------------------Create an object of tkinter ImageTk
             img = Image.open(f"student_documents/results/Information Technology/{self.sem}/{self.gr_no}.jpg")
         
+# ------------------------image resizing
+
+            # img = img.resize((1000, 300))
+
 # ----------------------img = img.resize((500, 200), Image.ANTIALIAS)
             img = ImageTk.PhotoImage(img)
             label = Label(self.frame, image = img)

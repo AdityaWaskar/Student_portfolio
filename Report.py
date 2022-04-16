@@ -1,3 +1,4 @@
+from pprint import pprint
 from tkinter import*
 from PIL import Image,ImageTk
 from tkinter import ttk,messagebox
@@ -41,7 +42,7 @@ class report:
         self.dob.place(x=560,y=100,width=150)
         self.btn_search=Button(self.root,text='Search', command=self.search_by_gr,justify=CENTER,font=("goudy old style",15,"bold"),bg="#03a9f4",fg="white",cursor="hand2")
         self.btn_search.place(x=820,y=100,width=100,height=35)
-        self.btn_clear=Button(self.root,text='Clear',justify=CENTER,font=("goudy old style",15,"bold"),bg="gray",fg="white",cursor="hand2")
+        self.btn_clear=Button(self.root,text='Clear',command=self.clear,justify=CENTER,font=("goudy old style",15,"bold"),bg="gray",fg="white",cursor="hand2")
         self.btn_clear.place(x=940,y=100,width=100,height=35)
 
         self.m_Frame = LabelFrame(self.root, text= "Semester", font=("times new roman", 15), bg="white")
@@ -161,7 +162,8 @@ class report:
         self.lbl_pointer.place(x=250-80, y=230, width=250, height=30)
     
         self.document = Button(self.root,bd=0,text='See the uploaded documents(Result).',bg="white",command = self.show_document ,justify=CENTER,font=("goudy old style",13,"bold","underline"),fg="orange",cursor="hand2")
-        self.extra_activity_document = Button(self.root,bd=0,text='See the curriculum activity documents.',bg="white",command = self.show_extra_curriculm_document ,justify=CENTER,font=("goudy old style",13,"bold","underline"),fg="orange",cursor="hand2")
+        self.extra_activity_document_tech = Button(self.root,bd=0,text='See the curriculum technical activity documents.',bg="white",command = self.show_extra_curriculm_tech_document ,justify=CENTER,font=("goudy old style",13,"bold","underline"),fg="orange",cursor="hand2")
+        self.extra_activity_document_non_tech = Button(self.root,bd=0,text='See the curriculum non technical activity documents.',bg="white",command = self.show_extra_curriculm__non_tech_document,justify=CENTER,font=("goudy old style",13,"bold","underline"),fg="orange",cursor="hand2")
 
 # -------------------------methods
 
@@ -204,8 +206,6 @@ class report:
         query = f"select sem from students where gr_no = {self.gr_no.get()}"
         mycursor.execute(query)
         result = mycursor.fetchone()
-        print(result[0])
-        print(result)
         if(result[0] == 'sem 1'):
             self.btn_sem1.place(x=40, y=5, width=100, height=30)
         elif(result[0] == 'sem 2'):
@@ -260,38 +260,52 @@ class report:
         self.show_information()
         
     def set_subject2(self):
+        self.extra_activity_document_tech.place(x=65000,y=730,width=400,height=35)
+        self.extra_activity_document_non_tech.place(x=65000,y=760,width=400,height=35)
         self.count = 1
         self.sem = 'sem2'
         self.get_marks()
         self.set()
         self.show_information()
     def set_subject3(self):
+        self.extra_activity_document_tech.place(x=65000,y=730,width=400,height=35)
+        self.extra_activity_document_non_tech.place(x=65000,y=760,width=400,height=35)
         self.count = 2
         self.sem = 'sem3'
         self.get_marks()
         self.set()
         self.show_information()
     def set_subject4(self):
+        self.extra_activity_document_tech.place(x=65000,y=730,width=400,height=35)
+        self.extra_activity_document_non_tech.place(x=65000,y=760,width=400,height=35)
         self.count = 3
         self.sem = 'sem4'
         self.get_marks()
         self.set()
         self.show_information()
+        self.extra_activity_document_tech.place(x=65000,y=730,width=400,height=35)
+        self.extra_activity_document_non_tech.place(x=65000,y=760,width=400,height=35)
     def set_subject5(self):
         self.count = 4
         self.sem = 'sem5'
         self.set()
         self.show_information()
+        self.extra_activity_document_tech.place(x=65000,y=730,width=400,height=35)
+        self.extra_activity_document_non_tech.place(x=65000,y=760,width=400,height=35)
     def set_subject6(self):
         self.count = 5
         self.sem = 'sem6'
         self.set()
         self.show_information()
+        self.extra_activity_document_tech.place(x=65000,y=730,width=400,height=35)
+        self.extra_activity_document_non_tech.place(x=65000,y=760,width=400,height=35)
     def set_subject7(self):
         self.count = 6
         self.sem = 'sem7'
         self.set()
         self.show_information()
+        self.extra_activity_document_tech.place(x=65000,y=730,width=400,height=35)
+        self.extra_activity_document_non_tech.place(x=65000,y=760,width=400,height=35)
     def set_subject8(self):
         self.count = 7
         self.sem = 'sem8'
@@ -304,11 +318,12 @@ class report:
         mycursor.execute(query)
         result= mycursor.fetchone()
         print(result[0], result[1])
-        if(result[0] == None or result[1] == None):
-            pass
-        else:
-            self.extra_activity_document.place(x=650,y=730,width=400,height=35)
+        if(result[0] != None): 
+            self.extra_activity_document_tech.place(x=650,y=730,width=400,height=35)
             print(":)")
+        if(result[1] != None):
+            self.extra_activity_document_non_tech.place(x=650,y=760,width=400,height=35)
+            print("(:")
 
 
 
@@ -327,7 +342,7 @@ class report:
         self.lbl_sem.config(text = self.sem)
         self.lbl_pointer.config(text = result1[0][0])
     def set(self):
-# -----------setting the subjects to correct position of tt1
+# --------------------making all labels normal
         self.tt1_lbl_sub1.config(state=NORMAL)
         self.tt1_lbl_sub2.config(state=NORMAL)
         self.tt1_lbl_sub3.config(state=NORMAL)
@@ -338,41 +353,7 @@ class report:
         self.tt1_sub3.config(state=NORMAL)
         self.tt1_sub4.config(state=NORMAL)
         self.tt1_sub5.config(state=NORMAL)
-
-        self.tt1_lbl_sub1.delete(0, 'end')
-        self.tt1_lbl_sub2.delete(0, 'end')
-        self.tt1_lbl_sub3.delete(0, 'end')
-        self.tt1_lbl_sub4.delete(0, 'end')
-        self.tt1_lbl_sub5.delete(0, 'end')
-        self.tt1_sub1.delete(0, 'end')
-        self.tt1_sub2.delete(0, 'end')
-        self.tt1_sub3.delete(0, 'end')
-        self.tt1_sub4.delete(0, 'end')
-        self.tt1_sub5.delete(0, 'end')
-
-        self.tt1_lbl_sub1.insert(0, subjects[self.count][0])
-        self.tt1_lbl_sub2.insert(0, subjects[self.count][1])
-        self.tt1_lbl_sub3.insert(0, subjects[self.count][2])
-        self.tt1_lbl_sub4.insert(0, subjects[self.count][3])
-        self.tt1_lbl_sub5.insert(0, subjects[self.count][4])
-        self.tt1_sub1.insert(0, self.list[0][0])
-        self.tt1_sub2.insert(0, self.list[1][0])
-        self.tt1_sub3.insert(0, self.list[2][0])
-        self.tt1_sub4.insert(0, self.list[3][0])
-        self.tt1_sub5.insert(0, self.list[4][0])
-
-        self.tt1_lbl_sub1.config(state='readonly', fg='#18258c')
-        self.tt1_lbl_sub2.config(state='readonly', fg='#18258c')
-        self.tt1_lbl_sub3.config(state='readonly', fg='#18258c')
-        self.tt1_lbl_sub4.config(state='readonly', fg='#18258c')
-        self.tt1_lbl_sub5.config(state='readonly', fg='#18258c')
-        self.tt1_sub1.config(state='readonly')
-        self.tt1_sub2.config(state='readonly')
-        self.tt1_sub3.config(state='readonly')
-        self.tt1_sub4.config(state='readonly')
-        self.tt1_sub5.config(state='readonly')
-
-# -----------setting the subjects to correct position of tt2
+    
         self.tt2_lbl_sub1.config(state=NORMAL)
         self.tt2_lbl_sub2.config(state=NORMAL)
         self.tt2_lbl_sub3.config(state=NORMAL)
@@ -384,6 +365,28 @@ class report:
         self.tt2_sub4.config(state=NORMAL)
         self.tt2_sub5.config(state=NORMAL)
 
+        self.ut_lbl_sub1.config(state=NORMAL)
+        self.ut_lbl_sub2.config(state=NORMAL)
+        self.ut_lbl_sub3.config(state=NORMAL)
+        self.ut_lbl_sub4.config(state=NORMAL)
+        self.ut_lbl_sub5.config(state=NORMAL)
+        self.ut_sub1.config(state=NORMAL)
+        self.ut_sub2.config(state=NORMAL)
+        self.ut_sub3.config(state=NORMAL)
+        self.ut_sub4.config(state=NORMAL)
+        self.ut_sub5.config(state=NORMAL)
+
+# ----------------deleting the content in the label and entry
+        self.tt1_lbl_sub1.delete(0, 'end')
+        self.tt1_lbl_sub2.delete(0, 'end')
+        self.tt1_lbl_sub3.delete(0, 'end')
+        self.tt1_lbl_sub4.delete(0, 'end')
+        self.tt1_lbl_sub5.delete(0, 'end')
+        self.tt1_sub1.delete(0, 'end')
+        self.tt1_sub2.delete(0, 'end')
+        self.tt1_sub3.delete(0, 'end')
+        self.tt1_sub4.delete(0, 'end')
+        self.tt1_sub5.delete(0, 'end')
 
         self.tt2_lbl_sub1.delete(0, 'end')
         self.tt2_lbl_sub2.delete(0, 'end')
@@ -395,40 +398,6 @@ class report:
         self.tt2_sub3.delete(0, 'end')
         self.tt2_sub4.delete(0, 'end')
         self.tt2_sub5.delete(0, 'end')
-
-        self.tt2_lbl_sub1.insert(0, subjects[self.count][0])
-        self.tt2_lbl_sub2.insert(0, subjects[self.count][1])
-        self.tt2_lbl_sub3.insert(0, subjects[self.count][2])
-        self.tt2_lbl_sub4.insert(0, subjects[self.count][3])
-        self.tt2_lbl_sub5.insert(0, subjects[self.count][4])
-        self.tt2_sub1.insert(0, self.list[0][1])
-        self.tt2_sub2.insert(0, self.list[1][1])
-        self.tt2_sub3.insert(0, self.list[2][1])
-        self.tt2_sub4.insert(0, self.list[3][1])
-        self.tt2_sub5.insert(0, self.list[4][1])
-        
-        self.tt2_lbl_sub1.config(state='readonly', fg='#18258c')
-        self.tt2_lbl_sub2.config(state='readonly', fg='#18258c')
-        self.tt2_lbl_sub3.config(state='readonly', fg='#18258c')
-        self.tt2_lbl_sub4.config(state='readonly', fg='#18258c')
-        self.tt2_lbl_sub5.config(state='readonly', fg='#18258c')
-        self.tt2_sub1.config(state='readonly')
-        self.tt2_sub2.config(state='readonly')
-        self.tt2_sub3.config(state='readonly')
-        self.tt2_sub4.config(state='readonly')
-        self.tt2_sub5.config(state='readonly')
-
-# -----------setting the subjects to correct position of ut
-        self.ut_lbl_sub1.config(state=NORMAL)
-        self.ut_lbl_sub2.config(state=NORMAL)
-        self.ut_lbl_sub3.config(state=NORMAL)
-        self.ut_lbl_sub4.config(state=NORMAL)
-        self.ut_lbl_sub5.config(state=NORMAL)
-        self.ut_sub1.config(state=NORMAL)
-        self.ut_sub2.config(state=NORMAL)
-        self.ut_sub3.config(state=NORMAL)
-        self.ut_sub4.config(state=NORMAL)
-        self.ut_sub5.config(state=NORMAL)
         
         self.ut_lbl_sub1.delete(0, 'end')
         self.ut_lbl_sub2.delete(0, 'end')
@@ -441,16 +410,73 @@ class report:
         self.ut_sub4.delete(0, 'end')
         self.ut_sub5.delete(0, 'end')
 
-        self.ut_lbl_sub1.insert(0, subjects[self.count][0])
-        self.ut_lbl_sub2.insert(0, subjects[self.count][1])
-        self.ut_lbl_sub3.insert(0, subjects[self.count][2])
-        self.ut_lbl_sub4.insert(0, subjects[self.count][3])
-        self.ut_lbl_sub5.insert(0, subjects[self.count][4])
-        self.ut_sub1.insert(0, self.list[0][2])
-        self.ut_sub2.insert(0, self.list[1][2])
-        self.ut_sub3.insert(0, self.list[2][2])
-        self.ut_sub4.insert(0, self.list[3][2])
-        self.ut_sub5.insert(0, self.list[4][2])
+
+
+
+# -----------Inserting the subject name
+
+        self.tt1_lbl_sub1.insert(0, subjects[self.count][0])
+        self.tt1_lbl_sub2.insert(0, subjects[self.count][1])
+        self.tt1_lbl_sub3.insert(0, subjects[self.count][2])
+        self.tt1_lbl_sub4.insert(0, subjects[self.count][3])
+        self.tt1_lbl_sub5.insert(0, subjects[self.count][4])
+
+        self.tt2_lbl_sub1.insert(0, subjects[self.count][0])
+        self.tt2_lbl_sub2.insert(0, subjects[self.count][1])
+        self.tt2_lbl_sub3.insert(0, subjects[self.count][2])
+        self.tt2_lbl_sub4.insert(0, subjects[self.count][3])
+        self.tt2_lbl_sub5.insert(0, subjects[self.count][4])
+
+        # self.ut_lbl_sub1.insert(0, subjects[self.count][0])
+        # self.ut_lbl_sub2.insert(0, subjects[self.count][1])
+        # self.ut_lbl_sub3.insert(0, subjects[self.count][2])
+        # self.ut_lbl_sub4.insert(0, subjects[self.count][3])
+        # self.ut_lbl_sub5.insert(0, subjects[self.count][4])
+
+# ----------------inserting the subject marks
+        try:
+            self.tt1_sub1.insert(0, self.list[0][0])
+            self.tt1_sub2.insert(0, self.list[1][0])
+            self.tt1_sub3.insert(0, self.list[2][0])
+            self.tt1_sub4.insert(0, self.list[3][0])
+            self.tt1_sub5.insert(0, self.list[4][0])
+
+            self.tt2_sub1.insert(0, self.list[0][1])
+            self.tt2_sub2.insert(0, self.list[1][1])
+            self.tt2_sub3.insert(0, self.list[2][1])
+            self.tt2_sub4.insert(0, self.list[3][1])
+            self.tt2_sub5.insert(0, self.list[4][1])
+
+            self.ut_sub1.insert(0, self.list[0][2])
+            self.ut_sub2.insert(0, self.list[1][2])
+            self.ut_sub3.insert(0, self.list[2][2])
+            self.ut_sub4.insert(0, self.list[3][2])
+            self.ut_sub5.insert(0, self.list[4][2])
+        except:
+            messagebox.showerror("error", "Enter your marks first!", parent=self.root)
+        
+# ---------------------remove the normal state in the label and entry
+        self.tt1_lbl_sub1.config(state='readonly', fg='#18258c')
+        self.tt1_lbl_sub2.config(state='readonly', fg='#18258c')
+        self.tt1_lbl_sub3.config(state='readonly', fg='#18258c')
+        self.tt1_lbl_sub4.config(state='readonly', fg='#18258c')
+        self.tt1_lbl_sub5.config(state='readonly', fg='#18258c')
+        self.tt1_sub1.config(state='readonly')
+        self.tt1_sub2.config(state='readonly')
+        self.tt1_sub3.config(state='readonly')
+        self.tt1_sub4.config(state='readonly')
+        self.tt1_sub5.config(state='readonly')
+        
+        self.tt2_lbl_sub1.config(state='readonly', fg='#18258c')
+        self.tt2_lbl_sub2.config(state='readonly', fg='#18258c')
+        self.tt2_lbl_sub3.config(state='readonly', fg='#18258c')
+        self.tt2_lbl_sub4.config(state='readonly', fg='#18258c')
+        self.tt2_lbl_sub5.config(state='readonly', fg='#18258c')
+        self.tt2_sub1.config(state='readonly')
+        self.tt2_sub2.config(state='readonly')
+        self.tt2_sub3.config(state='readonly')
+        self.tt2_sub4.config(state='readonly')
+        self.tt2_sub5.config(state='readonly')
 
         self.ut_lbl_sub1.config(state='readonly', fg='#18258c')
         self.ut_lbl_sub2.config(state='readonly', fg='#18258c')
@@ -462,19 +488,28 @@ class report:
         self.ut_sub3.config(state='readonly')
         self.ut_sub4.config(state='readonly')
         self.ut_sub5.config(state='readonly')
-        
 
     def show_document(self):
         self.new_win = Toplevel(self.root)
         self.new_obj = document(self.new_win, self.gr_no.get(),self.sem)
     
      
-    def show_extra_curriculm_document(self):
-        self.new_win = Toplevel(self.root)
+    def show_extra_curriculm_tech_document(self):
+        self.new_win1 = Toplevel(self.root)
+        self.new_obj1 = extracurriculaum_document(self.new_win1, self.gr_no.get(), "technical_event")
+    
+    def show_extra_curriculm__non_tech_document(self):
+        self.new_win1 = Toplevel(self.root)
+        self.new_obj1 = extracurriculaum_document(self.new_win1, self.gr_no.get(), "non_technical_event")
         
         # self.new_obj = extracurriculaum_document(self.new_win, self.gr_no.get(),self.destination, self.category.get())
 
-        
+    def clear(self):
+        self.root.destroy()
+        root=Tk()
+        bj=report(root)
+        root.mainloop()
+                
 
 
 
