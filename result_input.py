@@ -1,8 +1,10 @@
+import imp
 from tkinter import*
 from tkinter import ttk,messagebox
 import mysql.connector as sql
 from tkcalendar import DateEntry
 import shutil
+import result_input
 from tkinter import Tk, filedialog
 
 mydb = sql.connect(host="localhost", user="root", passwd="", database="SP")
@@ -12,10 +14,10 @@ subjects =[["EM_1", "EC_1", "EP_1", "BEE", "Mechanics"],
             ["EM_2", "EC_2", "EP_2", "C_Programming", "ED"],
             ["EM_3", "Java", "DSA", "DBMS", "PCE_1"],
             ["EM_4", "Python", "CNND", "OS", "COA"],
-            ["Data_Mining", "Web_X", "Wireless_Technology", "AI_and_DS", "Ethical_Hacking"],
             ["Internet_Programming", "CNS", "EEB", "Software_Engineering", "PCE_2"],
+            ["Data_Mining", "Web_X", "Wireless_Technology", "AI_and_DS", "Ethical_Hacking"],
             ["Enterprise_Network_Design", "Infrastruction_Security","Soft_computing", "Cyber_security_and_Law", "AI"],
-            ["Big_data_analytics", "Big_data_analytics", "Internet_of_Everything", "R_Programming", "Robotics" , "Project_management"]]
+            ["Big_data_analytics", "Internet_of_Everything", "R_Programming", "Robotics" , "Project_management"]]
 
 class enter_marks:
     def __init__(self,root):
@@ -208,9 +210,9 @@ class enter_marks:
         self.get_gr_no = self.gr_no.get()
         self.get_dob = self.dob.get()
         if(self.get_gr_no == ''):
-            messagebox.showerror('error', 'Enter gr no')
+            messagebox.showerror('error', 'Enter gr no',parent=self.root)
         elif(self.get_dob == ''):
-            messagebox.showerror('error', 'Enter dob no')
+            messagebox.showerror('error', 'Enter dob no',parent=self.root)
         else:
             query = f"select * from students where gr_no ={self.get_gr_no} and dob = '{self.get_dob}'"
             mycursor.execute(query)
@@ -223,9 +225,9 @@ class enter_marks:
                 self.m3_Frame.place(x=350, y=520, width=680, height=280)
                 self.m_Frame.place(x=80, y=150, width=1380, height=80)
 
-                messagebox.showinfo('message',  'Enter the marks')
+                messagebox.showinfo('message',  'Enter the marks',parent=self.root)
             else:
-                messagebox.showinfo('message', 'gr_no and dob no match!')
+                messagebox.showinfo('message', 'gr_no and dob no match!',parent=self.root)
 
     def show_sem(self):
         query = f"select sem from students where gr_no = {self.gr_no.get()}"
@@ -315,7 +317,7 @@ class enter_marks:
         self.set()
     def set(self):
         self.upload.place(x=1350,y=700,width=100,height=35)
-        self.upload_warn.config(text="*upload your result in pdf file.", fg= "red")
+        self.upload_warn.config(text="*upload your result in jpg file.", fg= "red")
         self.upload_warn.place(x=1340 ,y=750)
 # ---------------setting the tt1 subjects
         self.tt1_lbl_sub1.config(state=NORMAL)
@@ -471,7 +473,7 @@ class enter_marks:
         if(self.get_tt1_sub1_marks=='' or self.get_tt1_sub2_marks=='' or self.get_tt1_sub3_marks=='' or self.get_tt1_sub4_marks=='' or self.get_tt1_sub5_marks=='' or
            self.get_tt2_sub1_marks=='' or self.get_tt2_sub2_marks=='' or self.get_tt2_sub3_marks=='' or self.get_tt2_sub4_marks=='' or self.get_tt2_sub5_marks=='' or
            self.get_ut_sub1_marks=='' or self.get_ut_sub2_marks=='' or self.get_ut_sub3_marks=='' or self.get_ut_sub4_marks=='' or self.get_ut_sub5_marks==''):
-           messagebox.showwarning('warn',"All field must be required!")
+           messagebox.showwarning('warn',"All field must be required!",parent=self.root)
         else:
 # ---------queries
             marks =[[self.get_tt1_sub1_marks, self.get_tt1_sub2_marks, self.get_tt1_sub3_marks, self.get_tt1_sub4_marks, self.get_tt1_sub5_marks ],
@@ -482,28 +484,34 @@ class enter_marks:
             for i in marks[2]:
                 sum += int(i)
             cgpa = (sum/5)/9.5
-            query1 = f"update students set {self.sem} = {cgpa}"
+            if(cgpa > 10):
+                cgpa = 10
+            query1 = f"update students set {self.sem} = {cgpa} where gr_no = {self.get_gr_no};"
             mycursor.execute(query1)
             mydb.commit()
             try:
                 for i in range(5):
                     query = f"update {self.sem}_{subjects[self.count][i]}_performance set tt1={marks[0][i]} , tt2={marks[1][i]}, ut={marks[2][i]} where gr_no = {self.get_gr_no};"
+                    print(query)
                     mycursor.execute(query)
                     mydb.commit()
             except Exception as e:
                 print(e)
-            messagebox.showinfo('message', 'marks inserted sucessfully.')
+                print("dsfasdfsdfsdfdsf")
+            messagebox.showinfo('message', 'marks inserted sucessfully.',parent=self.root)
             self.root.destroy()    
+            import Report
+            import show_document
   
     def upload(self):
         if(self.tt1_mark_sub1.get()=='' or self.tt1_mark_sub2.get()=='' or self.tt1_mark_sub3.get()=='' or self.tt1_mark_sub4.get()=='' or self.tt1_mark_sub5.get()=='' or
            self.tt2_mark_sub1.get()=='' or self.tt2_mark_sub2.get()=='' or self.tt2_mark_sub3.get()=='' or self.tt2_mark_sub4.get()=='' or self.tt2_mark_sub5.get()=='' or
            self.ut_mark_sub1.get()=='' or self.ut_mark_sub2.get()=='' or self.ut_mark_sub3.get()=='' or self.ut_mark_sub4.get()=='' or self.ut_mark_sub5.get()==''):
-            messagebox.showerror("error", "All field must be required!")
+            messagebox.showerror("error", "All field must be required!",parent=self.root)
         else:
 # --------------open the directory
             f_types =[('jpg files','*.jpg')]
-            source = filedialog.askopenfilename(filetypes=f_types)
+            source = filedialog.askopenfilename(filetypes=f_types, parent=self.root)
 # --------------upload the filepath to database
             if(source == ""):
                 print("no")

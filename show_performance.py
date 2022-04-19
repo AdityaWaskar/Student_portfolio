@@ -1,5 +1,3 @@
-import os
-import string
 from tkinter import messagebox
 import mysql.connector as sql
 from tkinter import *
@@ -116,34 +114,34 @@ class show_performance:
 # -------------------if-else ladder for selecting right option
         try:
             if(self.get_branch =="Select"):
-                messagebox.showerror('error', 'Select branch!')
+                messagebox.showerror('error', 'Select branch!',parent=self.root)
             else:
                 if(self.get_sem == "Select" and self.get_subject == "Select"):
-                    messagebox.showerror('error', 'Select Semester and subject!')
+                    messagebox.showerror('error', 'Select Semester and subject!',parent=self.root)
                 elif(self.get_sem=='sem 1'):
                     if(self.get_subject !='EM_1' and self.get_subject !='EC_1' and self.get_subject !='EP_1' and self.get_subject !='BEE' and self.get_subject !='Mechanics'):
-                        messagebox.showerror('error', 'Select either EM_1 or EC_1 or EP_1 or BEE or Mechanics')
+                        messagebox.showerror('error', 'Select either EM_1 or EC_1 or EP_1 or BEE or Mechanics',parent=self.root)
                 elif(self.get_sem == 'sem 2'):
                     if(self.get_subject !='EM_2' and self.get_subject !='EC_2' and self.get_subject !='EP_2' and self.get_subject !='C_Programming' and self.get_subject !='ED'):
-                        messagebox.showerror('error', 'Select either EM_2 or EC_2 or EP_2 or C_Programming or ED')
+                        messagebox.showerror('error', 'Select either EM_2 or EC_2 or EP_2 or C_Programming or ED',parent=self.root)
                 elif(self.get_sem == 'sem 3'):
                     if(self.get_subject !='EM_3' and self.get_subject !='Java' and self.get_subject !='DSA' and self.get_subject !='DBMS' and self.get_subject !='PCE_1'):
-                        messagebox.showerror('error', 'Select either EM_3 or Java or DSA or DBMS or PCE_1')
+                        messagebox.showerror('error', 'Select either EM_3 or Java or DSA or DBMS or PCE_1',parent=self.root)
                 elif(self.get_sem == 'sem 4'):
                     if(self.get_subject !='EM_4' and self.get_subject !='Pyhton' and self.get_subject !='CNND' and self.get_subject !='OS' and self.get_subject !='COA'):
-                        messagebox.showerror('error', 'Select either EM_4 or Pyhton or CNND or OS or COA')
+                        messagebox.showerror('error', 'Select either EM_4 or Pyhton or CNND or OS or COA',parent=self.root)
                 elif(self.get_sem == 'sem 5' ):
                     if(self.get_subject !='Internet_Programming'):
-                        messagebox.showerror('error', 'Select Internet_Programming ')
+                        messagebox.showerror('error', 'Select Internet_Programming ',parent=self.root)
                 elif(self.get_sem == 'sem 6' ):
                     if(self.get_subject !='Data_Mining' ):
-                        messagebox.showerror('error', 'Select Data_Mining')
+                        messagebox.showerror('error', 'Select Data_Mining',parent=self.root)
                 elif(self.get_sem == 'sem 7' ):
                     if(self.get_subject !='Enterprise_Network'):
-                        messagebox.showerror('error', 'Select Enterprise_Network')
+                        messagebox.showerror('error', 'Select Enterprise_Network',parent=self.root)
                 elif(self.get_sem == 'sem 8' ):
                     if(self.get_subject !='Big_data_analytics'):
-                        messagebox.showerror('error', 'Select Big_data_analytics')
+                        messagebox.showerror('error', 'Select Big_data_analytics',parent=self.root)
                 else:
                     print("main else")
         except Exception as e:
@@ -165,13 +163,30 @@ class show_performance:
                 if result1 :
                     for i in result1:
                         print("for loop")
-                        query = f"select (count(a{i[0]})*100/(select count(*) from sem{self.get_sem[-1]}_{self.get_subject}_attendance)) as score from sem{self.get_sem[-1]}_{self.get_subject}_attendance where a{i[0]} = 'Present' ;"
-                        mycursor.execute(query)
-                        result = mycursor.fetchall()
+                        query_a = f"select count(*) from sem{self.get_sem[-1]}_{self.get_subject}_attendance where a{i[0]} = 'Present';"
+                        print(query_a)
+                        mycursor.execute(query_a)
+                        present = mycursor.fetchone()
+                        query_b = f"select count(*) from sem{self.get_sem[-1]}_{self.get_subject}_attendance where a{i[0]} = 'Absent';"
+                        print(query_b)
+                        mycursor.execute(query_b)
+                        absent = mycursor.fetchone()
+                        print(query_a)
+                        print(query_b)
+                        print(present)
+                        print(absent)
+                        # try:
+                        total = int(present[0]) * 100 / (int(present[0]+int(absent[0])))
+                        # except:
+                        #     total = 0
+
+                        # query = f"select (count(a{i[0]})*100/(select count(*) from sem{self.get_sem[-1]}_{self.get_subject}_attendance)) as score from sem{self.get_sem[-1]}_{self.get_subject}_attendance where a{i[0]} = 'Present' ;"
+                        # mycursor.execute(query)
+                        # result = mycursor.fetchall()
 
                         print("for --------------")
-                        if(result[0][0] != None):
-                            query_a = f"UPDATE sem{self.get_sem[-1]}_{self.get_subject}_performance set avg_attendacne = {result[0][0]} where gr_no = '{i[0]}'"
+                        if(total != 0):
+                            query_a = f"UPDATE sem{self.get_sem[-1]}_{self.get_subject}_performance set avg_attendacne = {total} where gr_no = '{i[0]}'"
                             print(query_a)
                             mycursor.execute(query_a)
                         else:
@@ -193,7 +208,7 @@ class show_performance:
                         self.my_table.insert(parent='',index='end',iid=a,text='',values=(i[0],result2[0], i[1], i[2], f"{result_b[1]}%"))
                         a+=1    
                 else:
-                    messagebox.showerror("error", f"There is no students in batch no {self.get_batch}")
+                    messagebox.showerror("error", f"There is no students in batch no {self.get_batch}",parent=self.root)
                 # except Exception as e:
                 #     messagebox.showerror("error", e)       
 

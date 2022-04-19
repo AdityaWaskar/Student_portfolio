@@ -1,4 +1,4 @@
-from pprint import pprint
+import result_input
 from tkinter import*
 from PIL import Image,ImageTk
 from tkinter import ttk,messagebox
@@ -18,7 +18,7 @@ subjects =[["EM_1", "EC_1", "EP_1", "BEE", "Mechanics"],
             ["Internet_Programming", "CNS", "EEB", "Software_Engineering", "PCE_2"],
             ["Data_Mining", "Web_X", "Wireless_Technology", "AI_and_DS", "Ethical_Hacking"],
             ["Enterprise_Network_Design", "Infrastruction_Security","Soft_computing", "Cyber_security_and_Law", "AI"],
-            ["Big_data_analytics", "Big_data_analytics", "Internet_of_Everything", "R_Programming", "Robotics" , "Project_management"]]
+            ["Big_data_analytics", "Internet_of_Everything", "R_Programming", "Robotics" , "Project_management"]]
 class report:
     def __init__(self,root):
 # --------------variable
@@ -171,31 +171,33 @@ class report:
         self.get_gr_no = self.gr_no.get()
         self.get_dob = self.dob.get()
         if(self.get_gr_no == ''):
-            messagebox.showerror('error', 'Enter gr no')
+            messagebox.showerror('error', 'Enter gr no',parent=self.root)
         elif(self.get_dob == ''):
-            messagebox.showerror('error', 'Enter dob no')
+            messagebox.showerror('error', 'Enter dob no',parent=self.root)
         else:
             query = f"select sem from students where gr_no = {self.get_gr_no} and dob = '{self.get_dob}';"
             print(query)
             mycursor.execute(query)
             self.get_sem = mycursor.fetchone()
             if(self.get_sem):
+                import result_input
                 self.show_sem()    
                 self.m_Frame.place(x=80, y=150, width=1380, height=80)
             else:
-                messagebox.showinfo('message', 'gr_no and dob no match!')    
+                messagebox.showinfo('message', 'gr_no and dob no match!',parent=self.root)    
 
     def get_marks(self):
         self.list = []
-        for i in range(5): 
-            try:   
+        try:   
+            for i in range(5): 
                 query1 = f"select tt1, tt2, ut from {self.sem}_{subjects[self.count][i]}_performance where gr_no = {self.get_gr_no};"
                 print(query1)
                 mycursor.execute(query1)
                 result = mycursor.fetchall()
                 self.list.append(result[0])
-            except :
-                messagebox.showerror("error", "Please Enter your marks.")
+        except Exception as e:
+            print(e)
+            messagebox.showerror("error", "Please Enter your marks.", parent=self.root)
             
 
         '''query = f"update {self.sem}_{subjects[self.count][i]}_performance set tt1={marks[0][i]} , tt2={marks[1][i]}, ut={marks[2][i]} where gr_no = {self.get_gr_no};"
@@ -283,32 +285,36 @@ class report:
         self.get_marks()
         self.set()
         self.show_information()
+    def set_subject5(self):
         self.extra_activity_document_tech.place(x=65000,y=730,width=400,height=35)
         self.extra_activity_document_non_tech.place(x=65000,y=760,width=400,height=35)
-    def set_subject5(self):
         self.count = 4
         self.sem = 'sem5'
+        self.get_marks()
         self.set()
         self.show_information()
+    def set_subject6(self):
         self.extra_activity_document_tech.place(x=65000,y=730,width=400,height=35)
         self.extra_activity_document_non_tech.place(x=65000,y=760,width=400,height=35)
-    def set_subject6(self):
         self.count = 5
         self.sem = 'sem6'
+        self.get_marks()
         self.set()
         self.show_information()
+    def set_subject7(self):
         self.extra_activity_document_tech.place(x=65000,y=730,width=400,height=35)
         self.extra_activity_document_non_tech.place(x=65000,y=760,width=400,height=35)
-    def set_subject7(self):
         self.count = 6
         self.sem = 'sem7'
+        self.get_marks()
         self.set()
         self.show_information()
+    def set_subject8(self):
         self.extra_activity_document_tech.place(x=65000,y=730,width=400,height=35)
         self.extra_activity_document_non_tech.place(x=65000,y=760,width=400,height=35)
-    def set_subject8(self):
         self.count = 7
         self.sem = 'sem8'
+        self.get_marks()
         self.set()
         self.show_information()
     def show_information(self):
@@ -440,20 +446,18 @@ class report:
             self.tt1_sub3.insert(0, self.list[2][0])
             self.tt1_sub4.insert(0, self.list[3][0])
             self.tt1_sub5.insert(0, self.list[4][0])
-
             self.tt2_sub1.insert(0, self.list[0][1])
             self.tt2_sub2.insert(0, self.list[1][1])
             self.tt2_sub3.insert(0, self.list[2][1])
             self.tt2_sub4.insert(0, self.list[3][1])
             self.tt2_sub5.insert(0, self.list[4][1])
-
             self.ut_sub1.insert(0, self.list[0][2])
             self.ut_sub2.insert(0, self.list[1][2])
             self.ut_sub3.insert(0, self.list[2][2])
             self.ut_sub4.insert(0, self.list[3][2])
             self.ut_sub5.insert(0, self.list[4][2])
-        except:
-            messagebox.showerror("error", "Enter your marks first!", parent=self.root)
+        except Exception as e:
+            messagebox.showerror("error", f"{e}Enter your marks first!", parent=self.root)
         
 # ---------------------remove the normal state in the label and entry
         self.tt1_lbl_sub1.config(state='readonly', fg='#18258c')

@@ -111,13 +111,13 @@ class show_teacher:
             self.get_gr_no = self.teacher_gr.get()
             try:
                 if self.teacher_gr.get() == "":
-                        messagebox.showerror("Error", "Enter Sr No.")
+                        messagebox.showerror("Error", "Enter Sr No.",parent=self.root)
                 else:
                         sql_query1 = "SELECT * FROM teachers where sr_no = %s"
                         mycursor.execute(sql_query1, [int(self.get_gr_no)])
                         result = mycursor.fetchone()
                         if(result == None):
-                                messagebox.showerror("Error", "Invalid Sr No.")
+                                messagebox.showerror("Error", "Invalid Sr No.",parent=self.root)
                         else:
                                 self.name.delete(0, 'end')
                                 self.name.insert(0, result[1])
@@ -138,7 +138,7 @@ class show_teacher:
                                 
                 self.show()
             except Exception as e:
-                messagebox.showerror("Error", f"Error due to {str(e)}")
+                messagebox.showerror("Error", f"Error due to {str(e)}",parent=self.root)
     
     def show(self):
             try:
@@ -150,7 +150,7 @@ class show_teacher:
                         self.teacher_table.insert('',END, values=row)
                         
             except Exception as e:
-                messagebox.showerror("Error", f"Error due to {str(e)}")
+                messagebox.showerror("Error", f"Error due to {str(e)}",parent=self.root)
 
 
     def update(self):
@@ -167,7 +167,7 @@ class show_teacher:
             mycursor.execute(query1, [self.updated_name, self.updated_dob, self.updated_email, self.updated_phone_no, self.updated_aadhar_no,self.updated_gender, self.updated_address, self.updated_branch, self.teacher_gr.get()])
             self.show()
             mydb.commit()
-            messagebox.showinfo("showinfo", f"Data Updated")
+            messagebox.showinfo("showinfo", f"Data Updated",parent=self.root)
 
     def back(self):
             self.root.destroy()

@@ -60,7 +60,7 @@ class RMS:
         self.new_win = Toplevel(self.root)
         self.new_obj = extracurricular(self.new_win)
     def logout(self):
-        a = messagebox.askquestion("logout", "Are you sure?")
+        a = messagebox.askquestion("logout", "Are you sure?",parent=self.root)
         print(a)
         if(a == "yes"):
             self.root.destroy()

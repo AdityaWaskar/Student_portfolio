@@ -242,7 +242,7 @@ create table sem2_ED_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
 
 create table sem3_EM_3_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
 create table sem3_Java_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
-create table sem3_DSA_3_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
+create table sem3_DSA_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
 create table sem3_DBMS_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
 create table sem3_PCE_1_attendance(sr_no int ,date varchar(20) PRIMARY KEY);
 
@@ -291,7 +291,7 @@ create table sem2_ED_performance( gr_no int not null, avg_attendance float, tt1 
 
 create table sem3_EM_3_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int, result_path varchar(200));
 create table sem3_Java_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int, result_path varchar(200));
-create table sem3_DSA_3_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int, result_path varchar(200));
+create table sem3_DSA_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int, result_path varchar(200));
 create table sem3_DBMS_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int, result_path varchar(200));
 create table sem3_PCE_1_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int, result_path varchar(200));
 
@@ -304,7 +304,7 @@ create table sem4_COA_performance( gr_no int not null, avg_attendance float, tt1
 create table sem5_Internet_Programming_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int, result_path varchar(200));
 create table sem5_CNS_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int, result_path varchar(200));
 create table sem5_EEB_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int, result_path varchar(200));
-create table sem5_Software_Engineering_5_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int, result_path varchar(200));
+create table sem5_Software_Engineering_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int, result_path varchar(200));
 create table sem5_PCE_2_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int, result_path varchar(200));
 
 create table sem6_Data_Mining_performance( gr_no int not null, avg_attendance float, tt1 int, tt2 int, ut int, result_path varchar(200));
@@ -497,3 +497,45 @@ alter table sem7_students add result_path varchar(200);
 alter table sem8_students add result_path varchar(200);
 
 alter table students add technical_event varchar(200);
+
+
+alter table sem1_EM_1_attendance alter 
+alter table sem1_EC_1_attendance alter 
+alter table sem1_EP_1_attendance alter 
+alter table sem1_BEE_attendance alter 
+alter table sem1_Mechanics_attendance alter 
+alter table sem2_EM_2_attendance alter 
+alter table sem2_EC_2_attendance alter 
+alter table sem2_EP_2_attendance alter 
+alter table sem2_C_Programming_attendance alter 
+alter table sem2_ED_attendance alter 
+alter table sem3_EM_3_attendance alter 
+alter table sem3_Java_attendance alter 
+alter table sem3_DSA_3_attendance alter 
+alter table sem3_DBMS_attendance alter 
+alter table sem3_PCE_1_attendance alter 
+alter table sem4_EM_4_attendance alter 
+alter table sem4_Python_attendance alter 
+alter table sem4_CNND_attendance alter 
+alter table sem4_OS_attendance alter 
+alter table sem4_COA_attendance alter 
+alter table sem5_Internet_Programming_attendance alter 
+alter table sem5_CNS_attendance alter 
+alter table sem5_EEB_attendance alter 
+alter table sem5_Software_Engineering_5_attendance alter 
+alter table sem5_PCE_2_attendance alter 
+alter table sem6_Data_Mining_attendance alter 
+alter table sem6_Web_X_attendance alter 
+alter table sem6_wireless_technology_attendance alter 
+alter table sem6_AI_and_DS_attendance alter 
+alter table sem6_Ethical_Hacking_attendance alter 
+alter table sem7_Enterprise_Network_Design_attendance alter 
+alter table sem7_Infrastruction_Security_attendance alter 
+alter table sem7_Soft_computing_attendance alter 
+alter table sem7_Cyber_security_and_Law_attendance alter 
+alter table sem7_AI_attendance alter 
+alter table sem8_Big_data_analytics_attendance alter 
+alter table sem8_Internet_of_Everything_attendance alter 
+alter table sem8_R_Programming_attendance alter 
+alter table sem8_Robotics_attendance alter 
+alter table sem8_Project_management_attendance alter 

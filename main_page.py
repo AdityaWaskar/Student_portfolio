@@ -70,8 +70,6 @@ class Login:
         self.root.config(menu=filemenu)
         filemenu.add_cascade(label="ACTIVITY",menu=m6)
 
-        
-
         m7 = Menu(filemenu,tearoff=0)
         m7.add_command(label="EXIT",command=exit)
         self.root.config(menu=filemenu)

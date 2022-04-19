@@ -63,7 +63,7 @@ class teacher_Login:
     def forgot_pass(self):
         if(self.txt_user.get() == ''):
             self.txt_user.config(highlightthickness=1,highlightbackground="red")
-            messagebox.showerror('error', 'Enter Username!')
+            messagebox.showerror('error', 'Enter Username!',parent=self.root)
         else:
             self.new_win = Toplevel(self.root)
             self.new_obj = forgot(self.new_win)

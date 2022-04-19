@@ -40,8 +40,9 @@ class student_Login:
 
     def login_function(self):
         self.get_txt_pass = self.txt_pass.get()
-        sql = "select email, dob from students where email = %s and dob = %s"
-        mycursor.execute(sql, [(self.txt_user.get()), (self.txt_pass.get())])
+        sql = f"select email, dob from students where email = '{self.txt_user.get()}' and dob = '{self.txt_pass.get()}'"
+        print(sql)
+        mycursor.execute(sql)
         result = mycursor.fetchall()
         
         if(self.txt_user.get()=="" and self.txt_pass.get()==""):

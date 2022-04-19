@@ -131,42 +131,42 @@ class take_attendance:
         if(self.get_sem=='sem 1'):
             print(self.get_sem, self.get_subject)
             if(self.get_subject !='EM_1' and self.get_subject !='EC_1' and self.get_subject !='EP_1' and self.get_subject !='BEE' and self.get_subject !='Mechanics'):
-                messagebox.showerror('error', 'Select either EM_1 or EC_1 or EP_1 or BEE or Mechanics')
+                messagebox.showerror('error', 'Select either EM_1 or EC_1 or EP_1 or BEE or Mechanics',parent=self.root)
             else:
                 flag=True
         elif(self.get_sem == 'sem 2'):
             if(self.get_subject !='EM_2' and self.get_subject !='EC_2' and self.get_subject !='EP_2' and self.get_subject !='C_Programming' and self.get_subject !='ED'):
-                messagebox.showerror('error', 'Select either EM_2 or EC_2 or EP_2 or C_Programming or ED')
+                messagebox.showerror('error', 'Select either EM_2 or EC_2 or EP_2 or C_Programming or ED',parent=self.root)
             else:
                 flag=True
         elif(self.get_sem == 'sem 3'):
             if(self.get_subject !='EM_3' and self.get_subject !='Java' and self.get_subject !='DSA' and self.get_subject !='DBMS' and self.get_subject !='PCE_1'):
-                messagebox.showerror('error', 'Select either EM_3 or Java or DSA or DBMS or PCE_1')
+                messagebox.showerror('error', 'Select either EM_3 or Java or DSA or DBMS or PCE_1',parent=self.root)
             else:
                 flag=True
         elif(self.get_sem == 'sem 4'):
             if(self.get_subject !='EM_4' and self.get_subject !='Pyhton' and self.get_subject !='CNND' and self.get_subject !='OS' and self.get_subject !='COA'):
-                messagebox.showerror('error', 'Select either EM_4 or Pyhton or CNND or OS or COA')
+                messagebox.showerror('error', 'Select either EM_4 or Pyhton or CNND or OS or COA',parent=self.root)
             else:
                 flag=True
         elif(self.get_sem == 'sem 5' ):
             if(self.get_subject !='Internet_Programming' and self.get_subject !='CNS' and self.get_subject !='EEB' and self.get_subject !='Software_Engineering' and self.get_subject !='PCE_2'):
-                messagebox.showerror('error', 'Select Internet_Programming or CNS or EEB or Software_Engineering or PCE_2')
+                messagebox.showerror('error', 'Select Internet_Programming or CNS or EEB or Software_Engineering or PCE_2',parent=self.root)
             else:
                 flag=True
         elif(self.get_sem == 'sem 6' ):
             if(self.get_subject !='Data_Mining' and self.get_subject !='Web_X' and self.get_subject !='Wireless_Technology' and self.get_subject !='AI_and_DS' and self.get_subject !='Ethical_Hacking' ):
-                messagebox.showerror('error', 'Select Data_Mining or Web_X or Wireless_Technology or AI_and_DS or Ethical_Hacking ')
+                messagebox.showerror('error', 'Select Data_Mining or Web_X or Wireless_Technology or AI_and_DS or Ethical_Hacking ',parent=self.root)
             else:
                 flag=True
         elif(self.get_sem == 'sem 7' ):
             if(self.get_subject !='Enterprise_Network' and self.get_subject !='Infrastruction_Security' and self.get_subject !='Soft_computing' and self.get_subject !='Cyber_security_and_Law' and self.get_subject !='AI'):
-                messagebox.showerror('error', 'Select Enterprise_Network or Infrastruction_Security or Soft_computing or Cyber_security_and_Law or AI ')
+                messagebox.showerror('error', 'Select Enterprise_Network or Infrastruction_Security or Soft_computing or Cyber_security_and_Law or AI ',parent=self.root)
             else:
                 flag=True
         elif(self.get_sem == 'sem 8' ):
             if(self.get_subject != 'Big_data_analytics' and self.get_subject !='Project_management' and self.get_subject !='Internet_of_Everything' and self.get_subject !='R_Programming' and self.get_subject !='Robotics'):
-                messagebox.showerror('error', 'Select Big_data_analytics or Project_management or Insternet_of_Everything or R_Programming or Robotics ')
+                messagebox.showerror('error', 'Select Big_data_analytics or Project_management or Insternet_of_Everything or R_Programming or Robotics ',parent=self.root)
             else:
                 flag=True
         else:
@@ -252,13 +252,13 @@ class take_attendance:
         except Exception as e:
             print(e)
 # -----------destroying the current frame
-        messagebox.showinfo('info', f"{self.get_date} attendance is inserted sucessfully.")
+        messagebox.showinfo('info', f"{self.get_date} attendance is inserted sucessfully.",parent=self.root)
         self.root.destroy()
         
 
     def put_present_all(self):
         print("present all")
-        query1 = f"select gr_no, name, email from students where sem = '{self.get_sem}' and branch='{self.get_branch}' ;"
+        query1 = f"select gr_no, name, email from students where sem = '{self.get_sem}' and branch='{self.get_branch}' and batch = '{self.batch.get()}' ;"
         mycursor.execute(query1)
         result1 = mycursor.fetchall()
 

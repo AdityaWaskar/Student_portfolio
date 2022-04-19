@@ -1,6 +1,5 @@
 import os
 from tkinter import messagebox
-from turtle import update
 import mysql.connector as sql
 from tkinter import *
 from tkinter import ttk
@@ -124,14 +123,14 @@ class show_student:
             self.get_gr_no = self.gr_no.get()
             try:
                 if self.gr_no.get() == "":
-                        messagebox.showerror("Error", "Enter Gr No.")
+                        messagebox.showerror("Error", "Enter Gr No.",parent=self.root)
                 else:
                         sql_query1 = "SELECT * FROM students where gr_no = %s"
                         mycursor.execute(sql_query1, [int(self.get_gr_no)])
                         result = mycursor.fetchone()
                         print(result)
                         if(result == None):
-                                messagebox.showerror("Error", "Invalid Gr No.")
+                                messagebox.showerror("Error", "Invalid Gr No.",parent=self.root)
                         else:
                                 self.name.delete(0, 'end')
                                 self.name.insert(0, result[1])
@@ -159,7 +158,7 @@ class show_student:
                                 self.roll_no.insert(0, result1[0])
                 self.show()
             except Exception as e:
-                messagebox.showerror("Error", f"Error due to {str(e)}")
+                messagebox.showerror("Error", f"Error due to {str(e)}",parent=self.root)
     
     def show(self):
             try:
@@ -171,7 +170,7 @@ class show_student:
                         self.student_table.insert('',END, values=row)
                         
             except Exception as e:
-                messagebox.showerror("Error", f"Error due to {str(e)}")
+                messagebox.showerror("Error", f"Error due to {str(e)}",parent=self.root)
 
 
     def update(self):
@@ -183,7 +182,7 @@ class show_student:
             self.updated_xth = self.xth.get()
             self.updated_xiith = self.xiith.get()
             self.updated_address = self.address.get()
-            self.updated_branch = self.branch.get()
+            self.updated_branch = self.branch.get()                                                             
             self.updated_sem = self.sem.get()
             print(self.updated_sem)
             print("test1")
@@ -256,11 +255,11 @@ class show_student:
                         query13= f"INSERT INTO sem5_Software_Engineering_5_performance (gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
                         query14= f"INSERT INTO sem5_PCE_2_performance (gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
                 elif(self.updated_sem == 'sem 6'):
-                        query5 = f"ALTER TABLE sem6_Data_Mining_attendancea ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
-                        query6 = f"ALTER TABLE sem6_Web_X_attendancea ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
-                        query7 = f"ALTER TABLE sem6_wireless_technology_attendancea ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
-                        query8 = f"ALTER TABLE sem6_Ethical_Hacking_attendancea ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
-                        query9 = f"ALTER TABLE sem6_AI_and_DS_attendancea ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query5 = f"ALTER TABLE sem6_Data_Mining_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query6 = f"ALTER TABLE sem6_Web_X_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query7 = f"ALTER TABLE sem6_wireless_technology_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query8 = f"ALTER TABLE sem6_Ethical_Hacking_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
+                        query9 = f"ALTER TABLE sem6_AI_and_DS_attendance ADD a{self.gr_no.get()} varchar(10) default 'Absent';"
 
                         query10= f"INSERT INTO sem6_Data_Mining_performance (gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
                         query11= f"INSERT INTO sem6_Web_X_performance (gr_no, batch) values ({self.gr_no.get()}, {self.batch[0][0]});"
@@ -303,7 +302,7 @@ class show_student:
                 mycursor.execute(query13)
                 mycursor.execute(query14)
                 mydb.commit()
-                messagebox.showinfo("info", "Data Updated")
+                messagebox.showinfo("info", "Data Updated",parent=self.root)
                 self.show()
                         
             else:
@@ -313,10 +312,10 @@ class show_student:
                         mycursor.execute(query4, [int(self.updated_roll_no), self.updated_name, self.updated_dob, self.updated_email, self.updated_phone_no, self.updated_xth, self.updated_xiith, self.updated_address, self.updated_branch, self.get_gr_no])
                         self.show()
                         mydb.commit()
-                        messagebox.showinfo("showinfo", "Data Updated")
+                        messagebox.showinfo("showinfo", "Data Updated",parent=self.root)
                         self.show()
                 except Exception as e:
-                        messagebox.showerror("error", e)
+                        messagebox.showerror("error", e,parent=self.root)
             
 
     def back(self):

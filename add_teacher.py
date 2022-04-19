@@ -118,7 +118,7 @@ class add_teacher:
         else:
                 sql1 = "INSERT INTO teachers(name, DOB, email, phone_no, aadhar_no, gender, address, branch) values(%s, %s, %s, %s, %s, %s, %s, %s)"
                 mycursor.execute(sql1, [self.get_name, self.get_DOB, self.get_email, self.get_phone_no, self.get_aadhar_no,self.get_gender, self.get_address, self.get_branch])
-                messagebox.showinfo("showinfo", "Data Inserted sucessfully.")
+                messagebox.showinfo("showinfo", "Data Inserted sucessfully.",parent=self.root)
                 msg = Message(self.root, text="Data Inserted sucessfully.")
                 msg.pack()
                 mydb.commit()

@@ -43,7 +43,7 @@ class document:
             label.pack()
 
         except:
-            messagebox.showerror("error", "Some error to fetch images! Try again later:) ")
+            messagebox.showerror("error", "Some error to fetch images! Try again later:) ",parent=self.root)
 
 # ----------------------Create a Label Widget to display the text or Image
 
