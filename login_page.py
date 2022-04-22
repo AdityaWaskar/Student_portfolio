@@ -2,7 +2,6 @@ from tkinter import *
 from PIL import ImageTk
 import os
 
-
 class Login:
     def __init__(self, root):
         self.root = root                                                                                                                                    
@@ -12,7 +11,7 @@ class Login:
         self.bg = ImageTk.PhotoImage(file="images/bg1.jpg")
         self.bg_img = Label(self.root, image=self.bg).place(x=0,y=0,relwidth=1, relheight=1)
         self.root.focus_force()
-
+    
         Frame_login = Frame(self.root, bg="White")
         Frame_login.place(x=150, y=150, height=340, width=500)
     # title

@@ -4,13 +4,13 @@ from PIL import Image, ImageTk
 
 from add_student import add_student
 from add_teacher import add_teacher
+from report_by_teacher import report_by_teacher
 from show_student import show_student
 from show_teacher import show_teacher
 from take_attendance import take_attendance
 from show_performance import show_performance
 from show_defaulter import show_defaulter 
 from result_input import enter_marks
-from Report import report
 from extracurricular_activity import extracurricular
 
 
@@ -113,7 +113,7 @@ class Login:
     
     def report(self):
         self.new_win = Toplevel(self.root)
-        self.new_obj = report(self.new_win)
+        self.new_obj = report_by_teacher(self.new_win)
 
 
 
