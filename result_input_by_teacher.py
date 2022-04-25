@@ -1,4 +1,5 @@
 import imp
+from multiprocessing import parent_process
 from tkinter import*
 from tkinter import ttk,messagebox
 import mysql.connector as sql
@@ -19,7 +20,7 @@ subjects =[["EM_1", "EC_1", "EP_1", "BEE", "Mechanics"],
             ["Enterprise_Network_Design", "Infrastruction_Security","Soft_computing", "Cyber_security_and_Law", "AI"],
             ["Big_data_analytics", "Internet_of_Everything", "R_Programming", "Robotics" , "Project_management"]]
 
-class enter_marks:
+class enter_marks_by_teacher:
     def __init__(self,root):
         self.root=root
         self.root.title("Enter Marks ")
@@ -28,6 +29,7 @@ class enter_marks:
         self.root.focus_force()
         self.root.grab_set()
         self.count = -1
+        self.source = ''
         #================title===================
         title=Label(self.root,text="Enter Your Marks",font=("times new roman",20,"bold"),bg="orange",fg="white").place(x=20,y=15,width=1500,height=50)
 
@@ -468,6 +470,8 @@ class enter_marks:
            self.get_tt2_sub1_marks=='' or self.get_tt2_sub2_marks=='' or self.get_tt2_sub3_marks=='' or self.get_tt2_sub4_marks=='' or self.get_tt2_sub5_marks=='' or
            self.get_ut_sub1_marks=='' or self.get_ut_sub2_marks=='' or self.get_ut_sub3_marks=='' or self.get_ut_sub4_marks=='' or self.get_ut_sub5_marks==''):
            messagebox.showwarning('warn',"All field must be required!",parent=self.root)
+        elif(self.source == ''):
+            messagebox.showerror('error', 'Upload result in jpg format!', parent= self.root)
         else:
 # ---------queries
             marks =[[self.get_tt1_sub1_marks, self.get_tt1_sub2_marks, self.get_tt1_sub3_marks, self.get_tt1_sub4_marks, self.get_tt1_sub5_marks ],
@@ -481,6 +485,7 @@ class enter_marks:
             if(cgpa > 10):
                 cgpa = 10
             query1 = f"update students set {self.sem} = {cgpa} where gr_no = {self.get_gr_no};"
+            print(query1)
             mycursor.execute(query1)
             mydb.commit()
             try:
@@ -505,14 +510,14 @@ class enter_marks:
         else:
 # --------------open the directory
             f_types =[('jpg files','*.jpg')]
-            source = filedialog.askopenfilename(filetypes=f_types, parent=self.root)
+            self.source = filedialog.askopenfilename(filetypes=f_types, parent=self.root)
 # --------------upload the filepath to database
-            if(source == ""):
+            if(self.source == ""):
                 print("no")
                 self.upload_warn.place(x=1340, y=750)
             else:
                 destination = f"E:/python/project/Student Portfoilo/student_documents/results/Information Technology/{self.sem}/{self.get_gr_no}.jpg"
-                dest = shutil.copy(source, destination)
+                dest = shutil.copy(self.source, destination)
                 self.bar()
                 self.upload_warn.config(text="Sucessfully Uploaded", fg="green")
                 self.upload_warn.place(x=1340 ,y=750)
@@ -551,5 +556,5 @@ class enter_marks:
 
 if __name__ == "__main__":
     root=Tk()
-    obj=enter_marks(root)
+    obj=enter_marks_by_teacher(root)
     root.mainloop()

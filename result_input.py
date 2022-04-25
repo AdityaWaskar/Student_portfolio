@@ -27,6 +27,7 @@ class enter_marks:
         self.root.config(bg="white")
         self.root.focus_force()
         self.root.grab_set()
+        self.source = ''
         self.count = -1
         #================title===================
         title=Label(self.root,text="Enter Your Marks",font=("times new roman",20,"bold"),bg="orange",fg="white").place(x=20,y=15,width=1500,height=50)
@@ -474,6 +475,8 @@ class enter_marks:
            self.get_tt2_sub1_marks=='' or self.get_tt2_sub2_marks=='' or self.get_tt2_sub3_marks=='' or self.get_tt2_sub4_marks=='' or self.get_tt2_sub5_marks=='' or
            self.get_ut_sub1_marks=='' or self.get_ut_sub2_marks=='' or self.get_ut_sub3_marks=='' or self.get_ut_sub4_marks=='' or self.get_ut_sub5_marks==''):
            messagebox.showwarning('warn',"All field must be required!",parent=self.root)
+        elif(self.source == ''):
+           messagebox.showwarning('warn',"Upload result in jpg format!",parent=self.root)
         else:
 # ---------queries
             marks =[[self.get_tt1_sub1_marks, self.get_tt1_sub2_marks, self.get_tt1_sub3_marks, self.get_tt1_sub4_marks, self.get_tt1_sub5_marks ],
@@ -511,14 +514,14 @@ class enter_marks:
         else:
 # --------------open the directory
             f_types =[('jpg files','*.jpg')]
-            source = filedialog.askopenfilename(filetypes=f_types, parent=self.root)
+            self.source = filedialog.askopenfilename(filetypes=f_types, parent=self.root)
 # --------------upload the filepath to database
-            if(source == ""):
+            if(self.source == ""):
                 print("no")
                 self.upload_warn.place(x=1340, y=750)
             else:
                 destination = f"E:/python/project/Student Portfoilo/student_documents/results/Information Technology/{self.sem}/{self.get_gr_no}.jpg"
-                dest = shutil.copy(source, destination)
+                dest = shutil.copy(self.source, destination)
                 self.bar()
                 self.upload_warn.config(text="Sucessfully Uploaded", fg="green")
                 self.upload_warn.place(x=1340 ,y=750)

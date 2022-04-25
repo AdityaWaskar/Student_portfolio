@@ -5,6 +5,7 @@ from PIL import Image, ImageTk
 from add_student import add_student
 from add_teacher import add_teacher
 from report_by_teacher import report_by_teacher
+from result_input_by_teacher import enter_marks_by_teacher
 from show_student import show_student
 from show_teacher import show_teacher
 from take_attendance import take_attendance
@@ -109,15 +110,12 @@ class Login:
 
     def result_input(self):
         self.new_win = Toplevel(self.root)
-        self.new_obj = enter_marks(self.new_win)
+        self.new_obj = enter_marks_by_teacher(self.new_win)
     
     def report(self):
         self.new_win = Toplevel(self.root)
         self.new_obj = report_by_teacher(self.new_win)
 
-
-
-              
         
 if __name__ == "__main__":
     root=Tk()
