@@ -499,7 +499,7 @@ class enter_marks_by_teacher:
                 print("dsfasdfsdfsdfdsf")
             messagebox.showinfo('message', 'marks inserted sucessfully.',parent=self.root)
             self.root.destroy()    
-            import Report
+            import report_by_teacher
             import show_document
   
     def upload(self):

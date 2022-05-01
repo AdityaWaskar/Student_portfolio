@@ -46,5 +46,5 @@ class extracurriculaum_document:
 
 if __name__ == "__main__":
     root=Tk()
-    obj = extracurriculaum_document(root, 1000,"technical_event")
+    obj = extracurriculaum_document(root, 1004,"non_technical_event")
     root.mainloop()

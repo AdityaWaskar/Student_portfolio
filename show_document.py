@@ -49,5 +49,5 @@ class document:
 
 if __name__ == "__main__":
     root=Tk()
-    obj = document(root, 1000, "sem1")
+    obj = document(root, 1004, "sem1")
     root.mainloop()

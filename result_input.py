@@ -500,7 +500,6 @@ class enter_marks:
                     mydb.commit()
             except Exception as e:
                 print(e)
-                print("dsfasdfsdfsdfdsf")
             messagebox.showinfo('message', 'marks inserted sucessfully.',parent=self.root)
             self.root.destroy()    
             import Report

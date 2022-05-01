@@ -265,7 +265,7 @@ class take_attendance:
         a=0
         self.my_table.delete(*self.my_table.get_children())        
         for i in result1:
-            query2 = f"select roll_no from sem{self.get_sem[-1]}_students where name = '{i[1]}' and email = '{i[2]}' ;"
+            query2 = f"select roll_no from sem{self.get_sem[-1]}_students where gr_no={i[0]} ;"
             mycursor.execute(query2)
             result2 = mycursor.fetchone() 
             self.my_table.insert(parent='',index='end',iid=a,text='',values=(i[0],result2[0], i[1], "Present"))

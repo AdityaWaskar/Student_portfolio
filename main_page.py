@@ -4,6 +4,7 @@ from PIL import Image, ImageTk
 
 from add_student import add_student
 from add_teacher import add_teacher
+from extracurricular_activity_by_teacher import extracurricular_by_teacher
 from report_by_teacher import report_by_teacher
 from result_input_by_teacher import enter_marks_by_teacher
 from show_student import show_student
@@ -78,7 +79,7 @@ class Login:
 
     def activity(self):
         self.new_win = Toplevel(self.root)
-        self.new_obj = extracurricular(self.new_win)
+        self.new_obj = extracurricular_by_teacher(self.new_win)
 
     def add_teacher(self):
         self.new_win = Toplevel(self.root)

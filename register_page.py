@@ -80,7 +80,7 @@ class Register:
                 query = f"Insert into login (name, username, phone_no, question, answer, password) values ('{self.name.get()}','{self.username.get()}', '{self.Phone_no.get()}', '{self.cnb_quest.get()}', '{self.txt_answer.get()}', '{self.password.get()}');"
                 mycursor.execute(query)
                 mydb.commit()
-                messagebox.showinfo("Success","Register Successful",parent=self.root)
+                messagebox.showinfo("Success","Register Successfully",parent=self.root)
                 self.root.destroy()
             except Exception as e:
                 messagebox.showinfo("error",e,parent=self.root)
